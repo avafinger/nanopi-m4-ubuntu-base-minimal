@@ -5,7 +5,7 @@ Ubuntu 18.04 base minimal image for RK3399 (NanoPi M4 / NEO4)
 
 OS Image for development with the following tidbits:
 
-* Kernel 4.4.y (with the best of both word, rockchip bsp kernel + kernel.org 4.4.y)
+* Kernel 4.4.y (with the best of both world, rockchip bsp kernel + kernel.org 4.4.y)
 * Gbps
 * Wifi
 * Bluetooth
