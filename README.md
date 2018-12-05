@@ -15,7 +15,7 @@ OS Image for development with the following tidbits:
 
 You need *wget* and *curl* installed to grab the files in a Linux distro.
 
-Get the files by running:
+Get the latest files by running (or seee below to fetch specific Release version files):
 
 
 	wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases/latest | grep -oP '"browser_download_url": "\K(.*)(?=")')
@@ -31,6 +31,10 @@ then
 Find the correct device letter for your USB SD CARD or you may wipe your hdd.
 
 
+# Release v1.0
+
+These are the raw files for building the OS Image with kernel 4.4.166-rockchip
+
 # Release v1.1
 
 * minor fixes and optimizations (4K, journaling , heart-beat)
@@ -38,9 +42,13 @@ Find the correct device letter for your USB SD CARD or you may wipe your hdd.
 * We're ready to roll
 
 
-	user: ubuntu
-	password: ubuntu
+		user: ubuntu
+		password: ubuntu
 
+
+Get v1.1 files:
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.1)
 
 
 Boot takes about 10 seconds or less depending on SD card in use. 
@@ -93,7 +101,56 @@ Now we can start installing and/or configuring things:
 
 **Instructions and DEB packages coming soon**
 
+# Remote access the board
 
-# Release v1.0
+Install ssh to be able to login remotely:
 
-These are the raw files for building the OS Image with kernel 4.4.166-rockchip
+
+		sudo apt-get install ssh
+
+
+from your PC:
+
+		ssh ubuntu@IP
+		where IP is the board IP assigned by DHCP
+
+
+# 3D Mali (fbdev)
+
+To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
+
+* Download files:
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.2)
+
+* Install the necessary packages:
+
+		sudo apt-get install libjpeg-turbo8 libjpeg8 libpng16-16 libegl1 libegl-mesa0 libpng-dev libjpeg-dev
+
+* Install Mali
+
+
+		sudo dpkg -i --force-all mali-t86x-rk3399-linux-4.4.y_1.0-1.deb
+
+Ignore the warnings.
+
+
+* Install enhanced htop:
+
+You can monitor the health of you RK3399 (CPU Temp, CPU Freq and CPU VCore, enter F2 and add these monitors)
+
+		sudo dpkg -i htop_2.1.1-3_arm64.deb 
+
+
+* Install tools for benchmarking mali on fbdev:
+
+
+		sudo dpkg -i glmark2-data_2014.03+git20150611.fa71af2d-0ubuntu5_all.deb 
+		sudo dpkg -i glmark2-es2-fbdev_2014.03+git20150611.fa71af2d-0ubuntu5_arm64.deb 
+
+
+If everithing is Okay, then you can test it:
+
+		
+		sudo glmark2-es2-fbdev (test it remotely)
+
