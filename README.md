@@ -132,12 +132,12 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
 
 		sudo dpkg -i --force-all mali-t86x-rk3399-linux-4.4.y_1.0-1.deb
 
-Ignore the warnings.
+  Ignore the warnings.
 
 
 * Install enhanced htop:
 
-You can monitor the health of you RK3399 (CPU Temp, CPU Freq and CPU VCore, enter F2 and add these monitors)
+  You can monitor the health of you RK3399 (CPU Temp, CPU Freq and CPU VCore, enter F2 and add these monitors)
 
 		sudo dpkg -i htop_2.1.1-3_arm64.deb 
 
@@ -149,8 +149,33 @@ You can monitor the health of you RK3399 (CPU Temp, CPU Freq and CPU VCore, ente
 		sudo dpkg -i glmark2-es2-fbdev_2014.03+git20150611.fa71af2d-0ubuntu5_arm64.deb 
 
 
-If everithing is Okay, then you can test it:
+  If everithing is Okay, then you can test it:
 
 		
 		sudo glmark2-es2-fbdev (test it remotely)
 
+# Wifi
+
+  Install packages:
+
+		sudo apt-get install crda wpasupplicant
+
+
+  Enable wifi editing the file /etc/network/interfaces and adding:
+
+
+		allow-hotplug wlan0
+		iface wlan0 inet dhcp
+			wpa-ssid SID
+			#psk="00012345678901234567890"
+			wpa-psk afde07531d767050796db24c3d449e26a449c15b98bfaf20148970ec43242078
+			dns-nameservers 8.8.8.8 8.8.4.4
+			wireless-power off
+
+
+  Where SID os you AP name and xxxxxxxxx is your encrypted password.
+  Generate encrypted password like so:
+
+		wpa_passphrase SSID xxxxxxxxx
+
+  and finally boot and connect to Wifi
