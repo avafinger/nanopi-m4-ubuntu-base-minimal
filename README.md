@@ -189,7 +189,7 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
   There is a DEB package ready to install VPU support. Mali user space for GBM is needed in order to be able to use GL and/or GLES 2/3.
   The nice thing here is that we can have Kodi Media Center to run on NanoPi M4 / NEO / T4 or any other RK3399 if you wish.
 
-  Install the gbm libraries and VPU deb package so we can have Hardware Decoding and HW accelerated display with Mali T82x.
+  Install the gbm libraries and VPU deb package so we can have Hardware Decoding and HW accelerated display with Mali T86x.
 
 
 		sudo apt-get install libgbm-dev
@@ -229,9 +229,15 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
   * Install GBM and libdrm on top of fbdev (mali-gbm user space)
   * Install VPU support (rkmpp)
   * Install ffmpeg (rkmpp)
-  * Buid Kodi
+  * Build Kodi
 
   Knowning before hand Kodi 18b5 is expected to work on RK3399 (thanks to user fosf0r), i then pícked and tried this version.
+  **Update**: 
+  I tried **Kodi 18rc3** from github but **Kodi** breaks on **DRM**, so we should stick with 18b5 for now.
+  I tried to figure out what could be wrong on the DRM part, but nothing i could find relevant.
+  The headers have been updated to build Kodi 18rc3 , this new headers could be the culprit and i am not an experienced 
+  Kodi builder or Kodi user anyway.
+
 
 Splash screen
 ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/screenshot000.png)
@@ -253,3 +259,29 @@ ScreenShot 5
 
 ScreenShot 6
 ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/screenshot006.png)
+
+
+# Release v1.3
+
+  * Kernel 4.4.167
+  * Faster boot times (~7 secs)
+  * gcc (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0
+  * All dependecies updated and installed for Kodi Multimedia Theather (18rc3) - RK3399 
+  * eDP LCD was removed from tree, for some reason EDP-1 is the main output and HDMI-1 is second monitor
+    this can be troube if you want to install a Graphic Desktop, you get a dual header even if eDP LCD is not attached.
+  * Rootfs ready to deploy Kodi Multimedia Center giving your NanoPi M4 / NEO4 a full blown Media Center (hopefully ;)
+
+
+  **Instructions:**
+
+    * Download files:
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.3)
+
+
+    * Flash Image
+
+
+    		sudo ./flash_kodi_sd.sh /dev/sdX (or /dev/mmcblkY) where X is a letter from b,c.. and Y is a number from 0,1..)
+
