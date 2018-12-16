@@ -149,7 +149,7 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
 		sudo dpkg -i glmark2-es2-fbdev_2014.03+git20150611.fa71af2d-0ubuntu5_arm64.deb 
 
 
-  If everithing is Okay, then you can test it:
+  If everything is Okay, then you can test it:
 
 		
 		sudo glmark2-es2-fbdev (test it remotely)
