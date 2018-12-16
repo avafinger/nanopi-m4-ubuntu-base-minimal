@@ -9,8 +9,8 @@ OS Image for development with the following tidbits:
 * Gbps
 * Wifi
 * Bluetooth
-* 3D mali gpu (fbdev / lxde)
-* VPU (X11 / lxde)
+* 3D mali gpu (fbdev / gbm / x11)
+* VPU (GBM / X11 / lxde)
 * camera (WiP)
 
 You need *wget* and *curl* installed to grab the files in a Linux distro.
@@ -231,11 +231,11 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
   * Install ffmpeg (rkmpp)
   * Build Kodi
 
-  Knowning before hand Kodi 18b5 is expected to work on RK3399 (thanks to user fosf0r), i then pícked and tried this version.
+  Knowning beforehand Kodi 18b5 is expected to work on RK3399 (thanks to user fosf0r), i then pícked and tried this version.
   **Update**: 
-  I tried **Kodi 18rc3** from github but **Kodi** breaks on **DRM**, so we should stick with 18b5 for now.
+  I tried **Kodi 18rc3** from github but **Kodi** breaks the **DRM**, so we should stick with 18b5 for now.
   I tried to figure out what could be wrong on the DRM part, but nothing i could find relevant.
-  The headers have been updated to build Kodi 18rc3 , this new headers could be the culprit and i am not an experienced 
+  The headers have been updated to build **Kodi 18rc3** , this new headers could be the culprit and i am not an experienced 
   Kodi builder or Kodi user anyway.
 
 
@@ -266,10 +266,10 @@ ScreenShot 6
   * Kernel 4.4.167
   * Faster boot times (~7 secs)
   * gcc (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0
-  * All dependecies updated and installed for Kodi Multimedia Theather (18rc3) - RK3399 
-  * eDP LCD was removed from tree, for some reason EDP-1 is the main output and HDMI-1 is second monitor
-    this can be troube if you want to install a Graphic Desktop, you get a dual header even if eDP LCD is not attached.
-  * Rootfs ready to deploy Kodi Multimedia Center giving your NanoPi M4 / NEO4 a full blown Media Center (hopefully ;)
+  * All dependencies updated and installed for Kodi Multimedia Theather (18rc3) - RK3399 
+  * eDP LCD was removed from the tree, for some reason, EDP-1 is the main output and HDMI-1 is the second monitor
+    this can be trouble if you want to install a Graphics Desktop, you get a dual header even if eDP LCD is not attached.
+  * Rootfs ready to deploy Kodi Multimedia Center giving your NanoPi M4 / NEO4 a full-blown Media Center (hopefully ;)
 
 
   **Instructions:**
