@@ -263,7 +263,7 @@ ScreenShot 6
 
 # Release v1.3
 
-  * Kernel 4.4.167
+  * Kernel 4.4.168
   * Faster boot times (~7 secs)
   * gcc (Ubuntu 8.2.0-1ubuntu2~18.04) 8.2.0
   * All dependencies updated and installed for Kodi Multimedia Theather (18rc3) - RK3399 
