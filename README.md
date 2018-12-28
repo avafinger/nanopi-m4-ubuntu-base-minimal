@@ -315,3 +315,60 @@ ScreenShot 6
 		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
 
 
+
+# Bluetooth
+
+We are going to set up the BT in an old fashioned way to bypass some limitations and later install a systemd service to boot with BT enabled.
+Kernel has been patched to hopefully fix the "timeout" issue with Bluez but still have some issues with hctool.
+For this we will use brcm_patchram_plus to load the firmware and turn ON the BT and have a stable BT experience.
+
+  * Install BT service
+
+		
+		sudo dpkg -i bluetooth-rk3399_1.0-1.deb
+		sudo sync && sudo reboot
+
+
+  After a reboot you can check if BT is on with:
+
+
+		hcitool devi
+		Devices:
+			hci0	CC:4B:73:23:D4:33
+
+
+
+  * Pairing a Phone with our NanoPi M4
+
+  Install the packages if not already installed:
+
+
+		sudo apt-get install rfkill bluez
+
+  Run pulseaudio required to pair with a phone.
+
+
+		pulseaudio
+
+
+  If you have not installed pulse and alsa you need to to do it and check if it is working:
+
+
+		ubuntu@nanopi-m4:~$ ps -e |grep pulse
+		  583 ?        00:00:00 pulseaudio
+
+
+  Check alsamixer and turn on everything:
+
+
+		alsamixer
+		aplay -l
+		**** List of PLAYBACK Hardware Devices ****
+		card 0: realtekrt5651co [realtek,rt5651-codec], device 0: ff890000.i2s-rt5651-aif1 rt5651-aif1-0 []
+		  Subdevices: 0/1
+		  Subdevice #0: subdevice #0
+		card 1: rockchiphdmi [rockchip,hdmi], device 0: ff8a0000.i2s-i2s-hifi i2s-hifi-0 []
+		  Subdevices: 0/1
+		  Subdevice #0: subdevice #0
+
+  (to be continued...)
