@@ -368,7 +368,7 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 
 		sudo apt-get install rfkill bluez
 
-    Run pulseaudio required to pair with a phone.
+    Run pulseaudio required to pair with a phone (**if not running!**).
 
 
 		pulseaudio -D
