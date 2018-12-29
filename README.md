@@ -345,11 +345,12 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 
         	sudo systemctl disable brcm_patchram_plus.service
 
-      * Install our trick to rc.local service that is the last service pulled up from systemd
+      * Install our trick to rc.local service that is the last service that gets pulled from systemd
         
-        Copy and past the complete command below:
+        Copy and past each complete command line below:
 
 			sudo printf '%s\n' '#!/bin/bash' 'pulseaudio -D' 'brcm_patchram_plus -d --enable_hci --no2bytes --use_baudrate_for_download --tosleep 200000 --baudrate 1500000 --patchram /system/etc/firmware/bcm4356a2.hcd --enable_lpm /dev/ttyS0 > /tmp/bt.log 2>&1 &' 'exit 0' | sudo tee -a /etc/rc.local
+			sudo chmod +x /etc/rc.local
 			sync && sudo reboot
 
 
