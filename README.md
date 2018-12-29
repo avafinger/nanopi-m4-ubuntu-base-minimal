@@ -329,7 +329,7 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 		sudo sync && sudo reboot
 
 
-  After a reboot you can check if BT is on with:
+     After a reboot you can check if BT is on with:
 
 
 		hcitool devi
@@ -338,20 +338,41 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 
 
 
+    The service should be the last service to be run, if not you get the "timeout" issue and BT will be useless.
+    A trick to make BT stable is as follow:
+
+      * Disable the BT service
+
+        	sudo systemctl disable brcm_patchram_plus.service
+
+      * Install our trick to rc.local service that is the last service pulled up from systemd
+        
+        Copy and past the complete command below:
+
+		sudo printf '%s\n' '#!/bin/bash' 'pulseaudio -D' 'brcm_patchram_plus -d --enable_hci --no2bytes --use_baudrate_for_download --tosleep 200000 --baudrate 1500000 --patchram /system/etc/firmware/bcm4356a2.hcd --enable_lpm /dev/ttyS0 > /tmp/bt.log 2>&1 &' 'exit 0' | sudo tee -a /etc/rc.local
+		sync && sudo reboot
+
+	Check with :
+
+		hcitool devi
+		Devices:
+			hci0	CC:4B:73:23:D4:33
+		
+
   * Pairing a Phone with our NanoPi M4
 
-  Install the packages if not already installed:
+    Install the packages if not already installed:
 
 
 		sudo apt-get install rfkill bluez
 
-  Run pulseaudio required to pair with a phone.
+    Run pulseaudio required to pair with a phone.
 
 
-		pulseaudio
+		pulseaudio -D
 
 
-  If you have not installed pulse and alsa you need to to do it and check if it is working:
+    If you have not installed pulse and alsa you need to to do it and check if it is working:
 
 
 		ubuntu@nanopi-m4:~$ ps -e |grep pulse
