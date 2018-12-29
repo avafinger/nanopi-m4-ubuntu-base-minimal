@@ -349,14 +349,15 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
         
         Copy and past the complete command below:
 
-		sudo printf '%s\n' '#!/bin/bash' 'pulseaudio -D' 'brcm_patchram_plus -d --enable_hci --no2bytes --use_baudrate_for_download --tosleep 200000 --baudrate 1500000 --patchram /system/etc/firmware/bcm4356a2.hcd --enable_lpm /dev/ttyS0 > /tmp/bt.log 2>&1 &' 'exit 0' | sudo tee -a /etc/rc.local
-		sync && sudo reboot
+			sudo printf '%s\n' '#!/bin/bash' 'pulseaudio -D' 'brcm_patchram_plus -d --enable_hci --no2bytes --use_baudrate_for_download --tosleep 200000 --baudrate 1500000 --patchram /system/etc/firmware/bcm4356a2.hcd --enable_lpm /dev/ttyS0 > /tmp/bt.log 2>&1 &' 'exit 0' | sudo tee -a /etc/rc.local
+			sync && sudo reboot
+
 
 	Check with :
 
-		hcitool devi
-		Devices:
-			hci0	CC:4B:73:23:D4:33
+			hcitool devi
+			Devices:
+				hci0	CC:4B:73:23:D4:33
 		
 
   * Pairing a Phone with our NanoPi M4
