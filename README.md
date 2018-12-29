@@ -381,7 +381,7 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 		  583 ?        00:00:00 pulseaudio
 
 
-  Check alsamixer and turn on everything:
+    Check alsamixer and turn on everything:
 
 
 		alsamixer
@@ -394,4 +394,144 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 		  Subdevices: 0/1
 		  Subdevice #0: subdevice #0
 
-  (to be continued...)
+
+  * Pairing test
+
+		ubuntu@nanopi-m4:~$ sudo bluetoothctl
+		[sudo] password for ubuntu: 
+		[NEW] Controller CC:4B:73:23:D4:33 nanopi-m4 [default]
+		Agent registered
+		[bluetooth]# list
+		Controller CC:4B:73:23:D4:33 nanopi-m4 [default]
+		[bluetooth]# power on
+		Changing power on succeeded
+		[bluetooth]# agent on
+		Agent is already registered
+		[bluetooth]# default-agent
+		Default agent request successful
+		[bluetooth]# scan on
+		Discovery started
+		[CHG] Controller CC:4B:73:23:D4:33 Discovering: yes
+		[NEW] Device 00:17:CA:F7:38:18 Haier HW-W910
+		[bluetooth]# pair 00:17:CA:F7:38:18
+		Attempting to pair with 00:17:CA:F7:38:18
+		[CHG] Device 00:17:CA:F7:38:18 Connected: yes
+		Request confirmation
+		[Haie1m[agent] Confirm passkey 552791 (yes/no): Request canceled
+		[agent] Confirm passkey 552791 (yes/no): Failed to pair: org.bluez.Error.AuthenticationFailed
+		[CHG] Device 00:17:CA:F7:38:18 Connected: no
+		[bluetooth]# pair 00:17:CA:F7:38:18
+		Attempting to pair with 00:17:CA:F7:38:18
+		[CHG] Device 00:17:CA:F7:38:18 Connected: yes
+		Request confirmation
+		[Haie1m[agent] Confirm passkey 053012 (yes/no): yes
+		[CHG] Device 00:17:CA:F7:38:18 Modalias: usb:v000Ap0000d0000
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001105-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110a-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110c-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001112-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001116-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000111f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000112f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001132-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001200-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001800-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001801-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 ServicesResolved: yes
+		[CHG] Device 00:17:CA:F7:38:18 Paired: yes
+		Pairing successful
+		[CHG] Device 00:17:CA:F7:38:18 ServicesResolved: no
+		[CHG] Device 00:17:CA:F7:38:18 Connected: no
+		[bluetooth]# info
+		Missing device address argument
+		[bluetooth]# info 00:17:CA:F7:38:18
+		Device 00:17:CA:F7:38:18 (public)
+			Name: Haier HW-W910
+			Alias: Haier HW-W910
+			Class: 0x005a020c
+			Icon: phone
+			Paired: yes
+			Trusted: no
+			Blocked: no
+			Connected: no
+			LegacyPairing: yes
+			UUID: OBEX Object Push          (00001105-0000-1000-8000-00805f9b34fb)
+			UUID: Audio Source              (0000110a-0000-1000-8000-00805f9b34fb)
+			UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
+			UUID: Headset AG                (00001112-0000-1000-8000-00805f9b34fb)
+			UUID: NAP                       (00001116-0000-1000-8000-00805f9b34fb)
+			UUID: Handsfree Audio Gateway   (0000111f-0000-1000-8000-00805f9b34fb)
+			UUID: Phonebook Access Server   (0000112f-0000-1000-8000-00805f9b34fb)
+			UUID: Message Access Server     (00001132-0000-1000-8000-00805f9b34fb)
+			UUID: PnP Information           (00001200-0000-1000-8000-00805f9b34fb)
+			UUID: Generic Access Profile    (00001800-0000-1000-8000-00805f9b34fb)
+			UUID: Generic Attribute Profile (00001801-0000-1000-8000-00805f9b34fb)
+			Modalias: usb:v000Ap0000d0000
+			RSSI: -82
+		[bluetooth]# connect 00:17:CA:F7:38:18
+		Attempting to connect to 00:17:CA:F7:38:18
+		[CHG] Device 00:17:CA:F7:38:18 Connected: yes
+		Connection successful
+		[CHG] Device 00:17:CA:F7:38:18 ServicesResolved: yes
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001105-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001108-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110a-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110c-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001112-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001116-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000111f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000112f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001132-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001200-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001800-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001801-0000-1000-8000-00805f9b34fb
+		Authorize service
+		[Haie1m[agent] Authorize service 00001108-0000-1000-8000-00805f9b34fb (yes/no): yes
+		[Haier HW-W910]# trust 00:17:CA:F7:38:18
+		[CHG] Device 00:17:CA:F7:38:18 Trusted: yes
+		Changing 00:17:CA:F7:38:18 trust succeeded
+		[Haier HW-W910]# info 00:17:CA:F7:38:18
+		Device 00:17:CA:F7:38:18 (public)
+			Name: Haier HW-W910
+			Alias: Haier HW-W910
+			Class: 0x005a020c
+			Icon: phone
+			Paired: yes
+			Trusted: yes
+			Blocked: no
+			Connected: yes
+			LegacyPairing: yes
+			UUID: OBEX Object Push          (00001105-0000-1000-8000-00805f9b34fb)
+			UUID: Headset                   (00001108-0000-1000-8000-00805f9b34fb)
+			UUID: Audio Source              (0000110a-0000-1000-8000-00805f9b34fb)
+			UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
+			UUID: Headset AG                (00001112-0000-1000-8000-00805f9b34fb)
+			UUID: NAP                       (00001116-0000-1000-8000-00805f9b34fb)
+			UUID: Handsfree Audio Gateway   (0000111f-0000-1000-8000-00805f9b34fb)
+			UUID: Phonebook Access Server   (0000112f-0000-1000-8000-00805f9b34fb)
+			UUID: Message Access Server     (00001132-0000-1000-8000-00805f9b34fb)
+			UUID: PnP Information           (00001200-0000-1000-8000-00805f9b34fb)
+			UUID: Generic Access Profile    (00001800-0000-1000-8000-00805f9b34fb)
+			UUID: Generic Attribute Profile (00001801-0000-1000-8000-00805f9b34fb)
+			Modalias: usb:v000Ap0000d0000
+			RSSI: -82
+		[Haier HW-W910]# untrust 00:17:CA:F7:38:18
+		[CHG] Device 00:17:CA:F7:38:18 Trusted: no
+		Changing 00:17:CA:F7:38:18 untrust succeeded
+		[Haier HW-W910]# disconnect 00:17:CA:F7:38:18
+		Attempting to disconnect from 00:17:CA:F7:38:18
+		[CHG] Device 00:17:CA:F7:38:18 ServicesResolved: no
+		Successful disconnected
+		[CHG] Device 00:17:CA:F7:38:18 Connected: no
+		[bluetooth]# remove 00:17:CA:F7:38:18
+		[DEL] Device 00:17:CA:F7:38:18 Haier HW-W910
+		Device has been removed
+		[NEW] Device 00:17:CA:F7:38:18 Haier HW-W910
+		[bluetooth]# scan off
+		Discovery stopped
+		[CHG] Controller CC:4B:73:23:D4:33 Discovering: no
+		[CHG] Device 00:17:CA:F7:38:18 RSSI is nil
+		[bluetooth]# quit
+		Agent unregistered
+		[DEL] Controller CC:4B:73:23:D4:33 nanopi-m4 [default]
+ubuntu@nanopi-m4:~$ 
