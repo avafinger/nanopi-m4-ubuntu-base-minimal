@@ -235,8 +235,15 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
 
   **If you installed Kodi v18.0 B5 removed it and install Kodi v18.0 rc5 for RK3399**
 
+
 		sudo apt-get remove --purge kodi-18b5-rk3399-gbm
+
  
+  then install Kodi 18.0 RC5
+
+
+		sudo dpkg -i kodi-18rc5-rk3399-gbm_1.0-2.deb
+
 
 Splash screen Kodi 18rc5 on NanoPi M4 (RK3399)
 ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch1.png)
