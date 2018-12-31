@@ -568,3 +568,9 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 		Agent unregistered
 		[DEL] Controller CC:4B:73:23:D4:33 nanopi-m4 [default]
 		ubuntu@nanopi-m4:~$ 
+
+# Credits
+
+  * FriendlyElec (for the sample)
+  * Amanda Finger (Expertise on Kodi and help building)
+  * Armbian (technical informations)
