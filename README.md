@@ -221,10 +221,10 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
 
 # Kodi Media Center on RK3399
 
-  Kodi has support for GBM (DRM) and can run on our NanoPi M4 setup. Kodi 18rc4 has been compiled succesfully.
+  Kodi has support for GBM (DRM) and can run on our NanoPi M4 setup. Kodi 18-RC5 has been compiled succesfully.
   Building instructions are provided here: https://github.com/xbmc/xbmc/blob/master/docs/README.Linux.md#4-build-kodi
 
-  Tips to build Kodi v18.0 RC4 on RK3399:
+  Tips to build Kodi v18.0 RC5 on RK3399:
 
   * Install gcc8 and cpp8
   * Install GBM and libdrm on top of fbdev (mali-gbm user space)
@@ -233,34 +233,34 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
   * Install ffmpeg (rkmpp)
   * Build Kodi
 
-  **If you installed Kodi v18.0 B5 removed it and install Kodi v18.0 RC4 for RK3399**
+  **If you installed Kodi v18.0 B5 removed it and install Kodi v18.0 rc5 for RK3399**
 
 		sudo apt-get remove --purge kodi-18b5-rk3399-gbm
  
 
-Splash screen Kodi 18rc4 on NanoPi M4 (RK3399)
+Splash screen Kodi 18rc5 on NanoPi M4 (RK3399)
 ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch1.png)
 
-Kodi 18rc4 on NanoPi M4
+Kodi 18rc5 on NanoPi M4
 ![Kodi NanoPi M4 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch3.png)
 
-Kodi 18rc4 on NanoPi M4 with kernel 4.4.169-rk3399
+Kodi 18rc5 on NanoPi M4 with kernel 4.4.169-rk3399
 ![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch2.png)
 
 
-Kodi 18rc4 screenshot 1
+Kodi 18rc5 screenshot 1
 ![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch4.png)
 
-Kodi 18rc4 screenshot 2
+Kodi 18rc5 screenshot 2
 ![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch5.png)
 
-Kodi 18rc4 screenshot 3
+Kodi 18rc5 screenshot 3
 ![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch6.png)
 
-Kodi 18rc4 screenshot 4
+Kodi 18rc5 screenshot 4
 ![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch7.png)
 
-Kodi 18rc4 screenshot 5
+Kodi 18rc5 screenshot 5
 ![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch8.png)
 
 
