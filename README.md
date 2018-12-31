@@ -221,25 +221,51 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
 
 # Kodi Media Center on RK3399
 
-  Kodi has support for GBM and can run on our NanoPi M4 setup. Kodi 18b5 runs fine for the most basic formats, let see if we can get 18rc3 soon.
+  Kodi has support for GBM (DRM) and can run on our NanoPi M4 setup. Kodi 18rc4 has been compiled succesfully.
   Building instructions are provided here: https://github.com/xbmc/xbmc/blob/master/docs/README.Linux.md#4-build-kodi
 
-  Tips to build Kodi:
+  Tips to build Kodi v18.0 RC4 on RK3399:
 
+  * Install gcc8 and cpp8
   * Install GBM and libdrm on top of fbdev (mali-gbm user space)
   * Install VPU support (rkmpp)
+  * Build ffmpeg-rockchip and add the codecs missing
   * Install ffmpeg (rkmpp)
   * Build Kodi
 
-  Knowning beforehand Kodi 18b5 is expected to work on RK3399 (thanks to user fosf0r), i then pícked and tried this version.
-  **Update**: 
-  I tried **Kodi 18rc3** from github but **Kodi** breaks the **DRM**, so we should stick with 18b5 for now.
-  I tried to figure out what could be wrong on the DRM part, but nothing i could find relevant.
-  The headers have been updated to build **Kodi 18rc3** , this new headers could be the culprit and i am not an experienced 
-  Kodi builder or Kodi user anyway.
+  **If you installed Kodi v18.0 B5 removed it and install Kodi v18.0 RC4 for RK3399**
+
+		sudo apt-get remove --purge kodi-18b5-rk3399-gbm
+ 
+
+Splash screen Kodi 18rc4 on NanoPi M4 (RK3399)
+![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch1.png)
+
+Kodi 18rc4 on NanoPi M4
+![Kodi NanoPi M4 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch3.png)
+
+Kodi 18rc4 on NanoPi M4 with kernel 4.4.169-rk3399
+![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch2.png)
 
 
-Splash screen
+Kodi 18rc4 screenshot 1
+![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch4.png)
+
+Kodi 18rc4 screenshot 2
+![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch5.png)
+
+Kodi 18rc4 screenshot 3
+![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch6.png)
+
+Kodi 18rc4 screenshot 4
+![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch7.png)
+
+Kodi 18rc4 screenshot 5
+![Kodi NanoPi M4 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/sch8.png)
+
+
+
+Splash screen Kodi 18b5
 ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/screenshot000.png)
 
 ScreenShot 1
@@ -534,4 +560,4 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 		[bluetooth]# quit
 		Agent unregistered
 		[DEL] Controller CC:4B:73:23:D4:33 nanopi-m4 [default]
-ubuntu@nanopi-m4:~$ 
+		ubuntu@nanopi-m4:~$ 
