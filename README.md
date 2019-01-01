@@ -196,7 +196,7 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
 
 
 
-  Test if GBM is fully working with **gbm_es2_demo (170 Kb)  or **kmscube (1.4 Mb)**
+  Test if GBM is fully working with **gbm_es2_demo (170 Kb)**  or **kmscube (1.4 Mb)**
   Get file with in https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.7 
 
 
