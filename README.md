@@ -196,7 +196,37 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
 
 
 
-  Test if GBM is fully working with **kmscube**
+  Test if GBM is fully working with **gbm_es2_demo (170 Kb)  or **kmscube (1.4 Mb)**
+  Get file with in https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.7 
+
+
+		./gbm_es2_demo 
+		using card: '/dev/dri/card0': Success
+		Using display 0x557241ccf0 with EGL version 1.4
+		EGL Version "1.4 Midgard-"r14p0-01rel0""
+		EGL Vendor "ARM"
+		EGL Extensions "EGL_KHR_partial_update EGL_KHR_image_pixmap EGL_EXT_image_dma_buf_import EGL_KHR_config_attribs EGL_KHR_image EGL_KHR_image_base EGL_KHR_fence_sync EGL_KHR_wait_sync EGL_KHR_gl_colorspace EGL_KHR_get_all_proc_addresses EGL_IMG_context_priority EGL_ARM_pixmap_multisample_discard EGL_KHR_gl_texture_2D_image EGL_KHR_gl_renderbuffer_image EGL_KHR_create_context EGL_KHR_surfaceless_context EGL_KHR_gl_texture_cubemap_image EGL_EXT_create_context_robustness EGL_KHR_cl_event2"
+		FPS: 0.002751 
+		FPS: 59.027754 
+		FPS: 59.989142 
+		FPS: 60.001338 
+		FPS: 60.008244 
+		FPS: 60.007122 
+		FPS: 59.988592 
+		FPS: 60.013970 
+		FPS: 59.988422 
+		FPS: 60.008008 
+		FPS: 60.001338 
+		FPS: 60.000630 
+		FPS: 59.995440 
+		FPS: 60.001102 
+		FPS: 60.006768 
+		FPS: 59.995967 
+		FPS: 60.001397 
+		FPS: 60.007831 
+
+
+  or kmscube
 
 		./kmscube 
 		Using display 0x55b89fca00 with EGL version 1.4
