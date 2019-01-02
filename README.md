@@ -263,7 +263,7 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
   * Install ffmpeg (rkmpp)
   * Build Kodi
 
-  **If you installed Kodi v18.0 B5 removed it and install Kodi v18.0 rc5 for RK3399**
+  **If you installed Kodi v18.0 B5 remove it and install Kodi v18.0 rc5 for RK3399**
 
 
 		sudo apt-get remove --purge kodi-18b5-rk3399-gbm
@@ -365,6 +365,7 @@ ScreenShot 6
 
 
 
+
 		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.4)
 
 
@@ -376,6 +377,72 @@ ScreenShot 6
 
 		sudo dpkg -i linux-image-4.4.169-rk3399_1.0-1.deb
 		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
+
+
+
+# Release v1.8 (OS Image for eMMC only)
+
+  * Boot from eMMC
+  * Kernel 4.4.169 (linux-image && kernel headers)
+  * The best of BSP and mainline in one kernel
+  * KODI 18.0 RC5
+
+
+  **Instructions:**
+
+  * boot from SD CARD and with eMMC attached
+  * install **parted**:
+
+
+
+
+		sudo apt-get install parted
+
+
+
+
+  * create a temporary directory:
+
+
+
+		mkdir -p emmc
+		cd emmc
+
+
+
+  * Download the files to flash eMMC:
+
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.8)
+
+
+
+    
+    Make sure the download is complete, check with md5sum atfer download! (bad SD card or bad USB sdhc writer can corrupt the file contents):
+
+		
+		
+		0521a81ed44c7274c906ae3d98769bc4  boot_kodi_emmc.tar.gz
+		e88855ba0775235475618309381c3759  rootfs_kodi.tar.gz
+
+
+
+
+  * Install (Burn OS Image to eMMC)
+
+
+
+
+		sudo ./flash_kodi_emmc.sh /dev/mmcblk1
+		sudo shutdown -h now (remone power and sd card)
+
+
+
+
+     **Boot** without the **sd card**
+
 
 
 
