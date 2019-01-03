@@ -666,6 +666,42 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 		[DEL] Controller CC:4B:73:23:D4:33 nanopi-m4 [default]
 		ubuntu@nanopi-m4:~$ 
 
+# LibreElec or not LibreElec
+
+  If you want to run Kodi automatically without the need of logging in you can do this:
+
+  * Boot automatically
+
+
+		 sudo systemctl edit getty@tty1.service
+
+    and copy & paste:
+
+		[Service]
+		ExecStart=
+		ExecStart=-/sbin/agetty --noissue --autologin ubuntu %I $TERM
+		Type=idle
+
+
+     Save and Exit
+
+  * Run Kodi right after login:
+
+
+		echo "kodi" >> .profile 
+
+    Then:
+
+		sync && sudo reboot
+
+
+     **Important**
+
+     For every login, kodi will run. If you login via ssh you get **kodi** on main screen.
+     Remember to exit **kodi** if you are goingo to access the board remotely
+
+
+
 # Credits
 
   * FriendlyElec (for the sample)
