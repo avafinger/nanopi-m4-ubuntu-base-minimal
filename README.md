@@ -126,6 +126,8 @@ To be able to use OpenGL ES 2 / 3 we need to install the Mali user space lib.
 * Install the necessary packages:
 
 		sudo apt-get install libjpeg-turbo8 libjpeg8 libpng16-16 libegl1 libegl-mesa0 libpng-dev libjpeg-dev
+		sudo apt-get install libgles2-mesa-dev ocl-icd-opencl-dev 
+
 
 * Install Mali
 
