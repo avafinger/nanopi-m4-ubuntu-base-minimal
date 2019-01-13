@@ -447,6 +447,33 @@ ScreenShot 6
 
 
 
+# Release v1.9
+
+  * Kernel 4.4.170 (linux-image && kernel headers)
+  * The best of BSP and mainline in one kernel
+
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.9)
+
+
+
+
+  * Install
+
+
+
+		sudo dpkg -i linux-image-4.4.170-rk3399_1.0-2.deb
+		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
+
+
+
 
 # Bluetooth
 
