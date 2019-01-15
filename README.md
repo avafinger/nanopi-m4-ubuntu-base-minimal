@@ -730,6 +730,22 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
      Remember to exit **kodi** if you are goingo to access the board remotely
 
 
+# Mainline Kernel on NanoPi M4
+
+  A litle follow-up on the status of Mainline kernel 5.0.0-rc2 on RK3399.
+
+  What works:
+
+  * HDMI
+  * Bluetooth
+  * USB 2
+  * DVFS
+  * ethernet
+
+
+  Some Logs here: https://gist.github.com/avafinger/a8474938b0dfb31e462ad332192b324d
+  
+
 
 # Credits
 
