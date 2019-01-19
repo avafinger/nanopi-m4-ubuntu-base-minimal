@@ -775,7 +775,7 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
   Boosted oop to 2.0 GHz and 1.5 GHz and board is still stable!
 
   Increase oop to 2.0 / 1.5 GHz **7z b**
-  ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/mainline_5.0.0-rc2_boosted.png)
+![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/mainline_5.0.0-rc2_boosted.png)
  
 
 # Credits
