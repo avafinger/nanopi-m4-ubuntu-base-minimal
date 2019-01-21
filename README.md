@@ -771,6 +771,9 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 
 
   Some Logs here: https://gist.github.com/avafinger/a8474938b0dfb31e462ad332192b324d
+
+  Mainline kernel 5.0.0.-rc3 built with gcc 8.2 
+  Some logs: https://gist.github.com/avafinger/05048dd20cef3953559a0bddef8f5930
   
   Boosted oop to 2.0 GHz and 1.5 GHz and board is still stable!
   Results here: https://gist.github.com/avafinger/a8474938b0dfb31e462ad332192b324d
