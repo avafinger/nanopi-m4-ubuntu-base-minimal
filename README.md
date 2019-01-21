@@ -772,7 +772,7 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 
   Some Logs here: https://gist.github.com/avafinger/a8474938b0dfb31e462ad332192b324d
 
-  Mainline kernel 5.0.0.-rc3 built with gcc 8.2 
+  Mainline kernel 5.0.0-rc3 built with gcc 8.2 
   Some logs: https://gist.github.com/avafinger/05048dd20cef3953559a0bddef8f5930
   
   Boosted oop to 2.0 GHz and 1.5 GHz and board is still stable!
@@ -782,6 +782,60 @@ Increase oop to 2.0 / 1.5 GHz **7z b**
 
 ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/mainline_5.0.0-rc2_boosted.png)
  
+# Instructions to build Mainline Kernel on NanoPi M4 (**on board**)
+
+  Requirements:
+
+    * 16 GB sd card minimum
+
+    * Pre-built **Mainline OS Image (This important)**
+
+    * Mainline Kernel from kernel.org to build
+
+
+  Instructions:
+
+    * login into NanoPi M4
+
+    * create directory
+
+		mkdir -p linux
+		cd linux  
+
+    * grab the latest kernel: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/refs/tags
+
+		wget https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-5.0-rc3.tar.gz
+
+    * Build
+
+		make  defconfig
+		#make  menuconfig (if you want to add or change kernel modules)
+		make  oldconfig
+		make -j6 INSTALL_MOD_PATH=output Image 
+		make -j6 INSTALL_MOD_PATH=output dtbs
+		make -j6 INSTALL_MOD_PATH=output modules
+		make -j6 INSTALL_MOD_PATH=output modules_install
+
+    * Install
+
+		export KV=$(strings ./arch/arm64/boot/Image |grep "Linux version"|awk '{print $3}')
+		sudo cp -fv ./arch/arm64/boot/Image /boot/Image_${KV}
+		sync
+		sudo cp -vfr ./output/* /
+		sync
+
+    * Make it current kernel
+
+		cd /boot
+		sudo ln -sf Image_${KV} Image
+		cd ${KVD}
+		sync
+
+    * Reboot
+
+		sudo shutdown -h now (remove power for 30 secs)
+		**Boot** with your new kernel
+
 
 # Credits
 
