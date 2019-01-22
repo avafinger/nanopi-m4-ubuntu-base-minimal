@@ -786,27 +786,27 @@ Increase oop to 2.0 / 1.5 GHz **7z b**
 
   Requirements:
 
-    * 16 GB sd card minimum
-
-    * Pre-built **Mainline OS Image (This important)**
-
-    * Mainline Kernel from kernel.org to build
+  * 16 GB sd card minimum
+  * Pre-built **Mainline OS Image (This important)**
+  * Mainline Kernel from kernel.org to build
 
 
   Instructions:
 
-    * login into NanoPi M4
+  * login into NanoPi M4
 
-    * create directory
+  * create directory
 
 		mkdir -p linux
 		cd linux  
 
-    * grab the latest kernel: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/refs/tags
+  * grab the latest kernel: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/refs/tags
 
 		wget https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-5.0-rc3.tar.gz
+		tar -xvpzf linux-5.0-rc3.tar.gz
+		cd linux-5.0-rc3
 
-    * Build
+  * Build
 
 		make  defconfig
 		#make  menuconfig (if you want to add or change kernel modules)
@@ -816,7 +816,7 @@ Increase oop to 2.0 / 1.5 GHz **7z b**
 		make -j6 INSTALL_MOD_PATH=output modules
 		make -j6 INSTALL_MOD_PATH=output modules_install
 
-    * Install
+  * Install
 
 		export KV=$(strings ./arch/arm64/boot/Image |grep "Linux version"|awk '{print $3}')
 		sudo cp -fv ./arch/arm64/boot/Image /boot/Image_${KV}
@@ -824,14 +824,14 @@ Increase oop to 2.0 / 1.5 GHz **7z b**
 		sudo cp -vfr ./output/* /
 		sync
 
-    * Make it current kernel
+  * Make it current kernel
 
 		cd /boot
 		sudo ln -sf Image_${KV} Image
 		cd ${KVD}
 		sync
 
-    * Reboot
+  * Reboot
 
 		sudo shutdown -h now (remove power for 30 secs)
 		**Boot** with your new kernel
