@@ -754,7 +754,7 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
      **Important**
 
      For every login, kodi will run. If you login via ssh you get **kodi** on main screen.
-     Remember to exit **kodi** if you are goingo to access the board remotely
+     Remember to exit **kodi** if you are going to access the board remotely
 
 
 # Mainline Kernel on NanoPi M4
@@ -787,7 +787,7 @@ Increase oop to 2.0 / 1.5 GHz **7z b**
   Requirements:
 
   * 16 GB sd card minimum
-  * Pre-built **Mainline OS Image (This important)**
+  * Pre-built **Mainline OS Image (This is important!)**
   * Mainline Kernel from kernel.org to build
 
 
@@ -799,7 +799,7 @@ Increase oop to 2.0 / 1.5 GHz **7z b**
 
 		mkdir -p linux
 		cd linux  
-
+g
   * grab the latest kernel: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/refs/tags
 
 		wget https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-5.0-rc3.tar.gz
