@@ -782,7 +782,7 @@ Increase oop to 2.0 / 1.5 GHz **7z b**
 
 ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/mainline_5.0.0-rc2_boosted.png)
  
-# Instructions to build Mainline Kernel on NanoPi M4 (**on board**)
+# Build Mainline Kernel on NanoPi M4 (**on board**)
 
   Requirements:
 
@@ -799,7 +799,7 @@ Increase oop to 2.0 / 1.5 GHz **7z b**
 
 		mkdir -p linux
 		cd linux  
-g
+
   * grab the latest kernel: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/refs/tags
 
 		wget https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-5.0-rc3.tar.gz
