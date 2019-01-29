@@ -501,6 +501,34 @@ ScreenShot 6
 		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
 
 
+# Release v1.11
+
+  * Kernel 4.4.172 (linux-image && kernel headers)
+  * support for ov13850 + ov4689 included
+  * F2FS code has been touched only, minor fix, need a complete re-write so it is more BSP than Mainline (you have been warned)
+
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.11)
+
+
+
+
+  * Install
+
+
+
+		sudo dpkg -i linux-image-4.4.172-rk3399_1.0-4.deb
+		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
+
+
+
 
 # Bluetooth
 
