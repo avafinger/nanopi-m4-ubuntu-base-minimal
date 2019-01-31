@@ -809,6 +809,15 @@ For this we will use brcm_patchram_plus to load the firmware and turn ON the BT 
 Increase oop to 2.0 / 1.5 GHz **7z b**
 
 ![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/mainline_5.0.0-rc2_boosted.png)
+
+# Mainline Kernel 5.0-rc2 (Ubuntu minimal 18.04)
+
+I have provided an OS Image tested on NanoPi M4:
+
+ * rk3399_ubuntu-minimal-mainline-kernel-5-rc2.7z
+
+Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.12
+
  
 # Build Mainline Kernel on NanoPi M4 (**on board**)
 
