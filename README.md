@@ -848,6 +848,28 @@ I have provided an OS Image tested on NanoPi M4:
 
 Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.12
 
+# Release v1.14 (Experimental)
+
+  * Kernel 5.0.0-rc5 (linux-image && kernel headers)
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.14)
+
+
+
+  * Install
+
+  You need at least 20 Mbytes free on /boot
+
+
+		sudo dpkg -i inux-image-mainline-5.0_1.0-6.deb
+		sudo shutdown -h now
+
  
 # Build Mainline Kernel on NanoPi M4 (**on board**)
 
