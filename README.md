@@ -529,6 +529,36 @@ ScreenShot 6
 
 
 
+# Release v1.13
+
+  * Kernel 4.4.173 (linux-image && kernel headers)
+  * modified rfkill-bt
+  * modified wifi
+  * mainline 4.4.173 patches
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.13)
+
+
+
+
+  * Install
+
+  You need at least 20 Mbytes free on /boot
+
+
+		sudo dpkg -i linux-image-4.4.173_1.0-5.deb
+		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
+
+
+
+
 
 # Bluetooth
 
