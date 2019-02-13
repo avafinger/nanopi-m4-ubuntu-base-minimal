@@ -13,6 +13,9 @@ OS Image for development with the following tidbits:
 * VPU (GBM / X11 / lxde)
 * camera (WiP)
 
+Img is available here:
+https://mega.nz/#!lfBW3SCC!NFYMG4AyKsFYhqC6Ny7FJ9aLgvZgpGUPD2j06m8JCgw
+
 You need *wget* and *curl* installed to grab the files in a Linux distro.
 
 Get the latest files by running (or seee below to fetch specific Release version files):
@@ -892,13 +895,38 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 
   * Install
 
-  You need at least 20 Mbytes free on /boot
+  You need at least 90 Mbytes free on /boot
 
 
 		sudo dpkg -i inux-image-mainline-5.0_1.0-6.deb
 		sudo shutdown -h now
 
  
+# Release v1.16 (Experimental)
+
+  * Kernel 5.0.0-rc6-rk3399 (linux-image && kernel headers)
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.16)
+
+
+
+  * Install
+
+  You need at least 90 Mbytes free on /boot
+
+
+		sudo dpkg -i inux-image-mainline-5.0_1.0-7.deb
+		sudo shutdown -h now
+		Reboot..
+
+
+
 # Build Mainline Kernel on NanoPi M4 (**on board**)
 
   Requirements:
