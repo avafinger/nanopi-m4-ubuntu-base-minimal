@@ -895,7 +895,7 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 
   * Install
 
-  You need at least 90 Mbytes free on /boot
+  You need at least 19 Mbytes free on /boot
 
 
 		sudo dpkg -i inux-image-mainline-5.0_1.0-6.deb
@@ -918,7 +918,7 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 
   * Install
 
-  You need at least 90 Mbytes free on /boot
+  You need at least 19 Mbytes free on /boot
 
 
 		sudo dpkg -i inux-image-mainline-5.0_1.0-7.deb
