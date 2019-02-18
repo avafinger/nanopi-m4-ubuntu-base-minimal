@@ -921,10 +921,33 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
   You need at least 19 Mbytes free on /boot
 
 
-		sudo dpkg -i inux-image-mainline-5.0_1.0-7.deb
+		sudo dpkg -i linux-image-mainline-5.0_1.0-7.deb
 		sudo shutdown -h now
 		Reboot..
 
+
+# Release v1.17 (Experimental)
+
+  * Kernel 5.0.0-rc7 (linux-image && kernel headers)
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.17)
+
+
+
+  * Install
+
+  You need at least 19 Mbytes free on /boot
+
+
+		sudo dpkg -i linux-image-mainline-5.0_1.0-8.deb
+		sudo shutdown -h now
+		Reboot..
 
 
 # Build Mainline Kernel on NanoPi M4 (**on board**)
