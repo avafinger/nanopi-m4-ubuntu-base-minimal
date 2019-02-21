@@ -590,6 +590,35 @@ ScreenShot 6
 
 
 
+# Release v1.18
+
+  * Linux Image 4.4.175-rk3399 (linux-image && kernel headers)
+  * built with gcc 7.3
+  * CPU freq back to 2 GHz (2.0 / 1.5 Ghz)
+  * mainline 4.4.175 patches (https://cdn.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.4.175)
+
+  **Instructions:**
+
+  * Download deb file:
+
+    https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.18
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.18)
+
+
+
+
+  * Install
+
+  You need at least 20 Mbytes free on /boot
+
+
+		sudo dpkg -i linux-image-4.4.174-rk3399_1.0-7.deb
+		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
+
+
+
 
 # Bluetooth
 
