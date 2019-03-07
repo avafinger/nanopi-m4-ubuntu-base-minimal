@@ -14,7 +14,7 @@ OS Image for development with the following tidbits:
 * camera (WiP)
 
 Img is available here:
-https://mega.nz/#!lfBW3SCC!NFYMG4AyKsFYhqC6Ny7FJ9aLgvZgpGUPD2j06m8JCgw
+https://mega.nz/#!YLZhlYJb!uqvCIjpeBoGyfhaNYPJwb67kma7wmGTn5ZObe-CPrb4
 
 You need *wget* and *curl* installed to grab the files in a Linux distro.
 
