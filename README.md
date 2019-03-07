@@ -13,8 +13,8 @@ OS Image for development with the following tidbits:
 * VPU (GBM / X11 / lxde)
 * camera (WiP)
 
-Img is available here:
-https://mega.nz/#!YLZhlYJb!uqvCIjpeBoGyfhaNYPJwb67kma7wmGTn5ZObe-CPrb4
+Img (SD card 8GB) is available here:
+https://mega.nz/#!YLZhlYJb!uqvCIjpeBoGyfhaNYPJwb67kma7wmGTn5ZObe-CPrb4 (use 7z / zip to unzip and flash to SD card with Win32DiskImager)
 
 You need *wget* and *curl* installed to grab the files in a Linux distro.
 
