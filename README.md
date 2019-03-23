@@ -614,10 +614,36 @@ ScreenShot 6
   You need at least 20 Mbytes free on /boot
 
 
-		sudo dpkg -i linux-image-4.4.174-rk3399_1.0-7.deb
+		sudo dpkg -i linux-image-4.4.175-rk3399_1.0-8.deb
 		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
 
 
+# Release v1.19
+
+  * Linux Image 4.4.177-rk3399 (linux-image && kernel headers)
+  * built with gcc 7.3
+  * CPU freq back to 2 GHz (2.0 / 1.5 Ghz)
+  * DRM workaround to run latest Kodi
+
+  **Instructions:**
+
+  * Download deb file:
+
+    https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.19
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.19)
+
+
+
+
+  * Install
+
+  You need at least 20 Mbytes free on /boot
+
+
+		sudo dpkg -i linux-image-4.4.177-rk3399_1.0-9.deb
+		sudo shutdown -h now (or **sync && sudo reboot** if you are **brave**)
 
 
 # Bluetooth
