@@ -1005,6 +1005,116 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 		Reboot..
 
 
+# Release v1.20 (Experimental)
+
+  * Kernel 5.0.3 (linux-image && kernel headers)
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.20)
+
+
+
+  * Install
+
+  You need at least 20 Mbytes free on /boot
+
+
+		sudo dpkg - i linux-image-mainline-5.0_1.0-9.deb
+		sudo shutdown -h now
+		Reboot..
+
+
+# Release v1.21 (Experimental)
+
+  * Kernel 5.1-rc1 (linux-image && kernel headers)
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.21)
+
+
+
+  * Install
+
+  You need at least 20 Mbytes free on /boot
+
+
+		sudo dpkg - i linux-image-mainline-5.1_1.0-10.deb
+		sudo shutdown -h now
+		Reboot..
+
+  7z b
+
+		7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+		p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
+		
+		LE
+		CPU Freq:  1938  1989  1989  1989  1989  1989  1989  1989  1989
+		
+		RAM size:    1989 MB,  # CPU hardware threads:   6
+		RAM usage:   1323 MB,  # Benchmark threads:      6
+		
+		                       Compressing  |                  Decompressing
+		Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+		         KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+		
+		22:       3882   357   1058   3777  |      98473   528   1591   8398
+		23:       4318   403   1092   4400  |     101357   532   1647   8770
+		24:       5381   479   1207   5786  |      98415   527   1638   8638
+		25:       4924   462   1216   5623  |      97324   530   1633   8661
+		----------------------------------  | ------------------------------
+		Avr:             425   1143   4896  |              530   1627   8617
+		Tot:             477   1385   6757
+
+
+
+  lsmod
+
+		Module                  Size  Used by
+		brcmfmac              225280  0
+		rockchipdrm           118784  1
+		brcmutil               16384  1 brcmfmac
+		cfg80211              327680  1 brcmfmac
+		analogix_dp            36864  1 rockchipdrm
+		dw_hdmi                32768  1 rockchipdrm
+		dw_mipi_dsi            20480  1 rockchipdrm
+		drm_kms_helper        180224  4 dw_mipi_dsi,rockchipdrm,dw_hdmi,analogix_dp
+		realtek                20480  1
+		hci_uart               49152  0
+		drm                   425984  6 drm_kms_helper,dw_mipi_dsi,rockchipdrm,dw_hdmi,analogix_dp
+		btbcm                  16384  1 hci_uart
+		bluetooth             335872  23 hci_uart,btbcm
+		dwmac_rk               28672  0
+		stmmac_platform        20480  1 dwmac_rk
+		crct10dif_ce           16384  1
+		stmmac                135168  2 stmmac_platform,dwmac_rk
+		phy_rockchip_pcie      16384  0
+		ecdh_generic           24576  2 bluetooth
+		rfkill                 28672  4 bluetooth,cfg80211
+		drm_panel_orientation_quirks    20480  1 drm
+		rtc_rk808              16384  1
+		pcie_rockchip_host     20480  0
+		rockchip_saradc        16384  0
+		rockchip_thermal       24576  0
+		ip_tables              32768  0
+		x_tables               36864  1 ip_tables
+		ipv6                  393216  26
+
+
+  Bootlog:
+
+ 	https://gist.github.com/avafinger/b87a07bf056c2d26b576f71e864ad30d
+
+
 # Build Mainline Kernel on NanoPi M4 (**on board**)
 
   Requirements:
