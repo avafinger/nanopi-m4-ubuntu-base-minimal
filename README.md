@@ -1115,6 +1115,33 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
  	https://gist.github.com/avafinger/b87a07bf056c2d26b576f71e864ad30d
 
 
+# Release v1.22 (Experimental)
+
+  * Kernel 5.1-rc2 (linux-image && kernel headers)
+
+  **Instructions:**
+
+  * Download deb file:
+
+
+
+		wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep v1.22)
+
+
+
+  * Install
+
+  You need at least 20 Mbytes free on /boot
+
+
+		sudo dpkg - i linux-image-mainline-5.1_1.0-10.deb
+		sudo shutdown -h now
+		Reboot..
+
+
+* Note:
+  Install this linux-image on OS **5.y** only and not on 4.4
+
 # Build Mainline Kernel on NanoPi M4 (**on board**)
 
   Requirements:
