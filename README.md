@@ -14,9 +14,12 @@ OS Image for development with the following tidbits:
 * camera (WiP)
 
 Img (SD card 8GB) is available here:
-https://mega.nz/#!YLZhlYJb!uqvCIjpeBoGyfhaNYPJwb67kma7wmGTn5ZObe-CPrb4 (use 7z / zip to unzip and flash to SD card with Win32DiskImager)
+
+	https://mega.nz/#!YLZhlYJb!uqvCIjpeBoGyfhaNYPJwb67kma7wmGTn5ZObe-CPrb4 (use 7z / zip to unzip and flash to SD card with Win32DiskImager)
+
 
 You need *wget* and *curl* installed to grab the files in a Linux distro.
+
 
 Get the latest files by running (or seee below to fetch specific Release version files):
 
@@ -1141,6 +1144,14 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 
 * Note:
   Install this linux-image on OS **5.y** only and not on 4.4
+
+
+# Mainline Kernel 5.1-rc6
+
+* Bootlog & modules
+
+	https://gist.github.com/avafinger/12c7ba931eec5972c7cfb19af0fa326a
+
 
 # Build Mainline Kernel on NanoPi M4 (**on board**)
 
