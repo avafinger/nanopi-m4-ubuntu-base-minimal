@@ -1251,6 +1251,30 @@ KODI 19.0 ALPHA1 - system
 ![Kodi 4](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi_system.png)
 
 
+**Install dependencies if not already installed, add or change if desired:**
+
+    sudo apt-get install autoconf automake autopoint gettext autotools-dev cmake curl default-jre gawk gcc g++ cpp gdc gperf     libasound2-dev libass-dev libavahi-client-dev libavahi-common-dev libbluetooth-dev libbluray-dev libbz2-dev libcdio-dev     libcec-dev libp8-platform-dev libcrossguid-dev libcurl4-openssl-dev libcwiid-dev libdbus-1-dev libegl1-mesa-dev libenca-     dev libflac-dev libfontconfig1-dev libfmt-dev libfreetype6-dev libfribidi-dev libfstrcmp-dev libgcrypt20-dev libgif-dev     libgles2-mesa-dev libglew-dev libglu1-mesa-dev libgnutls28-dev libgpg-error-dev libiso9660-dev libjpeg-dev liblcms2-dev     liblirc-dev libltdl-dev liblzo2-dev libmicrohttpd-dev libmysqlclient-dev libnfs-dev libogg-dev libomxil-bellagio-dev         libpcre3-dev libplist-dev libpng-dev libpulse-dev libsmbclient-dev libsqlite3-dev libssl-dev libtag1-dev libtiff5-dev       libtinyxml-dev libtool libudev-dev libva-dev libvdpau-dev libvorbis-dev libxkbcommon-dev libxmu-dev libxrandr-dev           libxslt1-dev libxt-dev netcat lsb-release nasm python-dev python-pil python-minimal rapidjson-dev swig unzip uuid-dev       yasm zip zlib1g-dev
+
+**Build the Kodi on-board**
+    
+    mkdir -p kodi
+    cd kodi
+    mkdir -p kodi-build
+    git clone https://github.com/xbmc/xbmc kodi
+    cd kodi
+    sudo make -C tools/depends/target/crossguid PREFIX=/usr
+    sudo make -C tools/depends/target/flatbuffers PREFIX=/usr
+    sudo make -C tools/depends/target/libfmt PREFIX=/usr
+    cd ../kodi-build
+    cmake ../kodi -DCMAKE_INSTALL_PREFIX=/usr/local -DCORE_PLATFORM_NAME=gbm -DGBM_RENDER_SYSTEM=gles
+    cmake --build . -- VERBOSE=0 -j4
+    sudo make install
+    cd ../kodi
+    sudo make -j4 -C tools/depends/target/binary-addons PREFIX=/usr/local
+    
+**Testing**
+
+    Kodi
 
 
 # Credits
