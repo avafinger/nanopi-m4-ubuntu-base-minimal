@@ -1239,16 +1239,16 @@ Instructions to build Kodi 19.0 ALPHA1
   * Remove any Previous Installed Kodi.
   
 KODI 19.0 ALPHA1
-![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/kodi_19.png)
+![Kodi 1](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi_19.png)
 
 KODI 19.0 ALPHA1 - mali
-![Kodi 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/kodi_mali.png)
+![Kodi 2](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi_mali.png)
 
 KODI 19.0 ALPHA1 - Web Inteerface Config
-![Kodi 3](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/kodi_web.png)
+![Kodi 3](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi_web.png)
 
 KODI 19.0 ALPHA1 - system
-![Kodi 4](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi/kodi_system.png)
+![Kodi 4](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi_system.png)
 
 
 
