@@ -1218,7 +1218,7 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 		sudo cp -vfr ./output/* /
 		sync
 		sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopc-t4.dtb /boot/rk3399-nanopc-t4.dtb_${KV}
-                sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb /boot/rk3399-nanopi-m4.dtb_${KV}
+ 		sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb /boot/rk3399-nanopi-m4.dtb_${KV}
                 sync
 
 
@@ -1227,7 +1227,7 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 		cd /boot
 		sudo ln -sf Image_${KV} Image
 		sudo ln -sf rk3399-nanopc-t4.dtb_${KV} dtb
-                sudo ln -sf rk3399-nanopi-m4.dtb_${KV} dtb
+		sudo ln -sf rk3399-nanopi-m4.dtb_${KV} dtb
 		cd ${KVD}
 		sync
 
