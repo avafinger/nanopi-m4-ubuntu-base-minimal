@@ -1196,9 +1196,9 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 
   * grab the latest kernel: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/refs/tags
 
-		wget https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-5.0-rc3.tar.gz
-		tar -xvpzf linux-5.0-rc3.tar.gz
-		cd linux-5.0-rc3
+		wget https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-5.2.tar.gz
+		tar -xvpzf linux-5.2.tar.gz
+		cd linux-5.2
 
   * Build
 
@@ -1217,11 +1217,17 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 		sync
 		sudo cp -vfr ./output/* /
 		sync
+		sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopc-t4.dtb /boot/rk3399-nanopc-t4.dtb_${KV}
+                sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb /boot/rk3399-nanopi-m4.dtb_${KV}
+                sync
+
 
   * Make it current kernel
 
 		cd /boot
 		sudo ln -sf Image_${KV} Image
+		sudo ln -sf rk3399-nanopc-t4.dtb_${KV} dtb
+                sudo ln -sf rk3399-nanopi-m4.dtb_${KV} dtb
 		cd ${KVD}
 		sync
 
@@ -1274,7 +1280,7 @@ KODI 19.0 ALPHA1 - system
     
 **Testing**
 
-    Kodi
+    kodi
 
 
 # Credits
