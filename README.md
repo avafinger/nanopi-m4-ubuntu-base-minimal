@@ -1176,6 +1176,21 @@ Download from: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releas
 		Reboot..
 
 
+# Mainline Kernel 5.2.0
+
+Mainline kernel 5.2 has been released, here is what you can expect:
+
+  * DVFS works
+  * BT works
+  * Wifi (in progress - almost)
+  * Gbps
+  
+Bootlog: https://gist.github.com/avafinger/97d7faea424e386219ea4193a787d3b5
+
+DVFS
+![DVFS(https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/manline_5.2.png)
+
+
 # Build Mainline Kernel on NanoPi M4 (**on board**)
 
   Requirements:
