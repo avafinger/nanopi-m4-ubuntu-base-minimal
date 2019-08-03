@@ -1298,6 +1298,12 @@ KODI 19.0 ALPHA1 - system
     kodi
 
 
+**Pre-built Kodi 19 RK3399**
+
+* Latest rockchip update
+
+      https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/1.24
+
 # Credits
 
   * FriendlyElec (for the sample)
