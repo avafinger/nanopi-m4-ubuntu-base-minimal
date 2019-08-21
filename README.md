@@ -1304,6 +1304,34 @@ KODI 19.0 ALPHA1 - system
 
       https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/1.24
 
+
+# nanopi-m4-ubuntu-base-minimal 19.10 development
+
+Deploying Ubuntu 19.10 Eoan Ermine (development branch)
+
+* Info
+
+		DISTRIB_ID=Ubuntu
+		DISTRIB_RELEASE=19.10
+		DISTRIB_CODENAME=eoan
+		DISTRIB_DESCRIPTION="Ubuntu Eoan Ermine (development branch)"
+
+
+* memory usage:
+
+			      total        used        free      shared  buff/cache   available
+		Mem:           1926          54        1782           8          90        1794
+		Swap:             0           0           0
+
+* gcc dev tools
+
+		gcc (Ubuntu 9.2.1-2ubuntu1) 9.2.1 20190819
+		Copyright (C) 2019 Free Software Foundation, Inc.
+		This is free software; see the source for copying conditions.  There is NO
+		warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
 # Credits
 
   * FriendlyElec (for the sample)
