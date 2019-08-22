@@ -1309,6 +1309,16 @@ KODI 19.0 ALPHA1 - system
 
 Deploying Ubuntu 19.10 Eoan Ermine (development branch)
 
+	Welcome to Ubuntu Eoan Ermine (development branch) (GNU/Linux 5.3.0-rc5-rk3399 aarch64)
+
+	 * Documentation:  https://help.ubuntu.com
+	 * Management:     https://landscape.canonical.com
+	 * Support:        https://ubuntu.com/advantage
+
+	Last login: Wed Aug 21 23:13:19 2019
+	ubuntu@nanopi-m4:~$ 
+
+
 * Info
 
 		DISTRIB_ID=Ubuntu
@@ -1317,11 +1327,18 @@ Deploying Ubuntu 19.10 Eoan Ermine (development branch)
 		DISTRIB_DESCRIPTION="Ubuntu Eoan Ermine (development branch)"
 
 
-* memory usage:
+* memory usage kernel 4.4:
 
 			      total        used        free      shared  buff/cache   available
 		Mem:           1926          54        1782           8          90        1794
 		Swap:             0           0           0
+
+* memory usage kernel 5.3 (ssh):
+
+			      total        used        free      shared  buff/cache   available
+		Mem:           1985          78        1715           8         191        1826
+		Swap:             0           0           0
+
 
 * gcc dev tools
 
