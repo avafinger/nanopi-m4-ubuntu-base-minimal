@@ -1304,6 +1304,11 @@ KODI 19.0 ALPHA1 - system
 
       https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/1.24
 
+# Fix for memory leak and random crahes
+
+Kernel 4.4.177 fix
+https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.25
+
 
 # nanopi-m4-ubuntu-base-minimal 19.10 development
 
