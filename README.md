@@ -1353,6 +1353,13 @@ Deploying Ubuntu 19.10 Eoan Ermine (development branch)
 		warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
+# Mainline Linux Kernel 5.3.0-rc7
+
+Bootlog: https://gist.github.com/avafinger/84aa9fac1c810765ec84844cb0da94b6
+
+* Flash Image to SD CARD
+
+      https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.27
 
 # Credits
 
