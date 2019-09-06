@@ -1369,10 +1369,61 @@ Bootlog: https://gist.github.com/avafinger/5d2e7586b4b10cb45a8a97f9d33d093b
 
 * Pre-requisites
 
-    sudo apt-get install build-essential git bison flex bc device-tree-compiler dh-make bzr-builddeb p7zip-full
-    sudo apt-get install libssl-dev rsync
+    
+      sudo apt-get install build-essential git bison flex bc device-tree-compiler dh-make bzr-builddeb p7zip-full
+      sudo apt-get install libssl-dev rsync wget
 
-* To do
+* Build 
+
+Get your kernel or use the linus kernel:
+
+      mkdir -p linux
+      wget https://git.kernel.org/torvalds/t/linux-5.3-rc7.tar.gz
+      sudo tar -xvpzf linux-5.3-rc7.tar.gz -C ./linux
+
+Build:
+
+    export KVD=$PWD
+    make  distclean
+    rm -rf ./output/*
+    make  mrproper
+    make  defconfig
+    make  menuconfig # enable,diable,add,remove driver(s) or configuration
+    make  oldconfig
+    make -j6 INSTALL_MOD_PATH=output Image 
+    make -j6 INSTALL_MOD_PATH=output dtbs
+    make -j6 INSTALL_MOD_PATH=output modules
+    make -j6 INSTALL_MOD_PATH=output modules_install
+    export KV=$(strings ./arch/arm64/boot/Image |grep "Linux version"|awk '{print $3}')
+    make INSTALL_HDR_PATH=output/usr/src/linux-headers-${KV} headers_install
+
+Install:
+
+    sudo cp -vfr ./output/usr/* /usr/
+    sudo cp -vfr ./output/lib/* /usr/lib
+    sync
+    sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopc-t4.dtb /boot/rk3399-nanopc-t4.dtb_${KV}
+    sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb /boot/rk3399-nanopi-m4.dtb_${KV}
+    sync
+    cd /boot
+    sudo ln -sf Image_${KV} Image
+    sudo ln -sf rk3399-nanopc-t4.dtb_${KV} dtb
+    sudo ln -sf rk3399-nanopi-m4.dtb_${KV} dtb
+    cd $KVD
+    sync
+
+Reboot with:
+ 
+    sudo shutdown -h now
+
+Remove power for 15 secs and power again!
+
+PS: it takes about 45 min to complete, depends on your SD CARD and how you cool your board!!!
+
+You can also monitor the health of your board with htop 2.2.2 from here:
+
+    https://github.com/avafinger/htop_2.2.2
+
 
 # Credits
 
