@@ -1361,6 +1361,19 @@ Bootlog: https://gist.github.com/avafinger/84aa9fac1c810765ec84844cb0da94b6
 
       https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.27
 
+**Compiled with gcc 9.2.1*
+
+Bootlog: https://gist.github.com/avafinger/5d2e7586b4b10cb45a8a97f9d33d093b
+
+# Build instructions
+
+* Pre-requisites
+
+    sudo apt-get install build-essential git bison flex bc device-tree-compiler dh-make bzr-builddeb p7zip-full
+    sudo apt-get install libssl-dev rsync
+
+* To do
+
 # Credits
 
   * FriendlyElec (for the sample)
