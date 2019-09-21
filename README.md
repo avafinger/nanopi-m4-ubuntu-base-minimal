@@ -1375,11 +1375,12 @@ Bootlog: https://gist.github.com/avafinger/5d2e7586b4b10cb45a8a97f9d33d093b
 
 * Build 
 
-Get your kernel or use the linus kernel:
+Get your kernel or use the linus kernel (stable kernel 5.3.1):
 
       mkdir -p linux
-      wget https://git.kernel.org/torvalds/t/linux-5.3-rc7.tar.gz
-      sudo tar -xvpzf linux-5.3-rc7.tar.gz -C ./linux
+      wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.3.1.tar.xz
+      tar -xf linux-5.3.1.tar.xz
+      cd linux-5.3.1/
 
 Build:
 
