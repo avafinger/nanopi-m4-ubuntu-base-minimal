@@ -1378,6 +1378,7 @@ Bootlog: https://gist.github.com/avafinger/5d2e7586b4b10cb45a8a97f9d33d093b
 Get your kernel or use the linus kernel (stable kernel 5.3.1):
 
       mkdir -p linux
+      cd linux/
       wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.3.1.tar.xz
       tar -xf linux-5.3.1.tar.xz
       cd linux-5.3.1/
