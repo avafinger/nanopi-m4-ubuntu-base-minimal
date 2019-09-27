@@ -2,9 +2,43 @@
 
 Ubuntu 18.04 base minimal image for RK3399 (NanoPi M4 / NEO4)
 
+**BSP Kernel 4.4**
 * [Release v1.0](#release-v10)
 * [Release v1.0](#release-v11)
 * [Remote access - ssh](#remote-access-the-board)
+* [mali - fbdev](#3d-mali-fbdev)
+* [Wifi - wlan](#wifi)
+* [GBM - mali](#gbm)
+* [Release v1.0](#release-v11)
+* [Kodi Media Center on RK3399](#kodi-media-center-on-rk3399
+* [Release v1.3  - Kernel 4.4.168](#release-v13)
+* [Release v1.4  - Kernel 4.4.169](#release-v14)
+* [Release v1.8  - Kernel 4.4.169 eMMC install](#release-v18-os-image-for-emmc-only)
+* [Release v1.9  - Kernel 4.4.170](#release-v19)
+* [Release v1.10 - Kernel 4.4.171](#release-v110)
+* [Release v1.11 - Kernel 4.4.172](#release-v111)
+* [Release v1.13 - Kernel 4.4.173](#release-v113)
+* [Release v1.15 - Kernel 4.4.173-rk3399](#release-v115)
+* [Release v1.18 - Kernel 4.4.175-rk3300](#release-v118)
+* [Release v1.19 - Kernel 4.4.177-rk3300](#release-v119)
+* [Bluetooth](#bluetooth)
+* [Kodi on login](#libreelec-or-not-libreelec)
+* [Kodi 19](#building-kodi-19)
+* [Building Kodi 19]#building-kodi-19)
+
+**Mainline Kernel 5.x**
+* [Mainline Kernel on NanoPi M4](#mainline-kernel-on-nanopi-m4)
+* [Mainline Kernel 5.0-rc2](#mainline-kernel-50-rc2-ubuntu-minimal-1804
+* [Release v1.14 - Experimental](#release-v114-experimental
+* [Mainline Kernel 5.1-rc6](mainline-kernel-51-rc6---release-123-experimental)
+* [Mainline Kernel 5.2.0](#mainline-kernel-520)
+* [Building Mainline Instructions](#build-mainline-kernel-on-nanopi-m4-on-board)
+* [Fix for memory leak and crash](#fix-for-memory-leak-and-random-crahes)
+
+**Ubuntu 19.10 - EOAN Ermine**
+* [Ubuntu 19.10](#nanopi-m4-ubuntu-base-minimal-1910-development)
+* [Kernel 5.30-rc7](#mainline-linux-kernel-530-rc7)
+* [Building Kernel 5.3.1 on board](#build-instructions)
 
 
 OS Image for development with the following tidbits:
