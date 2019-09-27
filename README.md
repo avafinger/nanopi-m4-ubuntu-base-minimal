@@ -2,6 +2,16 @@
 
 Ubuntu 18.04 base minimal image for RK3399 (NanoPi M4 / NEO4)
 
+OS Image for development with the following tidbits:
+
+* Kernel 4.4.y (with the best of both world, rockchip bsp kernel + kernel.org 4.4.y)
+* Gbps
+* Wifi
+* Bluetooth
+* 3D mali gpu (fbdev / gbm / x11)
+* VPU (GBM / X11 / lxde)
+* camera (WiP)
+
 **BSP Kernel 4.4**
 * [Release v1.0](#release-v10)
 * [Release v1.0](#release-v11)
@@ -10,7 +20,7 @@ Ubuntu 18.04 base minimal image for RK3399 (NanoPi M4 / NEO4)
 * [Wifi - wlan](#wifi)
 * [GBM - mali](#gbm)
 * [Release v1.0](#release-v11)
-* [Kodi Media Center on RK3399](#kodi-media-center-on-rk3399
+* [Kodi Media Center on RK3399](#kodi-media-center-on-rk3399)
 * [Release v1.3  - Kernel 4.4.168](#release-v13)
 * [Release v1.4  - Kernel 4.4.169](#release-v14)
 * [Release v1.8  - Kernel 4.4.169 eMMC install](#release-v18-os-image-for-emmc-only)
@@ -24,12 +34,12 @@ Ubuntu 18.04 base minimal image for RK3399 (NanoPi M4 / NEO4)
 * [Bluetooth](#bluetooth)
 * [Kodi on login](#libreelec-or-not-libreelec)
 * [Kodi 19](#building-kodi-19)
-* [Building Kodi 19]#building-kodi-19)
+* [Building Kodi 19](#building-kodi-19)
 
 **Mainline Kernel 5.x**
 * [Mainline Kernel on NanoPi M4](#mainline-kernel-on-nanopi-m4)
-* [Mainline Kernel 5.0-rc2](#mainline-kernel-50-rc2-ubuntu-minimal-1804
-* [Release v1.14 - Experimental](#release-v114-experimental
+* [Mainline Kernel 5.0-rc2](#mainline-kernel-50-rc2-ubuntu-minimal-1804)
+* [Release v1.14 - Experimental](#release-v114-experimental)
 * [Mainline Kernel 5.1-rc6](mainline-kernel-51-rc6---release-123-experimental)
 * [Mainline Kernel 5.2.0](#mainline-kernel-520)
 * [Building Mainline Instructions](#build-mainline-kernel-on-nanopi-m4-on-board)
@@ -40,16 +50,6 @@ Ubuntu 18.04 base minimal image for RK3399 (NanoPi M4 / NEO4)
 * [Kernel 5.30-rc7](#mainline-linux-kernel-530-rc7)
 * [Building Kernel 5.3.1 on board](#build-instructions)
 
-
-OS Image for development with the following tidbits:
-
-* Kernel 4.4.y (with the best of both world, rockchip bsp kernel + kernel.org 4.4.y)
-* Gbps
-* Wifi
-* Bluetooth
-* 3D mali gpu (fbdev / gbm / x11)
-* VPU (GBM / X11 / lxde)
-* camera (WiP)
 
 Img (SD card 8GB) is available here:
 
