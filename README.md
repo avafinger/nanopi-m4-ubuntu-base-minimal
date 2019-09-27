@@ -2,6 +2,10 @@
 
 Ubuntu 18.04 base minimal image for RK3399 (NanoPi M4 / NEO4)
 
+* [Release v1.0](#release-v10)
+* [Release v1.0](#release-v11)
+* [Remote access - ssh](#remote-access-the-board)
+
 
 OS Image for development with the following tidbits:
 
