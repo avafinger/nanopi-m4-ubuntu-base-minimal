@@ -47,7 +47,8 @@ OS Image for development with the following tidbits:
 
 **Ubuntu 19.10 - EOAN Ermine**
 * [Ubuntu 19.10](#nanopi-m4-ubuntu-base-minimal-1910-development)
-* [Kernel 5.30-rc7](#mainline-linux-kernel-530-rc7)
+* [Kernel 5.3.0-rc7](#mainline-linux-kernel-530-rc7)
+* [Kernel 5.3.1](#mainline-linux-kernel-531)
 * [Building Kernel 5.3.1 on board](#build-instructions)
 
 
@@ -1402,6 +1403,15 @@ Bootlog: https://gist.github.com/avafinger/84aa9fac1c810765ec84844cb0da94b6
 **Compiled with gcc 9.2.1*
 
 Bootlog: https://gist.github.com/avafinger/5d2e7586b4b10cb45a8a97f9d33d093b
+
+# Mainline Linux Kernel 5.3.1
+
+Bootlog: https://gist.github.com/avafinger/28d976dbe48bc92580efba3fffc37078
+
+* Linux-image
+
+      https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.28
+
 
 # Build instructions
 
