@@ -31,6 +31,7 @@ OS Image for development with the following tidbits:
 * [Release v1.15 - Kernel 4.4.173-rk3399](#release-v115)
 * [Release v1.18 - Kernel 4.4.175-rk3300](#release-v118)
 * [Release v1.19 - Kernel 4.4.177-rk3300](#release-v119)
+* [Fix for memory leak and crash](#fix-for-memory-leak-and-random-crahes)
 * [Bluetooth](#bluetooth)
 * [Kodi on login](#libreelec-or-not-libreelec)
 * [Kodi 19](#building-kodi-19)
@@ -43,12 +44,14 @@ OS Image for development with the following tidbits:
 * [Mainline Kernel 5.1-rc6](mainline-kernel-51-rc6---release-123-experimental)
 * [Mainline Kernel 5.2.0](#mainline-kernel-520)
 * [Building Mainline Instructions](#build-mainline-kernel-on-nanopi-m4-on-board)
-* [Fix for memory leak and crash](#fix-for-memory-leak-and-random-crahes)
+
 
 **Ubuntu 19.10 - EOAN Ermine**
 * [Ubuntu 19.10](#nanopi-m4-ubuntu-base-minimal-1910-development)
 * [Kernel 5.3.0-rc7](#mainline-linux-kernel-530-rc7)
 * [Kernel 5.3.1](#mainline-linux-kernel-531)
+* [Kernel 5.4.0-rc4](#mainline-linux-kernel-540-rc4)
+* [Bluetooth Ubuntu 19.10](#Mainline-Bluetooth)
 * [Building Kernel 5.3.1 on board](#build-instructions)
 
 
@@ -1413,62 +1416,172 @@ Bootlog: https://gist.github.com/avafinger/28d976dbe48bc92580efba3fffc37078
       https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.28
 
 
-# Build instructions
+# Mainline Linux Kernel 5.4.0-rc4
 
-* Pre-requisites
+Bootlog: https://gist.github.com/avafinger/0d3d90ad478fb3457707b9652c9710ea
+
+* Linux-image
+
+      https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.29
+      
+
+# Mainline Bluetooth
+
+  Mailine Bluetooth works out-of-the-box on 5.3.y and 5.4.y
+
+  Here is how to play music with a Bluetooth speaker like JBL CHARGE3
+  
+  * Install Bluetooth stack
+  
+        sudo apt-get update
+        sudo apt-get dist-upgrade
+        sudo apt-get install dialog alsa-utils libasound2 alsa-base
+        sudo apt-get install bluez bluez-tools libbluetooth-dev
+        sudo apt-get install pulseaudio pulseaudio-utils pavucontrol pulseaudio-module-bluetooth
+
+
+  * Find the BT
+
+        ubuntu@nanopi-m4:~$ hciconfig -a
+        hci0:	Type: Primary  Bus: UART
+	    BD Address: CC:4B:73:23:D4:33  ACL MTU: 1021:8  SCO MTU: 64:1
+	    UP RUNNING PSCAN 
+	    RX bytes:3640 acl:0 sco:0 events:418 errors:0
+	    TX bytes:64284 acl:0 sco:0 commands:418 errors:0
+	    Features: 0xbf 0xfe 0xcf 0xfe 0xdb 0xff 0x7b 0x87
+	    Packet type: DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3 
+	    Link policy: RSWITCH SNIFF 
+	    Link mode: SLAVE ACCEPT 
+	    Name: 'nanopi-m4'
+	    Class: 0x0c0000
+	    Service Classes: Rendering, Capturing
+	    Device Class: Miscellaneous, 
+	    HCI Version: 4.1 (0x7)  Revision: 0x210a
+	    LMP Version: 4.1 (0x7)  Subversion: 0x230f
+	    Manufacturer: Broadcom Corporation (15)
+	    
+  * Configure ALSA	    
+
+        cat /etc/asound.conf
+        pcm.!default {
+            type plug
+            slave {
+                pcm "hw:1,0"
+            }
+        }
+        		
+        ctl.!default {
+           type hw
+           card 1
+        } 
+
+
+  * Check for Pulse (must be running)
+
+        ubuntu@nanopi-m4:~$ rfkill list all
+        0: hci0: Bluetooth
+	    Soft blocked: no
+	    Hard blocked: no
+
+        ubuntu@nanopi-m4:~$ ps -e|grep pulse
+        603 ?        00:00:00 pulseaudio
+
+    if Pulse is not running, install and run:
+  
+         pulseaudio --start
+       
+  
+  * Find, pair and connect to CHARGE3       
+
+        sudo bluetoothctl
+        power on
+        agent on
+        scan on
+        scan off
+        trust 8E:06:78:D2:E1:3C
+        pair 8E:06:78:D2:E1:3C
+        connect 8E:06:78:D2:E1:3C
+        exit
+
+  
+  * Play music
+  
+        sudo apt-get install sox libsox-fmt-all
+        play music.mp3
 
     
-      sudo apt-get install build-essential git bison flex bc device-tree-compiler dh-make bzr-builddeb p7zip-full
-      sudo apt-get install libssl-dev rsync wget
+    I played this: https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
+    
+        play SoundHelix-Song-1.mp3 
+        
+        SoundHelix-Song-1.mp3:
+        
+        File Size: 8.95M     Bit Rate: 192k
+          Encoding: MPEG audio    Info: 2009
+          Channels: 2 @ 16-bit   
+        Samplerate: 44100Hz      
+        Replaygain: off         Artist: SoundHelix
+        Duration: 00:06:12.73  
+        
+        In:9.39% 00:00:35.02 [00:05:37.71] Out:1.54M [!=====|=====!] Hd:0.1 Clip:0 
+    
+    
+# Build instructions
 
-* Build 
+  * Pre-requisites
 
-Get your kernel or use the linus kernel (stable kernel 5.3.1):
+    
+        sudo apt-get install build-essential git bison flex bc device-tree-compiler dh-make bzr-builddeb p7zip-full
+        sudo apt-get install libssl-dev rsync wget
 
-      mkdir -p linux
-      cd linux/
-      wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.3.1.tar.xz
-      tar -xf linux-5.3.1.tar.xz
-      cd linux-5.3.1/
+  * Build 
 
-Build:
+    Get your kernel or use the linus kernel (stable kernel 5.3.1 on **Ubuntu 19.10**):
 
-    export KVD=$PWD
-    make  distclean
-    rm -rf ./output/*
-    make  mrproper
-    make  defconfig
-    make  menuconfig # enable,diable,add,remove driver(s) or configuration
-    make  oldconfig
-    make -j6 INSTALL_MOD_PATH=output Image 
-    make -j6 INSTALL_MOD_PATH=output dtbs
-    make -j6 INSTALL_MOD_PATH=output modules
-    make -j6 INSTALL_MOD_PATH=output modules_install
-    export KV=$(strings ./arch/arm64/boot/Image |grep "Linux version"|awk '{print $3}')
-    make INSTALL_HDR_PATH=output/usr/src/linux-headers-${KV} headers_install
+        mkdir -p linux
+        cd linux/
+        wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.3.1.tar.xz
+        tar -xf linux-5.3.1.tar.xz
+        cd linux-5.3.1/
 
-Install:
+    Build:
 
-    sudo cp -vfr ./output/usr/* /usr/
-    sudo cp -vfr ./output/lib/* /usr/lib
-    sync
-    sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopc-t4.dtb /boot/rk3399-nanopc-t4.dtb_${KV}
-    sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb /boot/rk3399-nanopi-m4.dtb_${KV}
-    sync
-    cd /boot
-    sudo ln -sf Image_${KV} Image
-    sudo ln -sf rk3399-nanopc-t4.dtb_${KV} dtb
-    sudo ln -sf rk3399-nanopi-m4.dtb_${KV} dtb
-    cd $KVD
-    sync
+        export KVD=$PWD
+        make  distclean
+        rm -rf ./output/*
+        make  mrproper
+        make  defconfig
+        make  menuconfig # enable,diable,add,remove driver(s) or configuration
+        make  oldconfig
+        make -j6 INSTALL_MOD_PATH=output Image 
+        make -j6 INSTALL_MOD_PATH=output dtbs
+        make -j6 INSTALL_MOD_PATH=output modules
+        make -j6 INSTALL_MOD_PATH=output modules_install
+        export KV=$(strings ./arch/arm64/boot/Image |grep "Linux version"|awk '{print $3}')
+        make INSTALL_HDR_PATH=output/usr/src/linux-headers-${KV} headers_install
 
-Reboot with:
+    Install:
+
+        sudo cp -vfr ./output/usr/* /usr/
+        sudo cp -vfr ./output/lib/* /usr/lib
+        sync
+        sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopc-t4.dtb /boot/rk3399-nanopc-t4.dtb_${KV}
+        sudo cp -vf arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb /boot/rk3399-nanopi-m4.dtb_${KV}
+        sync
+        cd /boot
+        sudo ln -sf Image_${KV} Image
+        sudo ln -sf rk3399-nanopc-t4.dtb_${KV} dtb
+        sudo ln -sf rk3399-nanopi-m4.dtb_${KV} dtb
+        cd $KVD
+        sync
+
+    Reboot with:
  
-    sudo shutdown -h now
+        sudo shutdown -h now
 
-Remove power for 15 secs and power again!
+    Remove power for 15 secs and power again!
 
-PS: it takes about 45 min to complete, depends on your SD CARD and how you cool your board!!!
+    **PS: it takes about 45 min to complete, depends on your SD CARD and how you cool your board!!!**
 
 You can also monitor the health of your board with htop 2.2.2 from here:
 
