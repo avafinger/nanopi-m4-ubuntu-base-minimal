@@ -1424,6 +1424,9 @@ Bootlog: https://gist.github.com/avafinger/0d3d90ad478fb3457707b9652c9710ea
 
       https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.29
       
+7z b burning test
+
+![7z b stress](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/rk3399_htop.png)
 
 # Mainline Bluetooth
 
@@ -1491,7 +1494,7 @@ Bootlog: https://gist.github.com/avafinger/0d3d90ad478fb3457707b9652c9710ea
          pulseaudio --start
        
   
-  * Find, pair and connect to CHARGE3       
+  * Find, pair and connect with CHARGE3       
 
         sudo bluetoothctl
         power on
