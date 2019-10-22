@@ -1424,7 +1424,42 @@ Bootlog: https://gist.github.com/avafinger/0d3d90ad478fb3457707b9652c9710ea
 
       https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.29
       
-7z b burning test
+
+      7z b burning test
+      
+      alex@svn:~$ ssh ubuntu@192.168.254.100
+      ubuntu@192.168.254.100's password: 
+      Welcome to Ubuntu 19.10 (GNU/Linux 5.4.0-rc4 aarch64)
+      
+       * Documentation:  https://help.ubuntu.com
+       * Management:     https://landscape.canonical.com
+       * Support:        https://ubuntu.com/advantage
+      
+      Last login: Tue Oct 22 21:06:53 2019 from 192.168.254.253
+      ubuntu@nanopi-m4:~$ 7z b
+
+      7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+      p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
+      
+      LE
+      CPU Freq: - - - - - - - - -
+      
+      RAM size:    1986 MB,  # CPU hardware threads:   6
+      RAM usage:   1323 MB,  # Benchmark threads:      6
+      
+                             Compressing  |                  Decompressing
+      Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+               KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+      
+      22:       5165   471   1067   5025  |     103265   533   1652   8807
+      23:       4807   447   1096   4898  |     100202   531   1633   8670
+      24:       3885   373   1119   4178  |      99252   533   1633   8712
+      25:       5253   498   1203   5998  |      94648   518   1626   8423
+      ----------------------------------  | ------------------------------
+      Avr:             447   1122   5025  |              529   1636   8653
+      Tot:             488   1379   6839
+      ubuntu@nanopi-m4:~$ 
+
 
 ![7z b stress](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/rk3399_htop.png)
 
