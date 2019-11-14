@@ -54,6 +54,43 @@ OS Image for development with the following tidbits:
 * [Bluetooth Ubuntu 19.10](#Mainline-Bluetooth)
 * [Building Kernel 5.3.1 on board](#build-instructions)
 
+**Status of the Mainline Kernel 5.4.y**
+* [Kernel 5.4.0-rc7](#Mainline-54y-status)
+
+# Mainline 5.4.y status
+
+|  SBC Dev Board tested  |    NanoPi M4                 |
+|------------------------|------------------------------|
+| kernel version         |       5.4.0-rc7              |
+| gcc version            |       9.2.1                  |
+| display                |       hdmi                   |
+| graphical interface    |       CLI                    |
+| idle Temp ºC / freq    |   37 ºC / ~600 Mhz   *       |
+| full Temp ºC / freq    |   55 ºC / 1.20 GHz - 1.99 GHz|
+| RAM memory usage (avg) |      95   Mbytes             |
+| i2c                    |       yes                    |
+| spi                    |                              |
+| Camera                 |                              |
+| Wifi                   |       yes / no *             |
+| BT                     |       yes / no *             |
+| ethernet               |       Gbps / 100Mbps         |
+| sound                  |       BT only		|
+| ir                     |                              |
+| gpu            	 |      panfrost	        |
+|------------------------|------------------------------|
+
+(*) Problems / Issues
+
+* High Cpu Load (around 1)
+  Wifi is enabled and i suspect is the cause of such high load, could be the journaling system
+  
+* Wifi
+  Wifi works, but i had to disable Bluetooth
+  
+* Bluetooth
+  Bluetooth works, but i had to disbale Wifi
+  
+  
 
 Img (SD card 8GB) is available here:
 
