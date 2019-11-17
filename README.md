@@ -82,13 +82,18 @@ OS Image for development with the following tidbits:
 (*) Problems / Issues
 
 * High Cpu Load (around 1)
-  Wifi is enabled and i suspect is the cause of such high load, could be the journaling system
+
+  Wifi is enabled and **is** the cause of such high load
+  
   
 * Wifi
-  Wifi works, but i had to disable Bluetooth
+
+  Wifi works, but I had to turn off Bluetooth for Wifi to work
+  
   
 * Bluetooth
-  Bluetooth works, but i had to disbale Wifi
+  
+  Bluetooth works, but i had to **disbale** Wifi to make BT works
   
   
 
