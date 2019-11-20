@@ -12,9 +12,12 @@ OS Image for development with the following tidbits:
 * VPU (GBM / X11 / lxde)
 * camera (WiP)
 
+**OS Image**
+* [OS Image Install Howto](#os-image)
+
 **BSP Kernel 4.4**
 * [Release v1.0](#release-v10)
-* [Release v1.0](#release-v11)
+* [Release v1.1](#release-v11)
 * [Remote access - ssh](#remote-access-the-board)
 * [mali - fbdev](#3d-mali-fbdev)
 * [Wifi - wlan](#wifi)
@@ -29,8 +32,8 @@ OS Image for development with the following tidbits:
 * [Release v1.11 - Kernel 4.4.172](#release-v111)
 * [Release v1.13 - Kernel 4.4.173](#release-v113)
 * [Release v1.15 - Kernel 4.4.173-rk3399](#release-v115)
-* [Release v1.18 - Kernel 4.4.175-rk3300](#release-v118)
-* [Release v1.19 - Kernel 4.4.177-rk3300](#release-v119)
+* [Release v1.18 - Kernel 4.4.175-rk3399](#release-v118)
+* [Release v1.19 - Kernel 4.4.177-rk3399](#release-v119)
 * [Fix for memory leak and crash](#fix-for-memory-leak-and-random-crahes)
 * [Bluetooth](#bluetooth)
 * [Kodi on login](#libreelec-or-not-libreelec)
@@ -56,12 +59,13 @@ OS Image for development with the following tidbits:
 
 **Status of the Mainline Kernel 5.4.y**
 * [Kernel 5.4.0-rc7](#Mainline-54y-status)
+* [Kernel 5.4.0-rc8](#Mainline-54y-status)
 
 # Mainline 5.4.y status
 
-|  SBC Dev Board tested  |    NanoPi M4                 |
+|  SBC Dev Board tested  |        NanoPi M4             |
 |------------------------|------------------------------|
-| kernel version         |       5.4.0-rc7              |
+| kernel version         |       5.4.0-rc8              |
 | gcc version            |       9.2.1                  |
 | display                |       hdmi                   |
 | graphical interface    |       CLI                    |
@@ -95,20 +99,36 @@ OS Image for development with the following tidbits:
   
   Bluetooth works, but i had to **disbale** Wifi to make BT works
   
+
+* Kernel 5.4.0-rc7 Boot log
+
+      https://gist.github.com/avafinger/99108b3255596080490f3b4d0030230d
+      
+      
+* linux-image 5.4.0-rc8 Deb package
+
+      https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.30
   
+  
+# OS Image
 
-Img (SD card 8GB) is available here:
-
-	https://mega.nz/#!YLZhlYJb!uqvCIjpeBoGyfhaNYPJwb67kma7wmGTn5ZObe-CPrb4 (use 7z / zip to unzip and flash to SD card with Win32DiskImager)
-
-
-You need *wget* and *curl* installed to grab the files in a Linux distro.
+* Image file (8GB SD card) is available here:
 
 
-Get the latest files by running (or seee below to fetch specific Release version files):
+	  https://mega.nz/#!YLZhlYJb!uqvCIjpeBoGyfhaNYPJwb67kma7wmGTn5ZObe-CPrb4 
+	  (use 7z / zip to unzip and flash into SD card with Win32DiskImager or etcher)
 
 
-	wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases/latest | grep -oP '"browser_download_url": "\K(.*)(?=")')
+* Flash SD CARD from Linux Box:
+
+
+  You need *wget* and *curl* installed to grab the files in a Linux distro.
+
+
+  Get the latest files by running (or seee below to fetch specific Release version files):
+
+
+	  wget $(curl -s https://api.github.com/repos/avafinger/nanopi-m4-ubuntu-base-minimal/releases/latest | grep -oP '"browser_download_url": "\K(.*)(?=")')
 
 
 then
