@@ -78,8 +78,7 @@ OS Image for development with the following tidbits:
 | Wifi                   |       yes / no *             |
 | BT                     |       yes / no *             |
 | ethernet               |       Gbps / 100Mbps         |
-| sound                  |       BT only		|
-| ir                     |                              |
+| sound                  |   hdmi-sound and Bluetooth   |
 | gpu            	 |      panfrost	        |
 |------------------------|------------------------------|
 
@@ -99,6 +98,10 @@ OS Image for development with the following tidbits:
   
   Bluetooth works, but i had to **disbale** Wifi to make BT works
   
+
+* Kernel 5.4.0-rc8 Boot log with hdmi-sound
+
+      https://gist.github.com/avafinger/c0651125c1209b4c8a7920a1595ed239
 
 * Kernel 5.4.0-rc7 Boot log
 
