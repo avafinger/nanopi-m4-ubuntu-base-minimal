@@ -60,14 +60,16 @@ OS Image for development with the following tidbits:
 **Status of the Mainline Kernel 5.4.y**
 * [Kernel 5.4.0-rc7](#mainline-kernel-54y-follow-up)
 * [Kernel 5.4.0-rc8](#mainline-kernel-54y-follow-up)
+* [Kernel 5.4.0](#mainline-kernel-54y-follow-up)
 * [3D Panfrost](#panfrost-3d-graphics)
+* [Kodi on mainline 5.4](#kodi-on-540)
 
 
 # Mainline 5.4.y status
 
 |  SBC Dev Board tested  |        NanoPi M4             |
 |------------------------|------------------------------|
-| kernel version         |       5.4.0-rc8              |
+| kernel version         |       5.4.0                  |
 | gcc version            |       9.2.1                  |
 | display                |       hdmi                   |
 | graphical interface    |       CLI                    |
@@ -86,7 +88,7 @@ OS Image for development with the following tidbits:
 
 (*) Problems / Issues
 
-* High Cpu Load (around 1)
+* High Cpu Load (around 1.0)
 
   Wifi is enabled and **is** the cause of such high load
   
@@ -147,6 +149,12 @@ Panfrost Output:
 
 * Build and install
 
+# Kodi on 5.4.0
+
+I have built Kodi with same parameters as for the Mali way, but for some reason it crashed when launched.
+It is known to be possible to run Kodi with Panfrost since Kernel 5.2, but something is missing on my Kodi build.
+No luck yet.
+
 # Mainline Kernel 5.4.y follow up
 
 * Kernel 5.4.0-rc8 Boot log with hdmi-sound
@@ -162,6 +170,11 @@ Panfrost Output:
 
       https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.30
   
+
+* linux-image 5.4.0 Deb package
+
+      https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.31
+      
   
 # OS Image
 
