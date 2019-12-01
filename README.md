@@ -61,6 +61,7 @@ OS Image for development with the following tidbits:
 * [Kernel 5.4.0-rc7](#mainline-kernel-54y-follow-up)
 * [Kernel 5.4.0-rc8](#mainline-kernel-54y-follow-up)
 * [Kernel 5.4.0](#mainline-kernel-54y-follow-up)
+* [Kernel 5.4.1](#mainline-kernel-54y-follow-up)
 * [3D Panfrost](#panfrost-3d-graphics)
 * [Kodi on mainline 5.4](#kodi-on-540)
 
@@ -69,7 +70,7 @@ OS Image for development with the following tidbits:
 
 |  SBC Dev Board tested  |        NanoPi M4             |
 |------------------------|------------------------------|
-| kernel version         |       5.4.0                  |
+| kernel version         |       5.4.1                  |
 | gcc version            |       9.2.1                  |
 | display                |       hdmi                   |
 | graphical interface    |       CLI                    |
@@ -174,6 +175,11 @@ No luck yet.
 * linux-image 5.4.0 Deb package
 
       https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.31
+      
+      
+* linux-image 5.4.1 Deb package      
+
+      https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.32
       
   
 # OS Image
