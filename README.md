@@ -185,7 +185,12 @@ No luck yet.
   https://gist.github.com/avafinger/bc9b1a8b0ea4fb482afee088b7c711d1
   
   To activate Wlan0 you need to recompile kernel 5.4.1 with BRCM module enabled and edit /etc/networks/interface and enable wlan
-  
+
+* linux-image 5.4.8 Deb package      
+
+      https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.33
+
+
 # OS Image
 
 * Image file (8GB SD card) is available here:
