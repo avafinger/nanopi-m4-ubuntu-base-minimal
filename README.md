@@ -46,6 +46,7 @@ OS Image for development with the following tidbits:
 * [Release v1.14 - Experimental](#release-v114-experimental)
 * [Mainline Kernel 5.1-rc6](mainline-kernel-51-rc6---release-123-experimental)
 * [Mainline Kernel 5.2.0](#mainline-kernel-520)
+* [Mainline Kernel 5.6.2](#mainline-kernel-562)
 * [Building Mainline Instructions](#build-mainline-kernel-on-nanopi-m4-on-board)
 
 
@@ -1374,6 +1375,50 @@ Bootlog: https://gist.github.com/avafinger/97d7faea424e386219ea4193a787d3b5
 
 DVFS
 ![DVFS](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/img/manline_5.2.png)
+
+
+
+# Mainline Kernel 5.6.2
+
+Mainline kernel 5.6.2 (status update) has some improvments:
+
+  * DVFS works
+  * BT works
+  * Wifi works
+  * Gbps
+  * hdmi
+  * hdmi-sound out works
+  
+i was surprised by some nice improvments on DVFS and Wifi and BT are working together.
+The missing pieces are the rt5651 codec and HW decoding.
+
+**7z b**
+
+	ubuntu@nanopi-m4:~$ 7z b
+
+	7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+	p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
+
+	LE
+	CPU Freq: 64000000 - - - - - - - -
+
+	RAM size:    1920 MB,  # CPU hardware threads:   6
+	RAM usage:   1323 MB,  # Benchmark threads:      6
+
+			       Compressing  |                  Decompressing
+	Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+		 KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+
+	22:       5049   450   1092   4912  |      98605   505   1665   8409
+	23:       5796   522   1131   5906  |      96652   506   1652   8363
+	24:       5369   497   1161   5773  |      94737   504   1649   8315
+	25:       5838   550   1212   6666  |      93054   507   1633   8281
+	----------------------------------  | ------------------------------
+	Avr:             505   1149   5814  |              506   1650   8342
+	Tot:             505   1399   7078
+
+  
+Bootlog: https://gist.github.com/avafinger/eb14cc0d7fde87223e3c8fa7766ac238
 
 
 # Build Mainline Kernel on NanoPi M4 (**on board**)
