@@ -67,6 +67,11 @@ OS Image for development with the following tidbits:
 * [Kodi on mainline 5.4](#kodi-on-540)
 
 
+**Fixing Wifi on Mainline Kernel**
+* [2.4 GHZ and 5 GHZ](#fix-wifi-on-mainline-kernels)
+
+
+
 # Mainline 5.4.y status
 
 |  SBC Dev Board tested  |        NanoPi M4             |
@@ -1814,6 +1819,46 @@ Bootlog: https://gist.github.com/avafinger/28d976dbe48bc92580efba3fffc37078
 You can also monitor the health of your board with htop 2.2.2 from here:
 
     https://github.com/avafinger/htop_2.2.2
+
+# Fix Wifi on Mainline Kernels
+
+Until recently i was able to use Wifi or Bluetooth but not both together. This has been fixed following some simple instructions.
+
+I used the old way (the ugly way) to set the Wifi and Ethernet, editing the file **/etc/network/interfaces** instead of **netplan**, the recommended way which i found a bit hard to configure.
+
+For some reason, the wifi works smooth with **power save off** in 2.4 GHz and 5 GHz, and now Bluetooth can work together.
+Setting the **wireless-power off** in  **/etc/network/interfaces** does not work but using **iw** works:
+
+        sudo apt-get update
+	sudo apt-get install iw
+	sudo iw dev wlan0 set power_save off
+
+Now Wifi and Bluetooth work smooth.
+
+Also for a better performance you can update the firmware from here (which is more up-to-date):
+
+	https://people.linaro.org/~manivannan.sadhasivam/rock960_wifi/
+	
+
+You can ad the power save command at boot time adding the command to **rc.local** file:
+
+	#!/bin/bash
+	iw dev wlan0 set power_save off
+	exit 0
+
+You might need to add the rc.local service if you have not done it yet before you edit the rc.local file above;
+
+	sudo systemctl status rc-local
+	sudo systemctl enable rc-local
+	printf '%s\n' '#!/bin/bash' 'exit 0' | sudo tee -a /etc/rc.local
+	sudo chmod +x /etc/rc.local
+	sudo systemctl enable rc-local
+
+Check for SSID(s):
+
+	sudo iw dev wlan0 scan | egrep "signal:|SSID:" | sed -e "s/\tsignal: //" -e "s/\tSSID: //" | awk '{ORS = (NR % 2 == 0)? "\n" : " "; print}' | sort
+
+Enjoy the maximum performance of both Wifi and BT.
 
 
 # Credits
