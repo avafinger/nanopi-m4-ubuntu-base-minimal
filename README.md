@@ -68,7 +68,7 @@ OS Image for development with the following tidbits:
 
 
 **Fixing Wifi on Mainline Kernel**
-* [2.4 GHZ and 5 GHZ](#fix-wifi-on-mainline-kernels)
+* [2.4 GHz and 5 GHz](#fix-wifi-on-mainline-kernels)
 
 
 
@@ -1826,10 +1826,10 @@ Until recently i was able to use Wifi or Bluetooth but not both together. This h
 
 I used the old way (the ugly way) to set the Wifi and Ethernet, editing the file **/etc/network/interfaces** instead of **netplan**, the recommended way which i found a bit hard to configure.
 
-For some reason, the wifi works smooth with **power save off** in 2.4 GHz and 5 GHz, and now Bluetooth can work together.
+For some reason, the wifi works smooth with **power save off** in **2.4 GHz** and **5 GHz**, and now Bluetooth can work together.
 Setting the **wireless-power off** in  **/etc/network/interfaces** does not work but using **iw** works:
 
-        sudo apt-get update
+	sudo apt-get update
 	sudo apt-get install iw
 	sudo iw dev wlan0 set power_save off
 
@@ -1840,7 +1840,7 @@ Also for a better performance you can update the firmware from here (which is mo
 	https://people.linaro.org/~manivannan.sadhasivam/rock960_wifi/
 	
 
-You can ad the power save command at boot time adding the command to **rc.local** file:
+You can add the power save command at boot time adding the command to **rc.local** file:
 
 	#!/bin/bash
 	iw dev wlan0 set power_save off
