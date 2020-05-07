@@ -70,45 +70,43 @@ OS Image for development with the following tidbits:
 **Fixing Wifi on Mainline Kernel**
 * [2.4 GHz and 5 GHz](#fix-wifi-on-mainline-kernels)
 
+**Status of the Mainline Kernel 5.7.y**
+* [Kernel 5.7.0-rc4](#mainline-57y-status)
 
-
-# Mainline 5.4.y status
+# Mainline 5.7.y status
 
 |  SBC Dev Board tested  |        NanoPi M4             |
 |------------------------|------------------------------|
-| kernel version         |       5.4.1                  |
+| kernel version         |       5.7.0-rc4              |
 | gcc version            |       9.2.1                  |
 | display                |       hdmi                   |
 | graphical interface    |       CLI                    |
-| idle Temp ºC / freq    |   37 ºC / ~600 Mhz   *       |
+| idle Temp ºC / freq    |   33 ºC / 408 Mhz            |
 | full Temp ºC / freq    |   55 ºC / 1.20 GHz - 1.99 GHz|
-| RAM memory usage (avg) |      95   Mbytes             |
+| RAM memory usage (avg) |      101   Mbytes            |
 | i2c                    |       yes                    |
 | spi                    |                              |
+| hdmi sound out         |       yes                    |
+| rt5651                 |       WiP                    |
+| spdif                  |                              |
 | Camera                 |                              |
-| Wifi                   |       yes / no *             |
-| BT                     |       yes / no *             |
+| Wifi                   |       yes (new firmware)     |
+| BT                     |       yes                    |
 | ethernet               |       Gbps / 100Mbps         |
 | sound                  |   hdmi-sound and Bluetooth   |
 | gpu            	 |      panfrost	        |
+| vpu            	 |      WiP	        	|
+| DVFS           	 |      yes	        	|
 |------------------------|------------------------------|
 
 (*) Problems / Issues
 
-* High Cpu Load (around 1.0)
+* Reboot
 
-  Wifi is enabled and **is** the cause of such high load
-  
-  
-* Wifi
+## Mainline Kernel 5.7.0-rc4
+* linux-image 5.7.0-rc4 plus brcm firmware update
+https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.34
 
-  Wifi works, but I had to turn off Bluetooth for Wifi to work
-  
-  
-* Bluetooth
-  
-  Bluetooth works, but i had to **disbale** Wifi to make BT works
-  
 
 # Panfrost 3D graphics
 
