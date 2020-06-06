@@ -77,7 +77,7 @@ OS Image for development with the following tidbits:
 
 |  SBC Dev Board tested  |        NanoPi M4             |
 |------------------------|------------------------------|
-| kernel version         |       5.7.0-rc4              |
+| kernel version         |       5.7.0                  |
 | gcc version            |       9.2.1                  |
 | display                |       hdmi                   |
 | graphical interface    |       CLI                    |
@@ -87,15 +87,15 @@ OS Image for development with the following tidbits:
 | i2c                    |       yes                    |
 | spi                    |                              |
 | hdmi sound out         |       yes                    |
-| rt5651                 |       WiP                    |
-| spdif                  |                              |
+| rt5651                 |       yes                    |
+| spdif                  | yes (need some testing)      |
 | Camera                 |                              |
 | Wifi                   |       yes (new firmware)     |
 | BT                     |       yes                    |
 | ethernet               |       Gbps / 100Mbps         |
 | sound                  |   hdmi-sound and Bluetooth   |
 | gpu            	 |      panfrost	        |
-| vpu            	 |      WiP	        	|
+| vpu            	 |      yes (common formats)  	|
 | DVFS           	 |      yes	        	|
 |------------------------|------------------------------|
 
