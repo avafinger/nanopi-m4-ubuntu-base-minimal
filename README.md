@@ -72,6 +72,7 @@ OS Image for development with the following tidbits:
 
 **Status of the Mainline Kernel 5.7.y**
 * [Kernel 5.7.0-rc4](#mainline-57y-status)
+* [Kernel 5.7.0 linux-image](#mainline-kernel-570)
 
 # Mainline 5.7.y status
 
@@ -103,8 +104,84 @@ OS Image for development with the following tidbits:
 
 * Reboot
 
+## Mainline Kernel 5.7.0
+
+* linux-image 5.7.0
+
+https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.35
+
+# Testing rt5651
+
+There is support for rt5651 but the trick to make it work is described on Armbian forum.
+Alsamixer must set the following:
+
+	amixer set 'HPO L' on
+	amixer set 'HPO R' on
+	amixer set 'HPOVOL L' on
+	amixer set 'HPOVOL R' on
+	amixer set 'HPO MIX HPVOL' on
+	amixer set 'OUT MIXL DAC L1' on
+	amixer set 'OUT MIXR DAC R1' on
+	amixer set 'Stereo DAC MIXL DAC L1' on
+	amixer set 'Stereo DAC MIXR DAC R1' on
+
+
+* Check sound devices
+
+	ubuntu@nanopi-m4:~$ aplay -l
+	**** List of PLAYBACK Hardware Devices ****
+	card 0: realtekrt5651co [realtek,rt5651-codec], device 0: ff890000.i2s-rt5651-aif1 rt5651-aif1-0 [ff890000.i2s-rt5651-aif1 rt5651-aif1-0]
+	  Subdevices: 1/1
+	  Subdevice #0: subdevice #0
+	card 1: ROCKCHIPSPDIF [ROCKCHIP,SPDIF], device 0: ff870000.spdif-dit-hifi dit-hifi-0 [ff870000.spdif-dit-hifi dit-hifi-0]
+	  Subdevices: 1/1
+	  Subdevice #0: subdevice #0
+	card 2: hdmisound [hdmi-sound], device 0: ff8a0000.i2s-i2s-hifi i2s-hifi-0 [ff8a0000.i2s-i2s-hifi i2s-hifi-0]
+	  Subdevices: 1/1
+	  Subdevice #0: subdevice #0
+
+
+Playing sound on every device:
+
+**rt5651**
+	
+	aplay -D sysdefault:CARD=0 /usr/share/sounds/alsa/Front_Right.wav
+
+**SPDIF**
+
+	aplay -D sysdefault:CARD=1 /usr/share/sounds/alsa/Front_Right.wav
+	
+**hdmi-sound**
+
+	aplay -D sysdefault:CARD=2 /usr/share/sounds/alsa/Front_Right.wav
+
+
+# Testing GPU and VPU
+
+There is support for GPU (panfrost) and VPU (hantro and rkvdec). Most H264 (1920x1080) works smooth.
+You can also build **Kodi**.
+
+If you output decoded video to a framebuffer:
+
+	ffmpeg -hwaccel drm -i Big_Buck_Bunny_1080_10s_30MB.mp4 -pix_fmt bgra -f fbdev /dev/fb0
+	
+
+There is a small penalty to be paid for converting the drm_prime format to bgra that increases CPU usage, while output to a drm_prime surface like Kodi does not.
+
+FFmpeg used to test hw decoding: ffmpeg version 4.2.2-Matrix-Alpha1-26-g6029b361f2-Kodi
+
+You can learn more reading Mainline VPU on Armbian forum
+
+# Testing Wifi
+
+Wifi and BT works fine with the latest brcm firmware provided on previous image.
+2.4 GHz and 5 GHz has been working without any glitch, read the previous info.
+
+
 ## Mainline Kernel 5.7.0-rc4
+
 * linux-image 5.7.0-rc4 plus brcm firmware update
+
 https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.34
 
 
