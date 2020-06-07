@@ -78,7 +78,7 @@ OS Image for development with the following tidbits:
 
 |  SBC Dev Board tested  |        NanoPi M4             |
 |------------------------|------------------------------|
-| kernel version         |       5.7.0                  |
+| kernel version         |       5.7.1                  |
 | gcc version            |       9.2.1                  |
 | display                |       hdmi                   |
 | graphical interface    |       CLI                    |
@@ -103,6 +103,74 @@ OS Image for development with the following tidbits:
 (*) Problems / Issues
 
 * Reboot
+
+## Mainline Kernel 5.7.1
+
+Bootlog: https://gist.github.com/avafinger/54a1d590308215a37e437d1a93033c15
+
+Support for:
+
+* DVFS
+* GPU / VPU
+* Wifi
+* Eth
+* BT
+* hdmi
+* hdmi-sound
+* rt5651 (jack)
+* spdif (?)
+
+**Basic Benchmark**
+
+* 7z b
+
+	7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+	p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
+
+	LE
+	CPU Freq: - - - - - - 512000000 - -
+
+	RAM size:    1924 MB,  # CPU hardware threads:   6
+	RAM usage:   1323 MB,  # Benchmark threads:      6
+
+			       Compressing  |                  Decompressing
+	Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+		 KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+
+	22:       5692   502   1102   5538  |      98576   504   1668   8407
+	23:       4857   431   1147   4949  |      96575   504   1658   8357
+	24:       4589   431   1144   4935  |      94597   503   1650   8303
+	25:       5601   527   1213   6396  |      93156   505   1643   8290
+	----------------------------------  | ------------------------------
+	Avr:             473   1152   5454  |              504   1654   8339
+	Tot:             489   1403   6897
+
+
+* openssl speed sha256 aes-128-cbc rsa2048
+	Doing sha256 for 3s on 16 size blocks: 9658979 sha256's in 2.99s
+	Doing sha256 for 3s on 64 size blocks: 7291386 sha256's in 3.00s
+	Doing sha256 for 3s on 256 size blocks: 4299091 sha256's in 2.99s
+	Doing sha256 for 3s on 1024 size blocks: 1621935 sha256's in 3.00s
+	Doing sha256 for 3s on 8192 size blocks: 238842 sha256's in 2.99s
+	Doing sha256 for 3s on 16384 size blocks: 120378 sha256's in 2.99s
+	Doing aes-128 cbc for 3s on 16 size blocks: 10267243 aes-128 cbc's in 3.00s
+	Doing aes-128 cbc for 3s on 64 size blocks: 2790474 aes-128 cbc's in 2.99s
+	Doing aes-128 cbc for 3s on 256 size blocks: 718036 aes-128 cbc's in 3.00s
+	Doing aes-128 cbc for 3s on 1024 size blocks: 180829 aes-128 cbc's in 2.99s
+	Doing aes-128 cbc for 3s on 8192 size blocks: 22646 aes-128 cbc's in 3.00s
+	Doing aes-128 cbc for 3s on 16384 size blocks: 11302 aes-128 cbc's in 2.99s
+	Doing 2048 bits private rsa's for 10s: 1400 2048 bits private RSA's in 9.98s
+	Doing 2048 bits public rsa's for 10s: 52169 2048 bits public RSA's in 9.98s
+	OpenSSL 1.1.1c  28 May 2019
+	built on: Wed May 27 19:04:47 2020 UTC
+	options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+	compiler: gcc -fPIC -pthread -Wa,--noexecstack -Wall -Wa,--noexecstack -g -O2 -fdebug-prefix-map=/build/openssl-KZTQCo/openssl-1.1.1c=. -fstack-protector-strong -Wformat -Werror=format-security -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG -Wdate-time -D_FORTIFY_SOURCE=2
+	The 'numbers' are in 1000s of bytes per second processed.
+	type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+	aes-128 cbc      54758.63k    59729.21k    61272.41k    61929.40k    61838.68k    61930.42k
+	sha256           51686.84k   155549.57k   368082.71k   553620.48k   654379.15k   659623.13k
+			  sign    verify    sign/s verify/s
+	rsa 2048 bits 0.007129s 0.000191s    140.3   5227.4
 
 ## Mainline Kernel 5.7.0
 
