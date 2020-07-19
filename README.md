@@ -127,21 +127,21 @@ This Image is not to be used with NanoPi M4 v2 and possibly with 4GB DRAM.
 
 * Kernel
 
-    Linux nanopi-m4 5.7.9 #1 SMP PREEMPT Sat Jul 18 18:14:35 -03 2020 aarch64 aarch64 aarch64 GNU/Linux
+		Linux nanopi-m4 5.7.9 #1 SMP PREEMPT Sat Jul 18 18:14:35 -03 2020 aarch64 aarch64 aarch64 GNU/Linux
 
 * Finding sound device
 
-  	aplay -l
-  	**** List of PLAYBACK Hardware Devices ****
-  	card 0: realtekrt5651co [realtek,rt5651-codec], device 0: ff890000.i2s-rt5651-aif1 rt5651-aif1-0 [ff890000.i2s-rt5651-aif1 rt5651-aif1-0]
-  	  Subdevices: 1/1
-  	  Subdevice #0: subdevice #0
-  	card 1: ROCKCHIPSPDIF [ROCKCHIP,SPDIF], device 0: ff870000.spdif-dit-hifi dit-hifi-0 [ff870000.spdif-dit-hifi dit-hifi-0]
-  	  Subdevices: 1/1
-  	  Subdevice #0: subdevice #0
-  	card 2: hdmisound [hdmi-sound], device 0: ff8a0000.i2s-i2s-hifi i2s-hifi-0 [ff8a0000.i2s-i2s-hifi i2s-hifi-0]
-  	  Subdevices: 1/1
-  	  Subdevice #0: subdevice #0
+		aplay -l
+		**** List of PLAYBACK Hardware Devices ****
+		card 0: realtekrt5651co [realtek,rt5651-codec], device 0: ff890000.i2s-rt5651-aif1 rt5651-aif1-0 [ff890000.i2s-rt5651-aif1 rt5651-aif1-0]
+		  Subdevices: 1/1
+		  Subdevice #0: subdevice #0
+		card 1: ROCKCHIPSPDIF [ROCKCHIP,SPDIF], device 0: ff870000.spdif-dit-hifi dit-hifi-0 [ff870000.spdif-dit-hifi dit-hifi-0]
+		  Subdevices: 1/1
+		  Subdevice #0: subdevice #0
+		card 2: hdmisound [hdmi-sound], device 0: ff8a0000.i2s-i2s-hifi i2s-hifi-0 [ff8a0000.i2s-i2s-hifi i2s-hifi-0]
+		  Subdevices: 1/1
+		  Subdevice #0: subdevice #0
 
 * Play sound (HDMI output)
 
@@ -166,9 +166,9 @@ This Image is not to be used with NanoPi M4 v2 and possibly with 4GB DRAM.
 
 * Bluetooth
 
-      hcitool dev
-      Devices:
-      	hci0	CC:4B:73:23:D4:33
+		hcitool dev
+		Devices:
+		hci0	CC:4B:73:23:D4:33
 
 * Ethernet and Wlan interfaces
 
