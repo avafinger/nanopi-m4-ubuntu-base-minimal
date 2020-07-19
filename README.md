@@ -73,12 +73,13 @@ OS Image for development with the following tidbits:
 **Status of the Mainline Kernel 5.7.y**
 * [Kernel 5.7.0-rc4](#mainline-57y-status)
 * [Kernel 5.7.0 linux-image](#mainline-kernel-570)
+* [Kernel 5.7.9 image file](#mainline-kernel-579)
 
 # Mainline 5.7.y status
 
 |  SBC Dev Board tested  |        NanoPi M4             |
 |------------------------|------------------------------|
-| kernel version         |       5.7.1                  |
+| kernel version         |       5.7.9                  |
 | gcc version            |       9.2.1                  |
 | display                |       hdmi                   |
 | graphical interface    |       CLI                    |
@@ -89,7 +90,7 @@ OS Image for development with the following tidbits:
 | spi                    |                              |
 | hdmi sound out         |       yes                    |
 | rt5651                 |       yes                    |
-| spdif                  | yes (need some testing)      |
+| spdif                  | yes (need someone to test)   |
 | Camera                 |                              |
 | Wifi                   |       yes (new firmware)     |
 | BT                     |       yes                    |
@@ -103,6 +104,150 @@ OS Image for development with the following tidbits:
 (*) Problems / Issues
 
 * Reboot
+
+## Mainline Kernel 5.7.9
+
+This is the Image file for booting from SD CARD for NanoPi M4 v1 (2G), with pre-built Kernel 5.7.9.
+The Ubuntu EOAN 19.10 OS Image has the following working:
+
+* DVFS
+* panfrost
+* eth0
+* wlan0
+* rt5651
+* BT
+* spdif (?)
+* i2c
+* hdmi
+* hdmi-sound
+* GBM / DRM
+* GPU / VPU
+
+This Image is not to be used with NanoPi M4 v2 and possibly with 4GB DRAM.
+
+* Kernel
+
+    Linux nanopi-m4 5.7.9 #1 SMP PREEMPT Sat Jul 18 18:14:35 -03 2020 aarch64 aarch64 aarch64 GNU/Linux
+
+* Finding sound device
+
+  	aplay -l
+  	**** List of PLAYBACK Hardware Devices ****
+  	card 0: realtekrt5651co [realtek,rt5651-codec], device 0: ff890000.i2s-rt5651-aif1 rt5651-aif1-0 [ff890000.i2s-rt5651-aif1 rt5651-aif1-0]
+  	  Subdevices: 1/1
+  	  Subdevice #0: subdevice #0
+  	card 1: ROCKCHIPSPDIF [ROCKCHIP,SPDIF], device 0: ff870000.spdif-dit-hifi dit-hifi-0 [ff870000.spdif-dit-hifi dit-hifi-0]
+  	  Subdevices: 1/1
+  	  Subdevice #0: subdevice #0
+  	card 2: hdmisound [hdmi-sound], device 0: ff8a0000.i2s-i2s-hifi i2s-hifi-0 [ff8a0000.i2s-i2s-hifi i2s-hifi-0]
+  	  Subdevices: 1/1
+  	  Subdevice #0: subdevice #0
+
+* Play sound (HDMI output)
+
+      		aplay -D sysdefault:CARD=2 /usr/share/sounds/alsa/Front_Right.wav
+
+  or
+
+		AUDIODEV=hw:2,0 play ff-16b-2c-44100hz.mp3
+		play WARN alsa: can't encode 0-bit Unknown or not applicable
+
+		ff-16b-2c-44100hz.mp3:
+
+		 File Size: 2.99M     Bit Rate: 128k
+		  Encoding: MPEG audio    Info: 2016-04-12
+		  Channels: 2 @ 16-bit   
+		Samplerate: 44100Hz      
+		Replaygain: off         
+		  Duration: 00:03:07.12  
+
+		In:25.2% 00:00:47.18 [00:02:19.93] Out:2.08M [-=====|=====-] Hd:1.0 Clip:0  
+
+
+* Bluetooth
+
+      hcitool dev
+      Devices:
+      	hci0	CC:4B:73:23:D4:33
+
+* Ethernet and Wlan interfaces
+
+		ifconfig
+		eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+		        inet 192.168.254.42  netmask 255.255.0.0  broadcast 192.168.255.255
+		        inet6 2804:7f4:3582:cf22:3835:48ff:fe87:d8e2  prefixlen 64  scopeid 0x0<global>
+		        inet6 fe80::3835:48ff:fe87:d8e2  prefixlen 64  scopeid 0x20<link>
+		        inet6 2804:7f4:3582:cf22:b4a6:8573:441a:ec4a  prefixlen 64  scopeid 0x0<global>
+		        ether 3a:35:48:87:d8:e2  txqueuelen 1000  (Ethernet)
+		        RX packets 8478  bytes 674293 (674.2 KB)
+		        RX errors 0  dropped 0  overruns 0  frame 0
+		        TX packets 6468  bytes 1331171 (1.3 MB)
+		        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+		        device interrupt 27  
+		
+		lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+		        inet 127.0.0.1  netmask 255.0.0.0
+		        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+		        loop  txqueuelen 1000  (Local Loopback)
+		        RX packets 0  bytes 0 (0.0 B)
+		        RX errors 0  dropped 0  overruns 0  frame 0
+		        TX packets 0  bytes 0 (0.0 B)
+		        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+		
+		wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+		        inet 192.168.254.102  netmask 255.255.0.0  broadcast 192.168.255.255
+		        inet6 2804:7f4:3582:cf22:b5fe:bcdb:1728:273a  prefixlen 64  scopeid 0x0<global>
+		        inet6 fe80::ce4b:73ff:fe23:d432  prefixlen 64  scopeid 0x20<link>
+		        inet6 2804:7f4:3582:cf22:ce4b:73ff:fe23:d432  prefixlen 64  scopeid 0x0<global>
+		        ether cc:4b:73:23:d4:32  txqueuelen 1000  (Ethernet)
+		        RX packets 1810  bytes 185266 (185.2 KB)
+		        RX errors 0  dropped 0  overruns 0  frame 0
+		        TX packets 663  bytes 88989 (88.9 KB)
+		        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+* testing VPU (decoding and displaying video on fb)
+
+		ffmpeg -hwaccel drm -i Jellyfish_1080_10s_30MB.mp4 -pix_fmt bgra -f fbdev /dev/fb0
+		ffmpeg version 4.2.2-Matrix-Alpha1-26-g6029b361f2-Kodi Copyright (c) 2000-2019 the FFmpeg developers
+		  built with gcc 9 (Ubuntu 9.2.1-9ubuntu2)
+		  configuration: --prefix=/usr --enable-nonfree --enable-gpl --enable-version3 --enable-libmp3lame --enable-libpulse --enable-libv4l2 --enable-v4l2-request --enable-v4l2-m2m --enable-libudev --enable-libdrm --enable-shared
+		  libavutil      56. 31.100 / 56. 31.100
+		  libavcodec     58. 54.100 / 58. 54.100
+		  libavformat    58. 29.100 / 58. 29.100
+		  libavdevice    58.  8.100 / 58.  8.100
+		  libavfilter     7. 57.100 /  7. 57.100
+		  libswscale      5.  5.100 /  5.  5.100
+		  libswresample   3.  5.100 /  3.  5.100
+		  libpostproc    55.  5.100 / 55.  5.100
+		Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'Jellyfish_1080_10s_30MB.mp4':
+		  Metadata:
+		    major_brand     : isom
+		    minor_version   : 512
+		    compatible_brands: isomiso2avc1mp41
+		    encoder         : Lavf57.63.100
+		  Duration: 00:00:10.00, start: 0.000000, bitrate: 25030 kb/s
+		    Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p, 1920x1080 [SAR 1:1 DAR 16:9], 25026 kb/s, 30 fps, 30 tbr, 15360 tbn, 60 tbc (default)
+		    Metadata:
+		      handler_name    : VideoHandler
+		Stream mapping:
+		  Stream #0:0 -> #0:0 (h264 (native) -> rawvideo (native))
+		Press [q] to stop, [?] for help
+		[h264 @ 0xaaaad4f4f320] v4l2_request_try_format: pixelformat 875967059 not supported for type 10
+		[h264 @ 0xaaaad4f4f320] v4l2_request_probe_video_device: try output format failed
+		Output #0, fbdev, to '/dev/fb0':
+		  Metadata:
+		    major_brand     : isom
+		    minor_version   : 512
+		    compatible_brands: isomiso2avc1mp41
+		    encoder         : Lavf58.29.100
+		    Stream #0:0(und): Video: rawvideo (BGRA / 0x41524742), bgra, 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 1990656 kb/s, 30 fps, 30 tbn, 30 tbc (default)
+		    Metadata:
+		      handler_name    : VideoHandler
+		      encoder         : Lavc58.54.100 rawvideo
+		frame=  300 fps= 56 q=-0.0 Lsize=N/A time=00:00:10.00 bitrate=N/A speed=1.88x    
+		video:2430000kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+
 
 ## Mainline Kernel 5.7.1
 
