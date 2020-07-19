@@ -124,6 +124,8 @@ The Ubuntu EOAN 19.10 OS Image has the following working:
 * GPU / VPU
 
 This Image is not to be used with NanoPi M4 v2 and possibly with 4GB DRAM.
+Image file: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.36
+
 
 * Kernel
 
@@ -162,6 +164,24 @@ This Image is not to be used with NanoPi M4 v2 and possibly with 4GB DRAM.
 		  Duration: 00:03:07.12  
 
 		In:25.2% 00:00:47.18 [00:02:19.93] Out:2.08M [-=====|=====-] Hd:1.0 Clip:0  
+
+* Play sound rt5651 (Jack)
+
+		AUDIODEV=hw:0,0 play ff-16b-2c-44100hz.mp3 
+		play WARN alsa: can't encode 0-bit Unknown or not applicable
+
+		ff-16b-2c-44100hz.mp3:
+
+		 File Size: 2.99M     Bit Rate: 128k
+		  Encoding: MPEG audio    Info: 2016-04-12
+		  Channels: 2 @ 16-bit   
+		Samplerate: 44100Hz      
+		Replaygain: off         
+		  Duration: 00:03:07.12  
+
+		In:100%  00:03:07.12 [00:00:00.00] Out:8.25M [      |      ]        Clip:14   
+		play WARN sox: `alsa' output clipped 14 samples; decrease volume?
+		Done.
 
 
 * Bluetooth
