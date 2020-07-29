@@ -74,6 +74,7 @@ OS Image for development with the following tidbits:
 * [Kernel 5.7.0-rc4](#mainline-57y-status)
 * [Kernel 5.7.0 linux-image](#mainline-kernel-570)
 * [Kernel 5.7.9 image file](#mainline-kernel-579)
+* [Kodi on Kernel 5.7.9](#kodi-mainline-kernel-579)
 
 # Mainline 5.7.y status
 
@@ -104,6 +105,21 @@ OS Image for development with the following tidbits:
 (*) Problems / Issues
 
 * Reboot
+
+## Kodi mainline kernel 5.7.9
+
+You can build Kodi for mainline with current kernel using the same instructions used in the kernel 4.4 but you get limited decoding capabilities. Support basic video codecs.
+
+To build Kodi with your own kernel version you will need:
+
+* Latest kernel with V4L2 / VPU patches and Panfrost enabled
+* FFmpeg with patches from Kwiboo / jernejsk
+* Build Mesa
+
+![Kodi Panfrost](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi_mainline_panfrost_mesa.png)
+
+![Kodi Mainline](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi_mainline_kernel_version.png)
+
 
 ## Mainline Kernel 5.7.9
 
