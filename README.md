@@ -76,6 +76,11 @@ OS Image for development with the following tidbits:
 * [Kernel 5.7.9 image file](#mainline-kernel-579)
 * [Kodi on Kernel 5.7.9](#kodi-mainline-kernel-579)
 
+**BSP Kernel 4.19**
+
+Experiments with Kernel 4.19
+
+
 # Mainline 5.7.y status
 
 |  SBC Dev Board tested  |        NanoPi M4             |
@@ -2189,4 +2194,4 @@ Enjoy the maximum performance of both Wifi and BT.
 
   * FriendlyElec (for the sample)
   * Amanda Finger (Expertise on Kodi and help building)
-  * Armbian (technical informations)
+  * Armbian (knowledge base)
