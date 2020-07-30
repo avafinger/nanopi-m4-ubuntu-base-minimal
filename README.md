@@ -83,6 +83,11 @@ OS Image for development with the following tidbits:
 
 Experiments with Kernel 4.19
 
+* Boot log (kernel 4.19.111)
+
+https://gist.github.com/avafinger/64085a755c717db2263aaa64c9aa91c2
+
+
 |  SBC Dev Board tested  |        NanoPi M4             |
 |------------------------|------------------------------|
 | kernel version         |       4.19.111               |
