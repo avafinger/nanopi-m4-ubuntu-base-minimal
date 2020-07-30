@@ -76,6 +76,9 @@ OS Image for development with the following tidbits:
 * [Kernel 5.7.9 image file](#mainline-kernel-579)
 * [Kodi on Kernel 5.7.9](#kodi-mainline-kernel-579)
 
+**BSP Kernel 4.19**
+* [Kernel 4.19.111](#bsp-kernel-419)
+
 ## BSP Kernel 4.19
 
 Experiments with Kernel 4.19
@@ -106,9 +109,9 @@ Experiments with Kernel 4.19
 
 **Kodi GPU (hw accel)**
 
-![Kodi gpu ](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/mali-gpu-kernel4.19.111.png
+![Kodi gpu ](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/mali-gpu-kernel4.19.111.png)
 
-![Kodi kernel ](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi-kernel-4.19.111.png
+![Kodi kernel ](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi-kernel-4.19.111.png)
 
 # Mainline 5.7.y status
 
