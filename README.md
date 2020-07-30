@@ -76,10 +76,39 @@ OS Image for development with the following tidbits:
 * [Kernel 5.7.9 image file](#mainline-kernel-579)
 * [Kodi on Kernel 5.7.9](#kodi-mainline-kernel-579)
 
-**BSP Kernel 4.19**
+## BSP Kernel 4.19
 
 Experiments with Kernel 4.19
 
+|  SBC Dev Board tested  |        NanoPi M4             |
+|------------------------|------------------------------|
+| kernel version         |       4.19.111               |
+| gcc version            |       7.5.0                  |
+| display                |       hdmi                   |
+| graphical interface    |       CLI                    |
+| idle Temp ºC / freq    |   25 ºC / 408 Mhz            |
+| full Temp ºC / freq    |   55 ºC / 1.4  GHz - 1.8  GHz|
+| RAM memory usage (avg) |      71   Mbytes             |
+| i2c                    |       yes                    |
+| spi                    |                              |
+| hdmi sound out         |       yes                    |
+| rt5651                 |       yes                    |
+| spdif                  |                              |
+| Camera                 |                              |
+| Wifi                   |       yes (?)                |
+| BT                     |       yes                    |
+| ethernet               |       Gbps / 100Mbps         |
+| sound                  |   hdmi-sound and Bluetooth   |
+| gpu            	 |      mali T860	        |
+| vpu            	 |                            	|
+| DVFS           	 |      yes	        	|
+|------------------------|------------------------------|
+
+**Kodi GPU (hw accel)**
+
+![Kodi gpu ](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/mali-gpu-kernel4.19.111.png
+
+![Kodi kernel ](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/kodi-kernel-4.19.111.png
 
 # Mainline 5.7.y status
 
