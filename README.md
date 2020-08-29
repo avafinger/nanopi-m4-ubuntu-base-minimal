@@ -103,13 +103,13 @@ We are going to build the latest u-boot on NanoPi M4 (2GB) running from SD CARD.
 		export BL31=$PWD/arm-trusted-firmware/build/rk3399/release/bl31/bl31.elf
 		git clone https://gitlab.denx.de/u-boot/u-boot.git
 		make -C u-boot distclean
-		make -C u-boot rk3399_defconfig
-		
-
-* Install
-
 		make -C u-boot nanopi-m4-2gb-rk3399_defconfig
 		make -C u-boot 
+
+* install
+
+		sudo dd if=u-boot/idbloader.img of=/dev/mmcblk1 seek=64
+		sudo dd if=u-boot/u-boot.itb of=/dev/mmcblk1 seek=16384
 
 * reboot
 
