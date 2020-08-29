@@ -79,6 +79,43 @@ OS Image for development with the following tidbits:
 **BSP Kernel 4.19**
 * [Kernel 4.19.111](#bsp-kernel-419)
 
+**Mainline u-boot**
+* [u-boot 2020.10-rc3](#mainline-u-boot)
+
+## Mainline u-boot
+
+Here we are going to fix the reboot issue i had with my u-boot Android like build.
+We are going to build the latest u-boot on NanoPi M4 (2GB) running from SD CARD.
+
+* Install dependencies
+
+		sudo apt-get install device-tree-compiler python3-dev python3-distutils swig
+		sudo apt-get install gcc-arm-none-eabi 
+
+* Build u-boot
+
+		mkdir u-boot
+		cd u-boot/
+		git clone https://github.com/ARM-software/arm-trusted-firmware 
+		cd arm-trusted-firmware/
+		make PLAT=rk3399 DEBUG=0 bl31
+		cd ..
+		export BL31=$PWD/arm-trusted-firmware/build/rk3399/release/bl31/bl31.elf
+		git clone https://gitlab.denx.de/u-boot/u-boot.git
+		make -C u-boot distclean
+		make -C u-boot rk3399_defconfig
+		
+
+* Install
+
+		make -C u-boot nanopi-m4-2gb-rk3399_defconfig
+		make -C u-boot 
+
+* reboot
+
+		sync && sudo reboot
+
+
 ## BSP Kernel 4.19
 
 Experiments with Kernel 4.19
