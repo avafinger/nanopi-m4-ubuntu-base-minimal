@@ -75,6 +75,7 @@ OS Image for development with the following tidbits:
 * [Kernel 5.7.0 linux-image](#mainline-kernel-570)
 * [Kernel 5.7.9 image file](#mainline-kernel-579)
 * [Kodi on Kernel 5.7.9](#kodi-mainline-kernel-579)
+* [Benchmarks](#Benchmarks-5.7.9-rkdec)
 
 **BSP Kernel 4.19**
 * [Kernel 4.19.111](#bsp-kernel-419)
@@ -114,6 +115,66 @@ We are going to build the latest u-boot on NanoPi M4 (2GB) running from SD CARD.
 * reboot
 
 		sync && sudo reboot
+
+## Benchmarks 5.7.9-rkdec
+
+Benchmarks with u-boot mainline and the board with nice cooler, a heatsink and ceramic, just for fun.
+
+	buntu@nanopi-m4:~$ 7z b
+
+	7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+	p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
+
+	LE
+	CPU Freq: - - - - - - - - -
+
+	RAM size:    1924 MB,  # CPU hardware threads:   6
+	RAM usage:   1323 MB,  # Benchmark threads:      6
+
+			       Compressing  |                  Decompressing
+	Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+		 KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+
+	22:       6338   530   1164   6166  |     102348   519   1682   8728
+	23:       5901   501   1200   6013  |     100372   518   1677   8685
+	24:       6377   565   1214   6857  |      98519   518   1668   8647
+	25:       6299   560   1285   7193  |      97049   518   1666   8637
+	----------------------------------  | ------------------------------
+	Avr:             539   1216   6557  |              518   1673   8674
+	Tot:             529   1445   7616
+
+	ubuntu@nanopi-m4:~$ openssl speed sha256 aes-128-cbc aes-256-cbc rsa2048
+	Doing sha256 for 3s on 16 size blocks: 19452925 sha256's in 3.00s
+	Doing sha256 for 3s on 64 size blocks: 13864911 sha256's in 3.00s
+	Doing sha256 for 3s on 256 size blocks: 7367936 sha256's in 2.99s
+	Doing sha256 for 3s on 1024 size blocks: 2553850 sha256's in 3.00s
+	Doing sha256 for 3s on 8192 size blocks: 359438 sha256's in 3.00s
+	Doing sha256 for 3s on 16384 size blocks: 180700 sha256's in 2.99s
+	Doing aes-128 cbc for 3s on 16 size blocks: 14735693 aes-128 cbc's in 3.00s
+	Doing aes-128 cbc for 3s on 64 size blocks: 4431648 aes-128 cbc's in 3.00s
+	Doing aes-128 cbc for 3s on 256 size blocks: 1164991 aes-128 cbc's in 3.00s
+	Doing aes-128 cbc for 3s on 1024 size blocks: 296218 aes-128 cbc's in 2.99s
+	Doing aes-128 cbc for 3s on 8192 size blocks: 37173 aes-128 cbc's in 3.00s
+	Doing aes-128 cbc for 3s on 16384 size blocks: 18591 aes-128 cbc's in 3.00s
+	Doing aes-256 cbc for 3s on 16 size blocks: 11725626 aes-256 cbc's in 2.99s
+	Doing aes-256 cbc for 3s on 64 size blocks: 3385548 aes-256 cbc's in 3.00s
+	Doing aes-256 cbc for 3s on 256 size blocks: 879341 aes-256 cbc's in 3.00s
+	Doing aes-256 cbc for 3s on 1024 size blocks: 222662 aes-256 cbc's in 3.00s
+	Doing aes-256 cbc for 3s on 8192 size blocks: 27923 aes-256 cbc's in 2.99s
+	Doing aes-256 cbc for 3s on 16384 size blocks: 13956 aes-256 cbc's in 3.00s
+	Doing 2048 bits private rsa's for 10s: 2222 2048 bits private RSA's in 9.98s
+	Doing 2048 bits public rsa's for 10s: 83572 2048 bits public RSA's in 9.99s
+	OpenSSL 1.1.1c  28 May 2019
+	built on: Wed May 27 19:04:47 2020 UTC
+	options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+	compiler: gcc -fPIC -pthread -Wa,--noexecstack -Wall -Wa,--noexecstack -g -O2 -fdebug-prefix-map=/build/openssl-KZTQCo/openssl-1.1.1c=. -fstack-protector-strong -Wformat -Werror=format-security -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG -Wdate-time -D_FORTIFY_SOURCE=2
+	The 'numbers' are in 1000s of bytes per second processed.
+	type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+	aes-128 cbc      78590.36k    94541.82k    99412.57k   101447.23k   101507.07k   101531.65k
+	aes-256 cbc      62745.82k    72225.02k    75037.10k    76001.96k    76503.42k    76218.37k
+	sha256          103748.93k   295784.77k   630833.32k   871714.13k   981505.37k   990163.48k
+			  sign    verify    sign/s verify/s
+	rsa 2048 bits 0.004491s 0.000120s    222.6   8365.6
 
 
 ## BSP Kernel 4.19
@@ -384,53 +445,54 @@ Support for:
 
 * 7z b
 
-	7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
-	p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
+		7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+		p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
 
-	LE
-	CPU Freq: - - - - - - 512000000 - -
+		LE
+		CPU Freq: - - - - - - 512000000 - -
 
-	RAM size:    1924 MB,  # CPU hardware threads:   6
-	RAM usage:   1323 MB,  # Benchmark threads:      6
+		RAM size:    1924 MB,  # CPU hardware threads:   6
+		RAM usage:   1323 MB,  # Benchmark threads:      6
 
-			       Compressing  |                  Decompressing
-	Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
-		 KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+				       Compressing  |                  Decompressing
+		Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+			 KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
 
-	22:       5692   502   1102   5538  |      98576   504   1668   8407
-	23:       4857   431   1147   4949  |      96575   504   1658   8357
-	24:       4589   431   1144   4935  |      94597   503   1650   8303
-	25:       5601   527   1213   6396  |      93156   505   1643   8290
-	----------------------------------  | ------------------------------
-	Avr:             473   1152   5454  |              504   1654   8339
-	Tot:             489   1403   6897
+		22:       5692   502   1102   5538  |      98576   504   1668   8407
+		23:       4857   431   1147   4949  |      96575   504   1658   8357
+		24:       4589   431   1144   4935  |      94597   503   1650   8303
+		25:       5601   527   1213   6396  |      93156   505   1643   8290
+		----------------------------------  | ------------------------------
+		Avr:             473   1152   5454  |              504   1654   8339
+		Tot:             489   1403   6897
 
 
 * openssl speed sha256 aes-128-cbc rsa2048
-	Doing sha256 for 3s on 16 size blocks: 9658979 sha256's in 2.99s
-	Doing sha256 for 3s on 64 size blocks: 7291386 sha256's in 3.00s
-	Doing sha256 for 3s on 256 size blocks: 4299091 sha256's in 2.99s
-	Doing sha256 for 3s on 1024 size blocks: 1621935 sha256's in 3.00s
-	Doing sha256 for 3s on 8192 size blocks: 238842 sha256's in 2.99s
-	Doing sha256 for 3s on 16384 size blocks: 120378 sha256's in 2.99s
-	Doing aes-128 cbc for 3s on 16 size blocks: 10267243 aes-128 cbc's in 3.00s
-	Doing aes-128 cbc for 3s on 64 size blocks: 2790474 aes-128 cbc's in 2.99s
-	Doing aes-128 cbc for 3s on 256 size blocks: 718036 aes-128 cbc's in 3.00s
-	Doing aes-128 cbc for 3s on 1024 size blocks: 180829 aes-128 cbc's in 2.99s
-	Doing aes-128 cbc for 3s on 8192 size blocks: 22646 aes-128 cbc's in 3.00s
-	Doing aes-128 cbc for 3s on 16384 size blocks: 11302 aes-128 cbc's in 2.99s
-	Doing 2048 bits private rsa's for 10s: 1400 2048 bits private RSA's in 9.98s
-	Doing 2048 bits public rsa's for 10s: 52169 2048 bits public RSA's in 9.98s
-	OpenSSL 1.1.1c  28 May 2019
-	built on: Wed May 27 19:04:47 2020 UTC
-	options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
-	compiler: gcc -fPIC -pthread -Wa,--noexecstack -Wall -Wa,--noexecstack -g -O2 -fdebug-prefix-map=/build/openssl-KZTQCo/openssl-1.1.1c=. -fstack-protector-strong -Wformat -Werror=format-security -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG -Wdate-time -D_FORTIFY_SOURCE=2
-	The 'numbers' are in 1000s of bytes per second processed.
-	type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
-	aes-128 cbc      54758.63k    59729.21k    61272.41k    61929.40k    61838.68k    61930.42k
-	sha256           51686.84k   155549.57k   368082.71k   553620.48k   654379.15k   659623.13k
-			  sign    verify    sign/s verify/s
-	rsa 2048 bits 0.007129s 0.000191s    140.3   5227.4
+
+		Doing sha256 for 3s on 16 size blocks: 9658979 sha256's in 2.99s
+		Doing sha256 for 3s on 64 size blocks: 7291386 sha256's in 3.00s
+		Doing sha256 for 3s on 256 size blocks: 4299091 sha256's in 2.99s
+		Doing sha256 for 3s on 1024 size blocks: 1621935 sha256's in 3.00s
+		Doing sha256 for 3s on 8192 size blocks: 238842 sha256's in 2.99s
+		Doing sha256 for 3s on 16384 size blocks: 120378 sha256's in 2.99s
+		Doing aes-128 cbc for 3s on 16 size blocks: 10267243 aes-128 cbc's in 3.00s
+		Doing aes-128 cbc for 3s on 64 size blocks: 2790474 aes-128 cbc's in 2.99s
+		Doing aes-128 cbc for 3s on 256 size blocks: 718036 aes-128 cbc's in 3.00s
+		Doing aes-128 cbc for 3s on 1024 size blocks: 180829 aes-128 cbc's in 2.99s
+		Doing aes-128 cbc for 3s on 8192 size blocks: 22646 aes-128 cbc's in 3.00s
+		Doing aes-128 cbc for 3s on 16384 size blocks: 11302 aes-128 cbc's in 2.99s
+		Doing 2048 bits private rsa's for 10s: 1400 2048 bits private RSA's in 9.98s
+		Doing 2048 bits public rsa's for 10s: 52169 2048 bits public RSA's in 9.98s
+		OpenSSL 1.1.1c  28 May 2019
+		built on: Wed May 27 19:04:47 2020 UTC
+		options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+		compiler: gcc -fPIC -pthread -Wa,--noexecstack -Wall -Wa,--noexecstack -g -O2 -fdebug-prefix-map=/build/openssl-KZTQCo/openssl-1.1.1c=. -fstack-protector-strong -Wformat -Werror=format-security -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG -Wdate-time -D_FORTIFY_SOURCE=2
+		The 'numbers' are in 1000s of bytes per second processed.
+		type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+		aes-128 cbc      54758.63k    59729.21k    61272.41k    61929.40k    61838.68k    61930.42k
+		sha256           51686.84k   155549.57k   368082.71k   553620.48k   654379.15k   659623.13k
+				  sign    verify    sign/s verify/s
+		rsa 2048 bits 0.007129s 0.000191s    140.3   5227.4
 
 ## Mainline Kernel 5.7.0
 
