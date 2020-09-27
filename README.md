@@ -83,6 +83,9 @@ OS Image for development with the following tidbits:
 **Mainline u-boot**
 * [u-boot 2020.10-rc3](#mainline-u-boot)
 
+**Mainline Kernel 5.9**
+* [Mainline Kernel 5.9 on NanoPi M4](#mainline-kernel-59)
+
 ## Mainline u-boot
 
 Here we are going to fix the reboot issue i had with my u-boot Android like build.
@@ -115,6 +118,114 @@ We are going to build the latest u-boot on NanoPi M4 (2GB) running from SD CARD.
 * reboot
 
 		sync && sudo reboot
+
+## Mainline Kernel 5.9
+
+|  SBC Dev Board tested  |        NanoPi M4             |
+|------------------------|------------------------------|
+| kernel version         |       5.9                    |
+| gcc version            |       10                     |
+| display                |       hdmi                   |
+| graphical interface    |       CLI                    |
+| idle Temp ºC / freq    |   25 ºC / 408 Mhz            |
+| full Temp ºC / freq    |   55 ºC / 1.5  GHz - 2.0  GHz|
+| RAM memory usage (avg) |      92   Mbytes             |
+| i2c                    |       yes                    |
+| spi                    |                              |
+| hdmi sound out         |       yes                    |
+| rt5651                 |       yes                    |
+| spdif                  |                              |
+| Camera                 |                              |
+| Wifi                   |       yes                    |
+| BT                     |       yes                    |
+| ethernet               |       Gbps                   |
+| sound                  |   hdmi-sound and Bluetooth   |
+| gpu            	 |      panfrost 	        |
+| vpu            	 |      wip                   	|
+| DVFS           	 |      yes	        	|
+|------------------------|------------------------------|
+
+
+* **Kernel 5.9.0-rc6**
+
+  The OS Image file will be here:
+  Image file: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.38
+
+
+	ubuntu@nanopi-m4:~$ uname -ra
+	Linux nanopi-m4 5.9.0-rc6 #1 SMP PREEMPT Sat Sep 26 19:07:46 -03 2020 aarch64 aarch64 aarch64 GNU/Linux
+
+	ubuntu@nanopi-m4:/$ gcc --version
+	gcc (Ubuntu 10-20200411-0ubuntu1) 10.0.1 20200411 (experimental) [master revision bb87d5cc77d:75961caccb7:f883c46b4877f637e0fa5025b4d6b5c9040ec566]
+	Copyright (C) 2020 Free Software Foundation, Inc.
+	This is free software; see the source for copying conditions.  There is NO
+	warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+	ubuntu@nanopi-m4:~$ 7z b
+
+	7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+	p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
+
+	LE
+	CPU Freq: - - - - - - - - -
+
+	RAM size:    1924 MB,  # CPU hardware threads:   6
+	RAM usage:   1323 MB,  # Benchmark threads:      6
+
+			       Compressing  |                  Decompressing
+	Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+		 KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+
+	22:       6511   550   1151   6335  |     102629   519   1687   8752
+	23:       6050   513   1202   6165  |     100584   519   1677   8703
+	24:       5864   505   1248   6306  |      98898   522   1663   8680
+	25:       6128   544   1286   6997  |      96949   519   1662   8628
+	----------------------------------  | ------------------------------
+	Avr:             528   1222   6451  |              520   1672   8691
+	Tot:             524   1447   7571
+
+	ubuntu@nanopi-m4:~$ sudo ifconfig -a wlan0
+	wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+		inet 192.168.254.49  netmask 255.255.0.0  broadcast 192.168.255.255
+		inet6 fe80::ce4b:73ff:fe23:d432  prefixlen 64  scopeid 0x20<link>
+		ether cc:4b:73:23:d4:32  txqueuelen 1000  (Ethernet)
+		RX packets 11530  bytes 15347454 (15.3 MB)
+		RX errors 0  dropped 0  overruns 0  frame 0
+		TX packets 5520  bytes 647408 (647.4 KB)
+		TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+	ubuntu@nanopi-m4:~$ iw wlan0 info
+	Interface wlan0
+		ifindex 3
+		wdev 0x1
+		addr cc:4b:73:23:d4:32
+		ssid FIB-8784-5G
+		type managed
+		wiphy 0
+		channel 149 (5745 MHz), width: 80 MHz, center1: 5775 MHz
+		txpower 31.00 dBm
+
+	ubuntu@nanopi-m4:~$ sudo iw dev wlan0 scan | egrep "signal:|SSID:" | sed -e "s/\tsignal: //" -e "s/\tSSID: //" | awk '{ORS = (NR % 2 == 0)? "\n" : " "; print}' | sort
+	-43.00 dBm FIB-8784-5G
+	-44.00 dBm FIB-8784
+	-51.00 dBm FIB-8784
+	-59.00 dBm foxy
+	
+	ubuntu@nanopi-m4:~$ hcitool dev
+	Devices:
+		hci0	CC:4B:73:23:D4:33
+	ubuntu@nanopi-m4:~$ 
+
+	ubuntu@nanopi-m4:~$ cat /proc/asound/cards
+	 0 [realtekrt5651co]: realtek_rt5651- - realtek,rt5651-codec
+			      realtek,rt5651-codec
+	 1 [ROCKCHIPSPDIF  ]: ROCKCHIP_SPDIF - ROCKCHIP,SPDIF
+			      ROCKCHIP,SPDIF
+	 2 [hdmisound      ]: hdmi-sound - hdmi-sound
+			      hdmi-sound
+
+
 
 ## Benchmarks 5.7.9-rkdec
 
