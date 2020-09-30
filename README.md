@@ -162,7 +162,11 @@ We are going to build the latest u-boot on NanoPi M4 (2GB) running from SD CARD.
   
   Boot log: https://gist.github.com/avafinger/ba6af660751c3e2917868bb3060beb13
 
-  The OS Image file will be here:
+
+  The OS Image file for 2GB DRAM and 4 GB DRAM:
+  Image file: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.40
+  
+  The OS Image file with mainline u-boot for 2GB DRAM only:
   Image file: https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.39
   
   
