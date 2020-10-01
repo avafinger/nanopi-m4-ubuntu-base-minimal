@@ -161,6 +161,10 @@ We are going to build the latest u-boot on NanoPi M4 (2GB) running from SD CARD.
   * vpu hantro
   
   Boot log: https://gist.github.com/avafinger/ba6af660751c3e2917868bb3060beb13
+  
+  ![7z b](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/nanopim4-7zb.png)
+  
+  ![htop 2.2.2-8](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/nanopim4-htop.png)
 
 
   The OS Image file for 2GB DRAM and 4 GB DRAM:
