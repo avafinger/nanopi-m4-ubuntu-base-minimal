@@ -145,6 +145,22 @@ We are going to build the latest u-boot on NanoPi M4 (2GB) running from SD CARD.
 | DVFS           	 |      yes	        	|
 |------------------------|------------------------------|
 
+* **Kernel 5.9.0**
+
+  OS Image file (8GB): https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/v1.41
+  
+  * hdmi
+  * hdmi sound
+  * analog sound
+  * Wifi
+  * BT
+  * Mainline u-boot
+  * reboot (ok)
+  * shutdown (ok)
+  * gpu panfrost
+  * vpu hantro
+  
+
 * **Kernel 5.9.0-rc7**
 
   **Kernel 5.9.0-rc7** with working:
