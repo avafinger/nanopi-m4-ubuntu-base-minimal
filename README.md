@@ -86,6 +86,9 @@ OS Image for development with the following tidbits:
 **Mainline Kernel 5.9**
 * [Mainline Kernel 5.9 on NanoPi M4](#mainline-kernel-59)
 
+**Mainline Kernel 5.10**
+* [Mainline Kernel 5.10.rc3 on NanoPi M4](#mainline-kernel-510)
+
 ## Mainline u-boot
 
 Here we are going to fix the reboot issue i had with my u-boot Android like build.
@@ -118,6 +121,83 @@ We are going to build the latest u-boot on NanoPi M4 (2GB) running from SD CARD.
 * reboot
 
 		sync && sudo reboot
+
+## Mainline Kernel 5.10
+
+Testing and Benchmarking 5.10 RC (WiP) in Ubuntu 20.04 LTS
+Simple benchmarks in progress for the nanoPi M4 2G (DDR3).
+
+
+|  SBC Dev Board tested  |        NanoPi M4             |
+|------------------------|------------------------------|
+| kernel version         |       5.10.0-rc3             |
+| gcc version            |       10                     |
+| display                |       hdmi                   |
+| graphical interface    |       CLI                    |
+| idle Temp ºC / freq    |   25 ºC / 408 Mhz            |
+| full Temp ºC / freq    |   55 ºC / 1.5  GHz - 2.0  GHz|
+| RAM memory usage (avg) |      97  Mbytes              |
+| i2c                    |                              |
+| spi                    |                              |
+| hdmi sound out         |                              |
+| rt5651                 |                              |
+| spdif                  |                              |
+| Camera                 |                              |
+| Wifi                   |                              |
+| BT                     |       BCM4356A2              |
+| ethernet               |       Gbps                   |
+| sound                  |   hdmi-sound and Bluetooth   |
+| gpu            	 |      panfrost 	        |
+| vpu            	 |                            	|
+| DVFS           	 |         	        	|
+|------------------------|------------------------------|
+
+* **Kernel 5.10.0-rc3**
+  
+  * hdmi
+  * hdmi sound
+  * analog sound
+  * Wifi
+  * BT
+  * Mainline u-boot
+  * reboot (ok)
+  * shutdown (ok)
+  * gpu panfrost
+  * vpu hantro
+
+* **Testing the kernel 5.10 RC (WIP)**
+
+  * GPU
+  
+    Testing the panfrost with GBM (OpenGLES2)
+
+  * VPU
+  
+    Very simple tests
+
+  * Wifi
+  
+    Testing Wifi with iperf3
+    
+  * RTL8211E Gigabit Ethernet
+  
+    Testing Eth0 with iperf3
+    
+    
+  * Bluetooth
+  
+    Testing conectivity with some hardware.
+
+
+  * HDMI sound
+  
+    Testing sound output to HDMI.
+
+
+  * Headphone jack sound
+  
+    Testing sound output to jack.
+
 
 ## Mainline Kernel 5.9
 
