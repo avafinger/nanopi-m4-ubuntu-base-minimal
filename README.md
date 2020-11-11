@@ -164,6 +164,47 @@ Simple benchmarks in progress for the nanoPi M4 2G (DDR3).
   * shutdown (ok)
   * gpu panfrost
   * vpu hantro
+  
+**Building Vanilla Kernel natively on NanoPi M4 with gcc 10.2.0**
+
+  * Build your kernel
+  
+		cd kernel
+		export KVD=$PWD
+		make nanopim4_full_defconfig
+		make oldconfig
+		make -j6 INSTALL_MOD_PATH=output Image 
+		make -j6 INSTALL_MOD_PATH=output dtbs
+		make -j6 INSTALL_MOD_PATH=output modules
+		make -j6 INSTALL_MOD_PATH=output modules_install
+		export KV="5.10.0-rc3"
+		make -j6 INSTALL_HDR_PATH=output/usr/src/linux-headers-${KV} headers_install
+
+
+  * Install your kernel
+  
+  		sudo cp -fv ./arch/arm64/boot/Image /boot/Image_${KV}
+		sudo cp -vf ./arch/arm64/boot/dts/rockchip/rk3399-nanopi-m4.dtb /boot/rk3399-nanopi-m4.dtb_${KV}
+		sudo cp -vfr ./output/usr/* /usr/
+		sudo cp -vfr ./output/lib/* /usr/lib
+
+  * Make it current kernel
+  
+  		cd /boot
+		sudo ln -sf Image_${KV} Image
+		sudo ln -sf rk3399-nanopi-m4.dtb_${KV} dtb
+		cd ${KVD}
+		sync
+
+  * Reboot
+  
+  		sync && sudo reboot
+  
+  		
+  ![Building mainline kernel](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/nanopi_kernel_5.10.png)
+  
+  
+The kernel 5.10.0-rc3
 
 * **Testing the kernel 5.10 RC (WIP)**
 
@@ -259,6 +300,7 @@ Simple benchmarks in progress for the nanoPi M4 2G (DDR3).
   Boot log: https://gist.github.com/avafinger/ba6af660751c3e2917868bb3060beb13
   
   ![7z b](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/nanopim4-7zb.png)
+  
   
   ![htop 2.2.2-8](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/nanopim4-htop.png)
 
