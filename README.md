@@ -220,6 +220,48 @@ The kernel 5.10.0-rc3
   
     Testing Wifi with iperf3
     
+    * **2.4 GHz**
+    
+		./iperf3 -c 192.168.254.49
+		Connecting to host 192.168.254.49, port 5201
+		[  5] local 192.168.254.253 port 33722 connected to 192.168.254.49 port 5201
+		[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+		[  5]   0.00-1.00   sec  11.7 MBytes  98.4 Mbits/sec    8   66.5 KBytes       
+		[  5]   1.00-2.00   sec  11.2 MBytes  93.6 Mbits/sec    5   83.4 KBytes       
+		[  5]   2.00-3.00   sec  11.2 MBytes  94.1 Mbits/sec    7   69.3 KBytes       
+		[  5]   3.00-4.00   sec  11.2 MBytes  93.6 Mbits/sec    3   83.4 KBytes       
+		[  5]   4.00-5.00   sec  11.4 MBytes  95.6 Mbits/sec    6   83.4 KBytes       
+		[  5]   5.00-6.00   sec  11.2 MBytes  93.6 Mbits/sec    7   84.8 KBytes       
+		[  5]   6.00-7.00   sec  11.2 MBytes  94.1 Mbits/sec    7   67.9 KBytes       
+		[  5]   7.00-8.00   sec  11.2 MBytes  94.1 Mbits/sec    4   83.4 KBytes       
+		[  5]   8.00-9.00   sec  11.2 MBytes  93.6 Mbits/sec    7   52.3 KBytes       
+		[  5]   9.00-10.00  sec  11.2 MBytes  93.6 Mbits/sec    5   69.3 KBytes       
+		- - - - - - - - - - - - - - - - - - - - - - - - -
+		[ ID] Interval           Transfer     Bitrate         Retr
+		[  5]   0.00-10.00  sec   113 MBytes  94.5 Mbits/sec   59             sender
+		[  5]   0.00-10.01  sec   112 MBytes  94.1 Mbits/sec                  receiver
+    
+    * **5 GHz**
+
+		./iperf3 -c 192.168.254.49
+		Connecting to host 192.168.254.49, port 5201
+		[  5] local 192.168.254.253 port 33958 connected to 192.168.254.49 port 5201
+		[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+		[  5]   0.00-1.00   sec  23.0 MBytes   193 Mbits/sec   10    197 KBytes       
+		[  5]   1.00-2.00   sec  19.2 MBytes   161 Mbits/sec    0    260 KBytes       
+		[  5]   2.00-3.00   sec  22.1 MBytes   186 Mbits/sec   24    304 KBytes       
+		[  5]   3.00-4.00   sec  22.4 MBytes   188 Mbits/sec    0    354 KBytes       
+		[  5]   4.00-5.00   sec  22.6 MBytes   190 Mbits/sec    5    396 KBytes       
+		[  5]   5.00-6.00   sec  24.1 MBytes   202 Mbits/sec    0    437 KBytes       
+		[  5]   6.00-7.00   sec  22.8 MBytes   191 Mbits/sec    9    355 KBytes       
+		[  5]   7.00-8.00   sec  22.9 MBytes   192 Mbits/sec   14    393 KBytes       
+		[  5]   8.00-9.00   sec  23.5 MBytes   197 Mbits/sec   15    433 KBytes       
+		[  5]   9.00-10.00  sec  23.3 MBytes   196 Mbits/sec    0    469 KBytes       
+		- - - - - - - - - - - - - - - - - - - - - - - - -
+		[ ID] Interval           Transfer     Bitrate         Retr
+		[  5]   0.00-10.00  sec   226 MBytes   190 Mbits/sec   77             sender
+		[  5]   0.00-10.01  sec   224 MBytes   188 Mbits/sec                  receiver  
+    
   * RTL8211E Gigabit Ethernet
   
     Testing Eth0 with iperf3
@@ -238,6 +280,31 @@ The kernel 5.10.0-rc3
   * Headphone jack sound
   
     Testing sound output to jack.
+
+
+  * 7z b
+  
+		7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+		p7zip Version 16.02 (locale=C.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs LE)
+
+		LE
+		CPU Freq: - 64000000 - - - 256000000 - - 2048000000
+
+		RAM size:    1922 MB,  # CPU hardware threads:   6
+		RAM usage:   1323 MB,  # Benchmark threads:      6
+
+				       Compressing  |                  Decompressing
+		Dict     Speed Usage    R/U Rating  |      Speed Usage    R/U Rating
+			 KiB/s     %   MIPS   MIPS  |      KiB/s     %   MIPS   MIPS
+
+		22:       6248   524   1161   6078  |     102582   519   1685   8748
+		23:       6323   552   1167   6443  |     100510   519   1676   8697
+		24:       6027   527   1231   6481  |      98711   518   1671   8664
+		25:       5856   514   1301   6687  |      97221   519   1666   8652
+		----------------------------------  | ------------------------------
+		Avr:             529   1215   6422  |              519   1675   8690
+		Tot:             524   1445   7556
+
 
 
 ## Mainline Kernel 5.9
