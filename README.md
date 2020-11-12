@@ -290,7 +290,52 @@ The kernel 5.10.0-rc3
     
     * **1 Gbit**
     
-    Having problems with rgmii and rgmii-id to get IP from the router. Possibly wrong configuration.
+      Having problems with rgmii and rgmii-id to get IP from the router. Possibly wrong configuration.
+      NanoPi M4 Board acts strange when can't get tthe IP
+      
+
+			./iperf3 -c 192.168.254.70
+			Connecting to host 192.168.254.70, port 5201
+			[  5] local 192.168.254.253 port 45954 connected to 192.168.254.70 port 5201
+			[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+			[  5]   0.00-1.00   sec   114 MBytes   955 Mbits/sec    0    342 KBytes       
+			[  5]   1.00-2.00   sec   112 MBytes   939 Mbits/sec    0    342 KBytes       
+			[  5]   2.00-3.00   sec   112 MBytes   939 Mbits/sec    0    356 KBytes       
+			[  5]   3.00-4.00   sec   113 MBytes   946 Mbits/sec    0    356 KBytes       
+			[  5]   4.00-5.00   sec   112 MBytes   941 Mbits/sec    0    356 KBytes       
+			[  5]   5.00-6.00   sec   112 MBytes   941 Mbits/sec    0    356 KBytes       
+			[  5]   6.00-7.00   sec   112 MBytes   938 Mbits/sec    0    356 KBytes       
+			[  5]   7.00-8.00   sec   112 MBytes   943 Mbits/sec    0    356 KBytes       
+			[  5]   8.00-9.00   sec   112 MBytes   939 Mbits/sec    0    356 KBytes       
+			[  5]   9.00-10.00  sec   112 MBytes   942 Mbits/sec    0    356 KBytes       
+			- - - - - - - - - - - - - - - - - - - - - - - - -
+			[ ID] Interval           Transfer     Bitrate         Retr
+			[  5]   0.00-10.00  sec  1.10 GBytes   942 Mbits/sec    0             sender
+			[  5]   0.00-10.01  sec  1.10 GBytes   940 Mbits/sec                  receiver      
+      
+      
+      Revrese
+      
+			./iperf3 -c 192.168.254.70 -R
+			Connecting to host 192.168.254.70, port 5201
+			Reverse mode, remote host 192.168.254.70 is sending
+			[  5] local 192.168.254.253 port 45902 connected to 192.168.254.70 port 5201
+			[ ID] Interval           Transfer     Bitrate
+			[  5]   0.00-1.00   sec   111 MBytes   931 Mbits/sec                  
+			[  5]   1.00-2.00   sec   112 MBytes   941 Mbits/sec                  
+			[  5]   2.00-3.00   sec   112 MBytes   940 Mbits/sec                  
+			[  5]   3.00-4.00   sec   112 MBytes   941 Mbits/sec                  
+			[  5]   4.00-5.00   sec   112 MBytes   940 Mbits/sec                  
+			[  5]   5.00-6.00   sec   112 MBytes   941 Mbits/sec                  
+			[  5]   6.00-7.00   sec   112 MBytes   941 Mbits/sec                  
+			[  5]   7.00-8.00   sec   112 MBytes   941 Mbits/sec                  
+			[  5]   8.00-9.00   sec   112 MBytes   941 Mbits/sec                  
+			[  5]   9.00-10.00  sec   112 MBytes   936 Mbits/sec                  
+			- - - - - - - - - - - - - - - - - - - - - - - - -
+			[ ID] Interval           Transfer     Bitrate         Retr
+			[  5]   0.00-10.00  sec  1.10 GBytes   942 Mbits/sec   58             sender
+			[  5]   0.00-10.00  sec  1.09 GBytes   940 Mbits/sec                  receiver
+      
     
   * Bluetooth
   
