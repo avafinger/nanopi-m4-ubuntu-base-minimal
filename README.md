@@ -266,6 +266,31 @@ The kernel 5.10.0-rc3
   
     Testing Eth0 with iperf3
     
+    * **100 Mbit**
+    
+			./iperf3 -c 192.168.254.69
+			Connecting to host 192.168.254.69, port 5201
+			[  5] local 192.168.254.253 port 46714 connected to 192.168.254.69 port 5201
+			[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+			[  5]   0.00-1.00   sec  11.7 MBytes  98.2 Mbits/sec    9   46.7 KBytes       
+			[  5]   1.00-2.00   sec  11.2 MBytes  93.6 Mbits/sec    6   69.3 KBytes       
+			[  5]   2.00-3.00   sec  11.4 MBytes  95.6 Mbits/sec    7   50.9 KBytes       
+			[  5]   3.00-4.00   sec  11.2 MBytes  94.1 Mbits/sec    5   69.3 KBytes       
+			[  5]   4.00-5.00   sec  11.2 MBytes  93.7 Mbits/sec    6   83.4 KBytes       
+			[  5]   5.00-6.00   sec  11.3 MBytes  94.6 Mbits/sec    6   70.7 KBytes       
+			[  5]   6.00-7.00   sec  11.2 MBytes  93.6 Mbits/sec    6   86.3 KBytes       
+			[  5]   7.00-8.00   sec  11.2 MBytes  93.6 Mbits/sec    6   69.3 KBytes       
+			[  5]   8.00-9.00   sec  11.2 MBytes  93.6 Mbits/sec    6   83.4 KBytes       
+			[  5]   9.00-10.00  sec  11.4 MBytes  95.6 Mbits/sec    7   86.3 KBytes       
+			- - - - - - - - - - - - - - - - - - - - - - - - -
+			[ ID] Interval           Transfer     Bitrate         Retr
+			[  5]   0.00-10.00  sec   113 MBytes  94.6 Mbits/sec   64             sender
+			[  5]   0.00-10.01  sec   112 MBytes  94.1 Mbits/sec                  receiver
+    
+    
+    * **1 Gbit**
+    
+    Having problems with rgmii and rgmii-id to get IP from the router. Possibly wrong configuration.
     
   * Bluetooth
   
