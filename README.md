@@ -89,6 +89,9 @@ OS Image for development with the following tidbits:
 **Mainline Kernel 5.10**
 * [Mainline Kernel 5.10.rc3 on NanoPi M4](#mainline-kernel-510)
 
+**Camera experiments with Kernel 4.19**
+* [OV13850 and OV4689 with Kernel 4.19.111](#mipi-camera)
+
 ## Mainline u-boot
 
 Here we are going to fix the reboot issue i had with my u-boot Android like build.
@@ -2740,6 +2743,17 @@ Check for SSID(s):
 	sudo iw dev wlan0 scan | egrep "signal:|SSID:" | sed -e "s/\tsignal: //" -e "s/\tSSID: //" | awk '{ORS = (NR % 2 == 0)? "\n" : " "; print}' | sort
 
 Enjoy the maximum performance of both Wifi and BT.
+
+## MIPI Camera
+
+Experiments with MIPI camera in Kernel 4.19.
+In these experiments i will try to grab images from the cameras with the kernel 4.19.111
+
+* gstreamer
+* v4l2 app
+* mjpg-streamer
+
+**WIP**
 
 
 # Credits
