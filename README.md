@@ -2752,7 +2752,8 @@ In these experiments i will try to grab images from the cameras with the kernel 
 * gstreamer
 
 * v4l2 app
-  OV4689 is configured and detected.
+
+  **OV4689 sensor** is configured and detected.
 
 		ubuntu@nanopi-m4:~/camera$ v4l2-ctl -V -d /dev/video1
 		Format Video Capture Multiplanar:
@@ -3005,6 +3006,125 @@ In these experiments i will try to grab images from the cameras with the kernel 
 
 		ubuntu@nanopi-m4:~/camera$ 
   
+  
+  **ov13850** sensor is configured and detected.
+  
+		ubuntu@nanopi-m4:~$ v4l2-ctl -d /dev/video6 -vwidth=1920,height=1080,pixelformat=NV12 --stream-mmap --stream-skip=3
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+		<<^C
+		ubuntu@nanopi-m4:~$ v4l2-ctl -V -d /dev/video6
+		Format Video Capture Multiplanar:
+			Width/Height      : 1920/1080
+			Pixel Format      : 'NV12' (Y/CbCr 4:2:0)
+			Field             : None
+			Number of planes  : 1
+			Flags             : 
+			Colorspace        : Default
+			Transfer Function : Default
+			YCbCr/HSV Encoding: Default
+			Quantization      : Full Range
+			Plane 0           :
+			   Bytes per Line : 1920
+			   Size Image     : 3110400
+		ubuntu@nanopi-m4:~$ dmesg|tail
+		[   10.379757] [dhd-wlan0] wl_ext_iapsta_event : [S] Link UP with 86:ea:ea:aa:87:8f
+		[   10.468710] [dhd-wlan0] wl_notify_connect_status : wl_bss_connect_done succeeded with 86:ea:ea:aa:87:8f 
+		[   31.201529] vcc_lcd: disabling
+		[   69.606312] ttyFIQ ttyFIQ0: tty_port_close_start: tty->count = 1 port count = 2
+		[  174.538452] ttyFIQ ttyFIQ0: tty_port_close_start: tty->count = 1 port count = 3
+		[  174.760610] ttyFIQ ttyFIQ0: tty_port_close_start: tty->count = 1 port count = 2
+		[  530.785357] rkisp1: waiting on params stream on event timeout
+		[  530.785408] rkisp1 ff920000.rkisp1: can not get first iq setting in stream on
+		[  530.786813] rockchip-mipi-dphy-rx ff968000.mipi-dphy-tx1rx1: stream on:1
+		[  539.035127] rockchip-mipi-dphy-rx ff968000.mipi-dphy-tx1rx1: stream on:0
+		ubuntu@nanopi-m4:~$ media-ctl -d /dev/media1 -p
+		Media controller API version 4.19.111
+
+		Media device information
+		------------------------
+		driver          rkisp1
+		model           rkisp1
+		serial          
+		bus info        
+		hw revision     0x0
+		driver version  4.19.111
+
+		Device topology
+		- entity 1: rkisp1-isp-subdev (4 pads, 6 links)
+			    type V4L2 subdev subtype Unknown flags 0
+			    device node name /dev/v4l-subdev3
+			pad0: Sink
+				[fmt:SBGGR10_1X10/2112x1568 field:none
+				 crop.bounds:(0,0)/2112x1568
+				 crop:(0,0)/2112x1568]
+				<- "rkisp1_dmapath":0 []
+				<- "rockchip-mipi-dphy-rx":1 [ENABLED]
+			pad1: Sink
+				<- "rkisp1-input-params":0 [ENABLED]
+			pad2: Source
+				[fmt:YUYV8_2X8/2112x1568 field:none
+				 crop.bounds:(0,0)/2112x1568
+				 crop:(0,0)/2112x1568]
+				-> "rkisp1_selfpath":0 [ENABLED]
+				-> "rkisp1_mainpath":0 [ENABLED]
+			pad3: Source
+				-> "rkisp1-statistics":0 [ENABLED]
+
+		- entity 6: rkisp1_mainpath (1 pad, 1 link)
+			    type Node subtype V4L flags 0
+			    device node name /dev/video5
+			pad0: Sink
+				<- "rkisp1-isp-subdev":2 [ENABLED]
+
+		- entity 10: rkisp1_selfpath (1 pad, 1 link)
+			     type Node subtype V4L flags 0
+			     device node name /dev/video6
+			pad0: Sink
+				<- "rkisp1-isp-subdev":2 [ENABLED]
+
+		- entity 14: rkisp1_dmapath (1 pad, 1 link)
+			     type Node subtype V4L flags 0
+			     device node name /dev/video7
+			pad0: Source
+				-> "rkisp1-isp-subdev":0 []
+
+		- entity 20: rkisp1-statistics (1 pad, 1 link)
+			     type Node subtype V4L flags 0
+			     device node name /dev/video8
+			pad0: Sink
+				<- "rkisp1-isp-subdev":3 [ENABLED]
+
+		- entity 24: rkisp1-input-params (1 pad, 1 link)
+			     type Node subtype V4L flags 0
+			     device node name /dev/video9
+			pad0: Source
+				-> "rkisp1-isp-subdev":1 [ENABLED]
+
+		- entity 28: rockchip-mipi-dphy-rx (2 pads, 2 links)
+			     type V4L2 subdev subtype Unknown flags 0
+			     device node name /dev/v4l-subdev4
+			pad0: Sink
+				[fmt:SBGGR10_1X10/2112x1568@10000/300000 field:none]
+				<- "ov13850 2-0010":0 [ENABLED]
+			pad1: Source
+				[fmt:SBGGR10_1X10/2112x1568@10000/300000 field:none]
+				-> "rkisp1-isp-subdev":0 [ENABLED]
+
+		- entity 31: ov13850 2-0010 (1 pad, 1 link)
+			     type V4L2 subdev subtype Sensor flags 0
+			     device node name /dev/v4l-subdev5
+			pad0: Source
+				[fmt:SBGGR10_1X10/2112x1568@10000/300000 field:none]
+				-> "rockchip-mipi-dphy-rx":0 [ENABLED]
+
+		ubuntu@nanopi-m4:~$ 
   
   
 * mjpg-streamer
