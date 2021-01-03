@@ -2750,7 +2750,263 @@ Experiments with MIPI camera in Kernel 4.19.
 In these experiments i will try to grab images from the cameras with the kernel 4.19.111
 
 * gstreamer
+
 * v4l2 app
+  OV4689 is configured and detected.
+
+		ubuntu@nanopi-m4:~/camera$ v4l2-ctl -V -d /dev/video1
+		Format Video Capture Multiplanar:
+			Width/Height      : 1280/960
+			Pixel Format      : 'NV12' (Y/CbCr 4:2:0)
+			Field             : None
+			Number of planes  : 1
+			Flags             : 
+			Colorspace        : Default
+			Transfer Function : Default
+			YCbCr/HSV Encoding: Default
+			Quantization      : Full Range
+			Plane 0           :
+			   Bytes per Line : 1280
+			   Size Image     : 1843200
+		ubuntu@nanopi-m4:~/camera$ v4l2-ctl -d /dev/v4l-subdev0 --all
+		Media Driver Info:
+			Driver name      : rkisp1
+			Model            : rkisp1
+			Serial           : 
+			Bus info         : 
+			Media version    : 4.19.111
+			Hardware revision: 0x00000000 (0)
+			Driver version   : 4.19.111
+		Interface Info:
+			ID               : 0x0300002d
+			Type             : V4L Sub-Device
+		Entity Info:
+			ID               : 0x00000001 (1)
+			Name             : rkisp1-isp-subdev
+			Function         : Unknown V4L2 Sub-Device
+			Pad 0x01000002   : 0: Sink, Must Connect
+			  Link 0x02000012: from remote pad 0x1000011 of entity 'rkisp1_dmapath': Data
+			  Link 0x02000023: from remote pad 0x100001e of entity 'rockchip-mipi-dphy-rx': Data
+			Pad 0x01000003   : 1: Sink
+			  Link 0x02000025: from remote pad 0x1000019 of entity 'rkisp1-input-params': Data
+			Pad 0x01000004   : 2: Source
+			  Link 0x02000027: to remote pad 0x100000d of entity 'rkisp1_selfpath': Data
+			  Link 0x02000029: to remote pad 0x1000009 of entity 'rkisp1_mainpath': Data
+			Pad 0x01000005   : 3: Source
+			  Link 0x0200002b: to remote pad 0x1000015 of entity 'rkisp1-statistics': Data
+
+		User Controls
+
+				       exposure 0x00980911 (int)    : min=4 max=1550 step=1 default=1536 value=1536
+
+		Image Source Controls
+
+			      vertical_blanking 0x009e0901 (int)    : min=34 max=31247 step=1 default=34 value=34
+			    horizontal_blanking 0x009e0902 (int)    : min=4294967192 max=4294967192 step=1 default=4294967192 value=-104 flags=read-only
+				  analogue_gain 0x009e0903 (int)    : min=128 max=2040 step=1 default=128 value=128
+
+		Image Processing Controls
+
+				 link_frequency 0x009f0901 (intmenu): min=0 max=0 default=0 value=0 (500000000 0x1dcd6500) flags=read-only
+						0: 500000000 (0x1dcd6500)
+				     pixel_rate 0x009f0902 (int64)  : min=0 max=400000000 step=1 default=400000000 value=400000000 flags=read-only
+				   test_pattern 0x009f0903 (menu)   : min=0 max=4 default=0 value=0 (Disabled)
+						0: Disabled
+						1: Vertical Color Bar Type 1
+						2: Vertical Color Bar Type 2
+						3: Vertical Color Bar Type 3
+						4: Vertical Color Bar Type 4
+		ubuntu@nanopi-m4:~/camera$ v4l2-ctl -d /dev/v4l-subdev1 --all
+		Media Driver Info:
+			Driver name      : rkisp1
+			Model            : rkisp1
+			Serial           : 
+			Bus info         : 
+			Media version    : 4.19.111
+			Hardware revision: 0x00000000 (0)
+			Driver version   : 4.19.111
+		Interface Info:
+			ID               : 0x0300002f
+			Type             : V4L Sub-Device
+		Entity Info:
+			ID               : 0x0000001c (28)
+			Name             : rockchip-mipi-dphy-rx
+			Function         : Video Interface Bridge
+			Pad 0x0100001d   : 0: Sink, Must Connect
+			  Link 0x02000021: from remote pad 0x1000020 of entity 'ov4689 1-0036': Data
+			Pad 0x0100001e   : 1: Source, Must Connect
+			  Link 0x02000023: to remote pad 0x1000002 of entity 'rkisp1-isp-subdev': Data
+
+		User Controls
+
+				       exposure 0x00980911 (int)    : min=4 max=1550 step=1 default=1536 value=1536
+
+		Image Source Controls
+
+			      vertical_blanking 0x009e0901 (int)    : min=34 max=31247 step=1 default=34 value=34
+			    horizontal_blanking 0x009e0902 (int)    : min=4294967192 max=4294967192 step=1 default=4294967192 value=-104 flags=read-only
+				  analogue_gain 0x009e0903 (int)    : min=128 max=2040 step=1 default=128 value=128
+
+		Image Processing Controls
+
+				 link_frequency 0x009f0901 (intmenu): min=0 max=0 default=0 value=0 (500000000 0x1dcd6500) flags=read-only
+						0: 500000000 (0x1dcd6500)
+				     pixel_rate 0x009f0902 (int64)  : min=0 max=400000000 step=1 default=400000000 value=400000000 flags=read-only
+				   test_pattern 0x009f0903 (menu)   : min=0 max=4 default=0 value=0 (Disabled)
+						0: Disabled
+						1: Vertical Color Bar Type 1
+						2: Vertical Color Bar Type 2
+						3: Vertical Color Bar Type 3
+						4: Vertical Color Bar Type 4
+		ubuntu@nanopi-m4:~/camera$ v4l2-ctl -d /dev/v4l-subdev2 --all
+		Media Driver Info:
+			Driver name      : rkisp1
+			Model            : rkisp1
+			Serial           : 
+			Bus info         : 
+			Media version    : 4.19.111
+			Hardware revision: 0x00000000 (0)
+			Driver version   : 4.19.111
+		Interface Info:
+			ID               : 0x03000031
+			Type             : V4L Sub-Device
+		Entity Info:
+			ID               : 0x0000001f (31)
+			Name             : ov4689 1-0036
+			Function         : Camera Sensor
+			Pad 0x01000020   : 0: Source
+			  Link 0x02000021: to remote pad 0x100001d of entity 'rockchip-mipi-dphy-rx': Data
+
+		User Controls
+
+				       exposure 0x00980911 (int)    : min=4 max=1550 step=1 default=1536 value=1536
+
+		Image Source Controls
+
+			      vertical_blanking 0x009e0901 (int)    : min=34 max=31247 step=1 default=34 value=34
+			    horizontal_blanking 0x009e0902 (int)    : min=4294967192 max=4294967192 step=1 default=4294967192 value=-104 flags=read-only
+				  analogue_gain 0x009e0903 (int)    : min=128 max=2040 step=1 default=128 value=128
+
+		Image Processing Controls
+
+				 link_frequency 0x009f0901 (intmenu): min=0 max=0 default=0 value=0 (500000000 0x1dcd6500) flags=read-only
+						0: 500000000 (0x1dcd6500)
+				     pixel_rate 0x009f0902 (int64)  : min=0 max=400000000 step=1 default=400000000 value=400000000 flags=read-only
+				   test_pattern 0x009f0903 (menu)   : min=0 max=4 default=0 value=0 (Disabled)
+						0: Disabled
+						1: Vertical Color Bar Type 1
+						2: Vertical Color Bar Type 2
+						3: Vertical Color Bar Type 3
+						4: Vertical Color Bar Type 4
+		ubuntu@nanopi-m4:~/camera$   
+  
+  First check:
+  
+		ubuntu@nanopi-m4:~$ v4l2-ctl -d /dev/video1 -vwidth=1920,height=1080,pixelformat=NV12 --stream-mmap --stream-skip=3
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 29.88 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 29.88 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 29.88 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 29.88 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 29.88 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 29.88 fps
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 29.88 fps
+  
+  Kernel output:
+  
+		[  692.916523] rkisp1: waiting on params stream on event timeout
+		[  692.916574] rkisp1 ff910000.rkisp1: can not get first iq setting in stream on
+		[  692.917944] rockchip-mipi-dphy-rx ff770000.syscon:mipi-dphy-rx0: stream on:1
+		[  700.472033] rockchip-mipi-dphy-rx ff770000.syscon:mipi-dphy-rx0: stream on:0
+  
+  Sensor is working. What's next? We need to grab real image from the sensor, but sensor does not show up as a char device, we need a way to link the sensor.
+  How we do that? ( I have no answer... :( )
+  
+  Here is the topology:
+  
+		ubuntu@nanopi-m4:~/camera$ media-ctl -d /dev/media0 -p
+		Media controller API version 4.19.111
+
+		Media device information
+		------------------------
+		driver          rkisp1
+		model           rkisp1
+		serial          
+		bus info        
+		hw revision     0x0
+		driver version  4.19.111
+
+		Device topology
+		- entity 1: rkisp1-isp-subdev (4 pads, 6 links)
+			    type V4L2 subdev subtype Unknown flags 0
+			    device node name /dev/v4l-subdev0
+			pad0: Sink
+				[fmt:SBGGR10_1X10/2688x1520 field:none
+				 crop.bounds:(0,0)/2688x1520
+				 crop:(0,0)/2688x1520]
+				<- "rkisp1_dmapath":0 []
+				<- "rockchip-mipi-dphy-rx":1 [ENABLED]
+			pad1: Sink
+				<- "rkisp1-input-params":0 [ENABLED]
+			pad2: Source
+				[fmt:YUYV8_2X8/2688x1520 field:none
+				 crop.bounds:(0,0)/2688x1520
+				 crop:(0,0)/2688x1520]
+				-> "rkisp1_selfpath":0 [ENABLED]
+				-> "rkisp1_mainpath":0 [ENABLED]
+			pad3: Source
+				-> "rkisp1-statistics":0 [ENABLED]
+
+		- entity 6: rkisp1_mainpath (1 pad, 1 link)
+			    type Node subtype V4L flags 0
+			    device node name /dev/video0
+			pad0: Sink
+				<- "rkisp1-isp-subdev":2 [ENABLED]
+
+		- entity 10: rkisp1_selfpath (1 pad, 1 link)
+			     type Node subtype V4L flags 0
+			     device node name /dev/video1
+			pad0: Sink
+				<- "rkisp1-isp-subdev":2 [ENABLED]
+
+		- entity 14: rkisp1_dmapath (1 pad, 1 link)
+			     type Node subtype V4L flags 0
+			     device node name /dev/video2
+			pad0: Source
+				-> "rkisp1-isp-subdev":0 []
+
+		- entity 20: rkisp1-statistics (1 pad, 1 link)
+			     type Node subtype V4L flags 0
+			     device node name /dev/video3
+			pad0: Sink
+				<- "rkisp1-isp-subdev":3 [ENABLED]
+
+		- entity 24: rkisp1-input-params (1 pad, 1 link)
+			     type Node subtype V4L flags 0
+			     device node name /dev/video4
+			pad0: Source
+				-> "rkisp1-isp-subdev":1 [ENABLED]
+
+		- entity 28: rockchip-mipi-dphy-rx (2 pads, 2 links)
+			     type V4L2 subdev subtype Unknown flags 0
+			     device node name /dev/v4l-subdev1
+			pad0: Sink
+				[fmt:SBGGR10_1X10/2688x1520@10000/300000 field:none]
+				<- "ov4689 1-0036":0 [ENABLED]
+			pad1: Source
+				[fmt:SBGGR10_1X10/2688x1520@10000/300000 field:none]
+				-> "rkisp1-isp-subdev":0 [ENABLED]
+
+		- entity 31: ov4689 1-0036 (1 pad, 1 link)
+			     type V4L2 subdev subtype Sensor flags 0
+			     device node name /dev/v4l-subdev2
+			pad0: Source
+				[fmt:SBGGR10_1X10/2688x1520@10000/300000 field:none]
+				-> "rockchip-mipi-dphy-rx":0 [ENABLED]
+
+		ubuntu@nanopi-m4:~/camera$ 
+  
+  
+  
 * mjpg-streamer
 
 **WIP**
