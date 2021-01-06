@@ -92,6 +92,9 @@ OS Image for development with the following tidbits:
 **Camera experiments with Kernel 4.19**
 * [OV13850 and OV4689 with Kernel 4.19.111](#mipi-camera)
 
+**Camera experiments with Kernel 5.10**
+* [OV13850 with Kernel 5.10.0-rc1](#mipi-camera-mainline)
+
 ## Mainline u-boot
 
 Here we are going to fix the reboot issue i had with my u-boot Android like build.
@@ -3128,6 +3131,217 @@ In these experiments i will try to grab images from the cameras with the kernel 
   
   
 * mjpg-streamer
+
+
+## MIPI Camera Mainline
+
+There is a port of the OV13850 driver to the mainline kernel, so I decided to take a look and see if we can pull the raw image from the sensor using mjpg-streamer on NanoPi M4. For one reason, i used Kernel v5.10.0-rc1 to test its work since my kernel v5.10.0, which has some of my hacks just failed to load the ISP.
+
+Now we have our character device as i expected to have it in kernel 4.19:
+
+	ubuntu@nanopi-m4:~$ cat /sys/dev/char/81:131/device/name
+	ov13850
+
+Doing some check to find out about the sensor and rkisp1:
+
+	ubuntu@nanopi-m4:~$ /usr/local/bin/media-ctl -d /dev/media0 -p|grep enti
+	- entity 1: rkisp1_isp (4 pads, 5 links)
+	- entity 6: rkisp1_resizer_mainpath (2 pads, 2 links)
+	- entity 9: rkisp1_resizer_selfpath (2 pads, 2 links)
+	- entity 12: rkisp1_mainpath (1 pad, 1 link)
+	- entity 16: rkisp1_selfpath (1 pad, 1 link)
+	- entity 20: rkisp1_stats (1 pad, 1 link)
+
+
+Configuring the sensor:
+
+
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --reset
+	# connect pad 0 (sink) of the ISP with pad 0 of the camera and enable the link
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --links "'ov13850 1-0010':0 -> 'rkisp1_isp':0 [1]"
+	# create a link between the selfpath (preview) and the ISP output on pad 2 (source), but keep it deactivated
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --links "'rkisp1_isp':2 -> 'rkisp1_resizer_selfpath':0 [0]"
+	# create a link between the mainpath and the ISP output on pad 2 (source) and enable the link
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --links "'rkisp1_isp':2 -> 'rkisp1_resizer_mainpath':0 [1]"
+
+	# Set the video format on the camera (this is very dependent on your camera)
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --set-v4l2 '"ov13850 1-0010":0 [fmt:SBGGR10_1X10/2112x1568]'
+	# Set the input video format for the ISP, this must match the video format of the camera, crop it down to 1920x1080
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_isp":0 [fmt:SBGGR10_1X10/2112x1568 crop: (0,0)/1920x1080]'
+	# Set the output video format of the ISP, the maximum size was propagated from the sink pad, and the format size is taken from the crop format
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_isp":2 [fmt:YUYV8_2X8/1920x1080 crop: (0,0)/1920x1080]'
+
+	# Set the input format for the mainpath resizer
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_resizer_mainpath":0 [fmt:YUYV8_2X8/1920x1080]'
+	# Set the output format for the mainpath resizer
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_resizer_mainpath":1 [fmt:YUYV8_2X8/1280x720]'
+
+	# Configure the format at the mainpath DMA-engine, which is the point that is accessed by user-space
+	/usr/local/bin/v4l2-ctl --media-bus-info "platform:rkisp1" --device "rkisp1_mainpath" --set-fmt-video "width=1280,height=720,pixelformat=422P"
+
+Check if this is working:
+
+	ubuntu@nanopi-m4:~$ /usr/local/bin/v4l2-ctl -d /dev/video1 -vwidth=1280,height=720,pixelformat=YUYV --stream-mmap --stream-skip=3
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<^C
+	ubuntu@nanopi-m4:~$ 
+	ubuntu@nanopi-m4:~$ /usr/local/bin/v4l2-ctl -d /dev/v4l-subdev3 --all
+
+	User Controls
+
+			       exposure 0x00980911 (int)    : min=4 max=1660 step=1 default=1536 value=1536
+
+	Image Source Controls
+
+		      vertical_blanking 0x009e0901 (int)    : min=96 max=31199 step=1 default=96 value=96
+		    horizontal_blanking 0x009e0902 (int)    : min=2688 max=2688 step=1 default=2688 value=2688 flags=read-only
+			  analogue_gain 0x009e0903 (int)    : min=16 max=248 step=1 default=16 value=16
+
+	Image Processing Controls
+
+			 link_frequency 0x009f0901 (intmenu): min=0 max=0 default=0 value=0 (300000000 0x11e1a300) flags=read-only
+					0: 300000000 (0x11e1a300)
+			     pixel_rate 0x009f0902 (int64)  : min=0 max=120000000 step=1 default=120000000 value=120000000 flags=read-only
+			   test_pattern 0x009f0903 (menu)   : min=0 max=4 default=0 value=0 (Disabled)
+					0: Disabled
+					1: Vertical Color Bar Type 1
+					2: Vertical Color Bar Type 2
+					3: Vertical Color Bar Type 3
+					4: Vertical Color Bar Type 4
+	ubuntu@nanopi-m4:~$ /usr/local/bin/v4l2-ctl -d /dev/v4l-subdev2 --all
+	Media Driver Info:
+		Driver name      : rkisp1
+		Model            : rkisp1
+		Serial           : 
+		Bus info         : platform:rkisp1
+		Media version    : 5.10.0
+		Hardware revision: 0x00000000 (0)
+		Driver version   : 5.10.0
+	Interface Info:
+		ID               : 0x03000030
+		Type             : V4L Sub-Device
+	Entity Info:
+		ID               : 0x00000009 (9)
+		Name             : rkisp1_resizer_selfpath
+		Function         : Video Scaler
+		Pad 0x0100000a   : 0: Sink, Must Connect
+		  Link 0x02000024: from remote pad 0x1000004 of entity 'rkisp1_isp': Data
+		Pad 0x0100000b   : 1: Source, Must Connect
+		  Link 0x02000026: to remote pad 0x1000013 of entity 'rkisp1_selfpath': Data, Enabled, Immutable
+	ubuntu@nanopi-m4:~$ /usr/local/bin/v4l2-ctl -d /dev/v4l-subdev1 --all
+	Media Driver Info:
+		Driver name      : rkisp1
+		Model            : rkisp1
+		Serial           : 
+		Bus info         : platform:rkisp1
+		Media version    : 5.10.0
+		Hardware revision: 0x00000000 (0)
+		Driver version   : 5.10.0
+	Interface Info:
+		ID               : 0x0300002e
+		Type             : V4L Sub-Device
+	Entity Info:
+		ID               : 0x00000006 (6)
+		Name             : rkisp1_resizer_mainpath
+		Function         : Video Scaler
+		Pad 0x01000007   : 0: Sink, Must Connect
+		  Link 0x02000020: from remote pad 0x1000004 of entity 'rkisp1_isp': Data, Enabled
+		Pad 0x01000008   : 1: Source, Must Connect
+		  Link 0x02000022: to remote pad 0x100000f of entity 'rkisp1_mainpath': Data, Enabled, Immutable
+	ubuntu@nanopi-m4:~$ /usr/local/bin/v4l2-ctl -d /dev/v4l-subdev0 --all
+	Media Driver Info:
+		Driver name      : rkisp1
+		Model            : rkisp1
+		Serial           : 
+		Bus info         : platform:rkisp1
+		Media version    : 5.10.0
+		Hardware revision: 0x00000000 (0)
+		Driver version   : 5.10.0
+	Interface Info:
+		ID               : 0x0300002c
+		Type             : V4L Sub-Device
+	Entity Info:
+		ID               : 0x00000001 (1)
+		Name             : rkisp1_isp
+		Function         : Video Pixel Formatter
+		Pad 0x01000002   : 0: Sink, Must Connect
+		  Link 0x0200001e: from remote pad 0x100001d of entity 'ov13850 1-0010': Data, Enabled
+		Pad 0x01000003   : 1: Sink
+		  Link 0x02000028: from remote pad 0x1000019 of entity 'rkisp1_params': Data, Enabled, Immutable
+		Pad 0x01000004   : 2: Source
+		  Link 0x02000020: to remote pad 0x1000007 of entity 'rkisp1_resizer_mainpath': Data, Enabled
+		  Link 0x02000024: to remote pad 0x100000a of entity 'rkisp1_resizer_selfpath': Data
+		Pad 0x01000005   : 3: Source
+		  Link 0x0200002a: to remote pad 0x1000015 of entity 'rkisp1_stats': Data, Enabled, Immutable
+	ubuntu@nanopi-m4:~$ 
+
+
+Testing the performance again:
+
+
+	ubuntu@nanopi-m4:~$ /usr/local/bin/v4l2-ctl --media-bus-info "platform:rkisp1" --device "rkisp1_mainpath" --stream-mmap --stream-count=150
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
+	<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+Build **mjpg-streamer** from source and run:
+
+	mjpg_streamer -i "./input_uvc.so -y -r 1280x720 -d /dev/video1" -o "./output_http.so -w ./www"
+	MJPG Streamer Version: git rev: 58e952383cbe973641a3ce6c6a738bafc1605337
+	 i: Using V4L2 device.: /dev/video1
+	 i: Desired Resolution: 1280 x 720
+	 i: Frames Per Second.: -1
+	 i: Format............: YUYV
+	 i: JPEG Quality......: 80
+	 i: TV-Norm...........: DEFAULT
+	Using mplane plugin for capture 
+	UVCIOC_CTRL_ADD - Error at Pan (relative): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Tilt (relative): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Pan Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Tilt Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Pan/tilt Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Focus (absolute): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Pan (relative): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Tilt (relative): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Pan Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Tilt Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Pan/tilt Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Focus (absolute): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at LED1 Mode: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at LED1 Frequency: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Disable video processing: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Raw bits per pixel: Inappropriate ioctl for device (25)
+	 o: www-folder-path......: ./www/
+	 o: HTTP TCP port........: 8080
+	 o: HTTP Listen Address..: (null)
+	 o: username:password....: disabled
+	 o: commands.............: enabled
+
+As we can see by the errors, we still need a way to use ISP while grabbing the frames, they are dark and greenish:
+
+mjpg-streamer pulling raw images - 1280x720 ~29 FPS (80% quality)
+![streaming](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/mainline_camera.png)
+
+Monitoring mjpg-streamer in action
+![mjpg-streamer](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/monitor_mainline_camera.png)
+
+You can get further info about the port:  
+
+Driver:
+https://sebastianfricke.me/porting-the-ov13850-camera/
+
+rkisp1 (Helen Koike):
+https://www.collabora.com/news-and-blog/news-and-events/kernel-5.10-rockchip-h264-bifrost-more.html
+
 
 **WIP**
 
