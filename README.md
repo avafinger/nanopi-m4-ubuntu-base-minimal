@@ -3344,6 +3344,23 @@ mjpg-streamer 1280x720 ~15 FPS (80% quality)
 Monitoring traffic and CPU usage
 ![mjpg-streamer isp](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/htop_camera.png)
 
+
+**Streaming 1920x1080**
+
+Experimenting with OV13850 in low light condition with window size 1920x1080 10 FPS.
+
+	/usr/local/bin/media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_resizer_mainpath":1 [fmt:YUYV8_2X8/1920x1080]'
+	/usr/local/bin/v4l2-ctl --media-bus-info "platform:rkisp1" --device "rkisp1_mainpath" --set-fmt-video "width=1920,height=1080,pixelformat=YUYV"
+
+Mjpg-streamer command line:
+
+	mjpg_streamer -i "./input_uvc.so -y -r 1920x1080 -d /dev/video1" -o "./output_http.so -w ./www"
+
+
+Mjpg-streamer 1920x1080
+![mjpg-streamer isp 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/streaming_1920x1080_night.png)
+
+
 You can get further info about the port:  
 
 Driver:
