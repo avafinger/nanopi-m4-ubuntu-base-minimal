@@ -93,7 +93,7 @@ OS Image for development with the following tidbits:
 * [OV13850 and OV4689 with Kernel 4.19.111](#mipi-camera)
 
 **Camera experiments with Kernel 5.10**
-* [OV13850 with Kernel 5.10.0-rc1](#mipi-camera-mainline)
+* [OV13850 with Kernel 5.10.0-rc1 / 5.11.0-rc2](#mipi-camera-mainline)
 
 ## Mainline u-boot
 
@@ -3334,12 +3334,24 @@ mjpg-streamer pulling raw images - 1280x720 ~29 FPS (80% quality)
 Monitoring mjpg-streamer in action
 ![mjpg-streamer](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/monitor_mainline_camera.png)
 
+**Mainline 5.11.0-rc2**
+
+With the help of Sebastian (the author), it was possible to make use of ISP. Grabbing images still greenish but far better quality than pulling raw images directly from the sensor. Unfortunately Mjpg-streamer dropped from 29 FPS to 15 FPS and CPU usage seems a bit higher.
+
+mjpg-streamer 1280x720 ~15 FPS (80% quality)
+![streaming 15 FPS](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/mjpg_mainline.png)
+
+Monitoring traffic and CPU usage
+![mjpg-streamer isp](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/htop_camera.png)
+
 You can get further info about the port:  
 
 Driver:
+
 https://sebastianfricke.me/porting-the-ov13850-camera/
 
 rkisp1 (Helen Koike):
+
 https://www.collabora.com/news-and-blog/news-and-events/kernel-5.10-rockchip-h264-bifrost-more.html
 
 
