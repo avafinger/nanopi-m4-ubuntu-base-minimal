@@ -3135,7 +3135,7 @@ In these experiments i will try to grab images from the cameras with the kernel 
 
 ## MIPI Camera Mainline
 
-There is a port of the OV13850 driver to the mainline kernel, so I decided to take a look and see if we can pull the raw image from the sensor using mjpg-streamer on NanoPi M4. For one reason, i used Kernel v5.10.0-rc1 to test its work since my kernel v5.10.0, which has some of my hacks just failed to load the ISP.
+There is a porting of the OV13850 driver to the mainline kernel, so I decided to take a look and see if we can pull the raw image from the sensor using mjpg-streamer on NanoPi M4. For one reason, i used Kernel v5.10.0-rc1 to test its work since my kernel v5.10.0, which has some of my hacks just failed to load the ISP.
 
 Now we have our character device as i expected to have it in kernel 4.19:
 
