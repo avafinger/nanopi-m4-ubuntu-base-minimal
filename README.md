@@ -95,6 +95,9 @@ OS Image for development with the following tidbits:
 **Camera experiments with Kernel 5.10**
 * [OV13850 with Kernel 5.10.0-rc1 / 5.11.0-rc2](#mipi-camera-mainline)
 
+**Screenshot comparison - OV13850**
+* [OV13850 with Kernel 5.10.0-rc1 / 5.11.0-rc2](#mipi-camera-experiments)
+
 ## Mainline u-boot
 
 Here we are going to fix the reboot issue i had with my u-boot Android like build.
@@ -2923,7 +2926,7 @@ In these experiments i will try to grab images from the cameras with the kernel 
 		[  700.472033] rockchip-mipi-dphy-rx ff770000.syscon:mipi-dphy-rx0: stream on:0
   
   Sensor is working. What's next? We need to grab real image from the sensor, but sensor does not show up as a char device, we need a way to link the sensor.
-  How we do that? ( I have no answer... :( )
+  
   
   Here is the topology:
   
@@ -3131,6 +3134,11 @@ In these experiments i will try to grab images from the cameras with the kernel 
   
   
 * mjpg-streamer
+  Build from source, take a photo with cam and run:
+  
+  	mjpg_streamer -i "./input_uvc.so -y -r 1920x1080 -d /dev/video1" -o "./output_http.so -w ./www"
+
+  
 
 
 ## MIPI Camera Mainline
@@ -3361,7 +3369,7 @@ Mjpg-streamer 1920x1080
 ![mjpg-streamer isp 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/streaming_1920x1080_night.png)
 
 
-You can get further info about the port:  
+You can get further info about the porting:  
 
 Driver:
 
@@ -3371,6 +3379,25 @@ rkisp1 (Helen Koike):
 
 https://www.collabora.com/news-and-blog/news-and-events/kernel-5.10-rockchip-h264-bifrost-more.html
 
+
+## MIPI Camera Experiments
+
+Here we can compare some photos taken with FE Kernel 4.4 and mainline 5.11 (OV13850). I have the impression that in FE, the image is taken at a higher resolution and then resized to fit 1920x1080 (16:9). It looks a little distorted. You can draw your conclusions.
+
+1 - Photo in 1920x1080 size
+
+This is the image taken with **cam** application from FE 4.4.
+![Real Image 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/captured_image_1920x1080.jpg)
+
+2 - Screenshot mjpg-streamer with FE 4.4.179
+
+This is a screenshot of mjpg-streamer while streaming video in 1920x1080 taken from FE 4.4.179.
+![mjpg-streamer FE 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/captured_mjpg_1920x1080_friendlyelec.png)
+
+2 - Screenshot mjpg-streamer with Mainline 5.11.0-rc2
+
+This is a screenshot of mjpg-streamer while streaming video in 1920x1080 taken from the mainline kernel 5.11.0-rc2.
+![mjpg-streamer 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/captured_mjpg_1920x1080_mainline_5.11-rc2.png)
 
 **WIP**
 
