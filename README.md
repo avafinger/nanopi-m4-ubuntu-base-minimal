@@ -96,7 +96,7 @@ OS Image for development with the following tidbits:
 * [OV13850 with Kernel 5.10.0-rc1 / 5.11.0-rc2](#mipi-camera-mainline)
 
 **Screenshot comparison - OV13850**
-* [OV13850 with Kernel 5.10.0-rc1 / 5.11.0-rc2](#mipi-camera-experiments)
+* [OV13850 screenshots](#mipi-camera-experiments)
 
 ## Mainline u-boot
 
@@ -3382,24 +3382,26 @@ https://www.collabora.com/news-and-blog/news-and-events/kernel-5.10-rockchip-h26
 
 ## MIPI Camera Experiments
 
-Here we can compare some photos taken with FE Kernel 4.4 and mainline 5.11 (OV13850). I have the impression that in FE, the image is taken at a higher resolution and then resized to fit 1920x1080 (16:9). It looks a little distorted. You can draw your conclusions.
+Here we can compare some photos taken with FE Kernel 4.4.179, Kernel 4.19.111 and mainline 5.11.0-rc2 (OV13850). I have the impression that in BSP, the image is taken at a higher resolution and then resized to fit 1920x1080 (16:9). It looks a little distorted. You can draw your conclusions.
 
 1 - Photo in 1920x1080 size
-
-This is the image taken with **cam** application from FE 4.4.
+This is the image taken with **cam** application from FE 4.4.179.
 ![Real Image 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/captured_image_1920x1080.jpg)
 
 2 - Screenshot mjpg-streamer with FE 4.4.179
-
 This is a screenshot of mjpg-streamer while streaming video in 1920x1080 taken from FE 4.4.179.
 ![mjpg-streamer FE 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/captured_mjpg_1920x1080_friendlyelec.png)
 
-2 - Screenshot mjpg-streamer with Mainline 5.11.0-rc2
+3 - Screenshot YU12 1920x1080 with KFE Kernel 4.19.111
+This is a screenshot of YU12 1920x1080 grabed image with Kernel 4.19.11, better focus but no Gain / Exposure controls.
+![YU12 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/OV13850_kernel_4.19.111.png)
 
+
+4 - Screenshot mjpg-streamer with Mainline 5.11.0-rc2
 This is a screenshot of mjpg-streamer while streaming video in 1920x1080 taken from the mainline kernel 5.11.0-rc2.
 ![mjpg-streamer 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/captured_mjpg_1920x1080_mainline_5.11-rc2.png)
 
-**WIP**
+**WiP**
 
 
 # Credits
