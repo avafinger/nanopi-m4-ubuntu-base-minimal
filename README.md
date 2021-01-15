@@ -95,8 +95,8 @@ OS Image for development with the following tidbits:
 **Camera experiments with Kernel 5.10**
 * [OV13850 with Kernel 5.10.0-rc1 / 5.11.0-rc2](#mipi-camera-mainline)
 
-**Screenshot comparison - OV13850**
-* [OV13850 screenshots](#mipi-camera-experiments)
+**Screenshot comparison - OV13850 / OV4689**
+* [OV13850 / OV4689 screenshots](#mipi-camera-experiments)
 
 ## Mainline u-boot
 
@@ -3353,7 +3353,7 @@ Monitoring traffic and CPU usage
 ![mjpg-streamer isp](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/htop_camera.png)
 
 
-**Streaming 1920x1080**
+**Streaming 1920x1080 with Mainline**
 
 Experimenting with OV13850 in low light condition with window size 1920x1080 10 FPS.
 
@@ -3365,8 +3365,12 @@ Mjpg-streamer command line:
 	mjpg_streamer -i "./input_uvc.so -y -r 1920x1080 -d /dev/video1" -o "./output_http.so -w ./www"
 
 
-Mjpg-streamer 1920x1080
+Mjpg-streamer 1920x1080 OV13850
 ![mjpg-streamer isp 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/streaming_1920x1080_night.png)
+
+
+Mjpg-streamer 1920x1080 OV4689 (IR cut - Indirect light)
+![mjpg-streamer isp 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/MCAM400-OV4689.png)
 
 
 You can get further info about the porting:  
@@ -3374,6 +3378,8 @@ You can get further info about the porting:
 Driver:
 
 https://sebastianfricke.me/porting-the-ov13850-camera/
+
+Obs: Porting OV4689 is very similar to the OV13850.
 
 rkisp1 (Helen Koike):
 
