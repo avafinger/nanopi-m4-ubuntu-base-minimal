@@ -3300,6 +3300,23 @@ Testing the performance again:
 	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 30.05 fps
 	<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+Media order keeps changing on every boot, here you can find the sensor name and the corresponding /dev/videoX:
+
+	ubuntu@nanopi-m4:~$ ls /dev/media*
+	/dev/media0  /dev/media1  /dev/media2  /dev/media3
+
+Finding the sensor in use:
+
+	ubuntu@nanopi-m4:~$ media-ctl -p -d 1 |grep ENABLED |grep -v "rkisp"|grep -o "\".*\""|tr -d \"
+	ov4689 1-0036
+
+where -d **1** is the media index, searching from media0,media1,...media3
+
+Finding the video device for the sensor:
+
+	ubuntu@nanopi-m4:~$ media-ctl -e "rkisp1_mainpath" -d 1
+	/dev/video2
+
 
 Build **mjpg-streamer** from source and run:
 
