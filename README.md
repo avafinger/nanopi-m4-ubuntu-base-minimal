@@ -3373,6 +3373,41 @@ Mjpg-streamer 1920x1080 OV4689 (IR cut - Indirect light)
 ![mjpg-streamer isp 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/MCAM400-OV4689.png)
 
 
+Streaming video with Mjpg-streamer 2688x1520 gives **5 FPS** over Gbit ethernet.
+
+	mjpg_streamer -i "./input_uvc.so -y -r 2688x1520 -d /dev/video2" -o "./output_http.so -w ./www"
+	MJPG Streamer Version: git rev: 58e952383cbe973641a3ce6c6a738bafc1605337
+	 i: Using V4L2 device.: /dev/video2
+	 i: Desired Resolution: 2688 x 1520
+	 i: Frames Per Second.: -1
+	 i: Format............: YUYV
+	 i: JPEG Quality......: 80
+	 i: TV-Norm...........: DEFAULT
+	Using mplane plugin for capture 
+	UVCIOC_CTRL_ADD - Error at Pan (relative): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Tilt (relative): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Pan Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Tilt Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Pan/tilt Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_ADD - Error at Focus (absolute): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Pan (relative): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Tilt (relative): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Pan Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Tilt Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Pan/tilt Reset: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Focus (absolute): Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at LED1 Mode: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at LED1 Frequency: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Disable video processing: Inappropriate ioctl for device (25)
+	UVCIOC_CTRL_MAP - Error at Raw bits per pixel: Inappropriate ioctl for device (25)
+	 o: www-folder-path......: ./www/
+	 o: HTTP TCP port........: 8080
+	 o: HTTP Listen Address..: (null)
+	 o: username:password....: disabled
+
+
+![mjpg-streamer isp 2688x1520](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/ov4689_2688x1520.png)
+
 You can get further info about the porting:  
 
 Driver:
