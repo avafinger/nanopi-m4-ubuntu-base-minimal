@@ -98,6 +98,9 @@ OS Image for development with the following tidbits:
 **Screenshot comparison - OV13850 / OV4689**
 * [OV13850 / OV4689 screenshots](#mipi-camera-experiments)
 
+**Dual-camera with Kernel 4.19.y**
+* [Kernel 4.19.111](#mipi-dual-camera)
+
 ## Mainline u-boot
 
 Here we are going to fix the reboot issue i had with my u-boot Android like build.
@@ -3424,6 +3427,16 @@ Streaming video with Mjpg-streamer 2688x1520 gives **5 FPS** over Gbit ethernet.
 
 
 ![mjpg-streamer isp 2688x1520](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/ov4689_2688x1520.png)
+
+## MIPI Dual Camera
+
+Initial support for dual-camera has been done in Kernel 4.19.111 and the Kernel is made available here:
+https://github.com/avafinger/kernel-rockchip-dual-camera
+
+You can attach two cameras (OV13850 or OV4689) to the NanoPi M4 and stream video.
+
+
+**Mainline Porting**
 
 You can get further info about the porting:  
 
