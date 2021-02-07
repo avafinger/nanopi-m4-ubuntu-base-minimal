@@ -3507,7 +3507,7 @@ Now we can run mjpg streamer and stream video to our web clients. Build the late
 
 	mjpg_streamer -i "input_uvc.so -y -r 1920x1080 -d /dev/video1" -o "output_http.so -w /usr/local/share/mjpg-streamer/www"
 
-![ov4689 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/masterov4689_1920x1080.png)
+![ov4689 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/ov4689_1920x1080.png)
 
 # Credits
 
