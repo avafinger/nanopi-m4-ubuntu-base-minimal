@@ -3472,8 +3472,42 @@ This is a screenshot of YU12 1920x1080 grabed image with Kernel 4.19.11, better 
 This is a screenshot of mjpg-streamer while streaming video in 1920x1080 taken from the mainline kernel 5.11.0-rc2.
 ![mjpg-streamer 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/master/captured_mjpg_1920x1080_mainline_5.11-rc2.png)
 
-**WiP**
+**OV4689 w/o IR cut filter with mainline kernel 5.11.0-rc6**
 
+* Config sensor to be used by v4l2 pplications
+  
+		media-ctl --device "platform:rkisp1" --reset
+		# connect pad 0 (sink) of the ISP with pad 0 of the camera and enable the link
+		media-ctl --device "platform:rkisp1" --links "'ov4689 1-0036':0 -> 'rkisp1_isp':0 [1]"
+		# create a link between the selfpath (preview) and the ISP output on pad 2 (source), but keep it deactivated
+		media-ctl --device "platform:rkisp1" --links "'rkisp1_isp':2 -> 'rkisp1_resizer_selfpath':0 [0]"
+		# create a link between the mainpath and the ISP output on pad 2 (source) and enable the link
+		media-ctl --device "platform:rkisp1" --links "'rkisp1_isp':2 -> 'rkisp1_resizer_mainpath':0 [1]"
+
+		# Set the video format on the camera (this is very dependent on your camera)
+		media-ctl --device "platform:rkisp1" --set-v4l2 '"ov4689 1-0036":0 [fmt:SBGGR10_1X10/2688x1520]'
+		# Set the input video format for the ISP, this must match the video format of the camera, crop it down to 1920x1080
+		media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_isp":0 [fmt:SBGGR10_1X10/2688x1520 crop: (0,0)/1920x1080]'
+		# Set the output video format of the ISP, the maximum size was propagated from the sink pad, and the format size is taken from the crop format
+		media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_isp":2 [fmt:YUYV8_2X8/1920x1080 crop: (0,0)/1920x1080]'
+
+		# Set the input format for the mainpath resizer
+		media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_resizer_mainpath":0 [fmt:YUYV8_2X8/1920x1080]'
+		# Set the output format for the mainpath resizer
+		media-ctl --device "platform:rkisp1" --set-v4l2 '"rkisp1_resizer_mainpath":1 [fmt:YUYV8_2X8/1920x1080]'
+
+		# Configure the format at the mainpath DMA-engine, which is the point that is accessed by user-space
+		v4l2-ctl --media-bus-info "platform:rkisp1" --device "rkisp1_mainpath" --set-fmt-video "width=1920,height=1080,pixelformat=YU12"
+
+This will configure the sensor OV4689 but grabbed images will appear green and dark, so we need a trick to bypass this limitation, run the **cam** application to grab a few images and adjust exposure automatically for our v4l2 application and then repeat the previous config.
+
+	cam --camera=1 --capture=1000 --file=/dev/null -s height=1520,width=2688,pixelformat=NV21
+
+Now we can run mjpg streamer and stream video to our web clients. Build the latest mjpg streamer from source, install and run like:
+
+	mjpg_streamer -i "input_uvc.so -y -r 1920x1080 -d /dev/video1" -o "output_http.so -w /usr/local/share/mjpg-streamer/www"
+
+![ov4689 1920x1080](https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/raw/masterov4689_1920x1080.png)
 
 # Credits
 
