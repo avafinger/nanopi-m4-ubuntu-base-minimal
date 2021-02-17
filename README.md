@@ -101,6 +101,9 @@ OS Image for development with the following tidbits:
 **Dual-camera with Kernel 4.19.y**
 * [Kernel 4.19.111](#mipi-dual-camera)
 
+**Dual camera with Mainline Kernel 5.11.0**
+* [Kernel 5.11.0](#mipi-dual-camera-mainline)
+
 ## Mainline u-boot
 
 Here we are going to fix the reboot issue i had with my u-boot Android like build.
@@ -3436,6 +3439,41 @@ https://github.com/avafinger/kernel-rockchip-dual-camera
 You can attach two cameras (OV13850 or OV4689) to the NanoPi M4 and stream video.
 
 
+## MIPI Dual Camera Mainline
+
+Initial support for dual-camera has been introduced in Kernel 5.11.0 with pre-built camera application
+
+The setup must follow one of this:
+
+* Single OV13850 installed in CSI-1
+* Single OV4689 installed in CSI-1
+* Dual camera OV13850 installed in CSI-1 and CSI-2
+* Dual Camera OV4689 installed in CSI-1 and CSI-2
+
+**Limitations:**
+
+The camera sensor tested with ov4689 is the camera w/o IR cut filter
+
+**Pulling video from the cameras**
+
+* Camera 1 (**CSI-1**)
+
+       cam --camera=1 --capture=100 --file=cam1-frames-100_1920x1080.nv21 -s height=1080,width=1920,pixelformat=NV21
+       
+* Camera 2 (**CSI-2**)  
+       
+       cam --camera=1 --capture=100 --file=cam2-frames-100_1920x1080.nv21 -s height=1080,width=1920,pixelformat=NV21   
+
+
+* Converting **NV21** to **MP4** using **ffmpeg** in you PC
+
+      ffmpeg -f rawvideo -vcodec rawvideo -s 1920x1080 -r 30 -pix_fmt nv21 -i cam1-frames-100_1920x1080.nv21 -c:v libx264 -preset ultrafast -qp 0 -y -hide_banner test-cam1.mp4
+      ffmpeg -f rawvideo -vcodec rawvideo -s 1920x1080 -r 30 -pix_fmt nv21 -i cam2-frames-100_1920x1080.nv21 -c:v libx264 -preset ultrafast -qp 0 -y -hide_banner test-cam2.mp4
+
+
+**8GB SD CARD Image**
+https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/1.42
+
 **Mainline Porting**
 
 You can get further info about the porting:  
@@ -3501,7 +3539,7 @@ This is a screenshot of mjpg-streamer while streaming video in 1920x1080 taken f
 
 This will configure the sensor OV4689 but grabbed images will appear green and dark, so we need a trick to bypass this limitation, run the **cam** application to grab a few images and adjust exposure automatically for our v4l2 application and then repeat the previous config.
 
-	cam --camera=1 --capture=1000 --file=/dev/null -s height=1520,width=2688,pixelformat=NV21
+	cam --camera=1 --capture=15 --file=/dev/null -s height=1520,width=2688,pixelformat=NV21
 
 Now we can run mjpg streamer and stream video to our web clients. Build the latest mjpg streamer from source, install and run like:
 
