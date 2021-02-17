@@ -1,6 +1,6 @@
 # nanopi-m4-ubuntu-base-minimal
 
-Ubuntu 18.04 base minimal image for RK3399 (NanoPi M4 / NEO4)
+Ubuntu 18.04 / 20.04 base minimal image for RK3399 with camera support (NanoPi M4 v1 - 2GB / 4 GB)
 
 OS Image for development with the following tidbits:
 
