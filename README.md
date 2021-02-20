@@ -103,6 +103,7 @@ OS Image for development with the following tidbits:
 
 **Dual camera with Mainline Kernel 5.11.0**
 * [Kernel 5.11.0](#mipi-dual-camera-mainline)
+* Linux kernel headers for 5.11.0 (https://github.com/avafinger/nanopi-m4-ubuntu-base-minimal/releases/tag/1.42a)
 
 ## Mainline u-boot
 
