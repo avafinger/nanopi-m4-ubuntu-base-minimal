@@ -3463,7 +3463,7 @@ The camera sensor tested with ov4689 is the camera w/o IR cut filter
        
 * Camera 2 (**CSI-2**)  
        
-       cam --camera=1 --capture=100 --file=cam2-frames-100_1920x1080.nv21 -s height=1080,width=1920,pixelformat=NV21   
+       cam --camera=2 --capture=100 --file=cam2-frames-100_1920x1080.nv21 -s height=1080,width=1920,pixelformat=NV21   
 
 
 * Converting **NV21** to **MP4** using **ffmpeg** in you PC
